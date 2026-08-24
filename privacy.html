@@ -78,21 +78,11 @@
         }
 
         .logo-icon {
-            background: var(--amazon-navy);
-            border: 1px solid rgba(255, 153, 0, 0.4);
             width: 42px;
             height: 42px;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-        }
-
-        .logo-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: #f3a847;
+            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
         }
 
         .back-link {
@@ -279,11 +269,7 @@
     <div class="container">
         <header>
             <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 512 512">
-                        <path d="M14 0C6.3 0 0 6.3 0 14c0 7.7 6.3 14 14 14h51.7l32.2 161c1.8 9.2 9.9 16 19.3 16h331.6c9.4 0 17.5-6.8 19.3-16l32.2-161H512c7.7 0 14-6.3 14-14s-6.3-14-14-14H14zM128 64h312l-22.4 112H105.6L128 64zm-16 192c-26.5 0-48 21.5-48 48s21.5 48 48 48c22.1 0 40.8-15 46.2-35.2h203.6c5.4 20.2 24.1 35.2 46.2 35.2 26.5 0 48-21.5 48-48s-21.5-48-48-48c-22.1 0-40.8 15-46.2 35.2H158.2c-5.4-20.2-24.1-35.2-46.2-35.2zm0 28c11 0 20 9 20 20s-9 20-20 20-20-9-20-20 9-20 20-20zm288 0c11 0 20 9 20 20s-9 20-20 20-20-9-20-20 9-20 20-20z"/>
-                    </svg>
-                </div>
+                <img src="https://addons.mozilla.org/user-media/addon_icons/3059/3059333-64.png?modified=c39ec745" alt="CopyCart Logo" class="logo-icon">
                 CopyCart
             </a>
             <a href="index.html" class="back-link">
@@ -315,35 +301,28 @@
 
             <div class="section">
                 <h2>1. Overview</h2>
-                <p>CopyCart ("the Extension", "we", "us") is dedicated to protecting your privacy. This policy details how data is handled when you use our browser extension to copy, save, and share Amazon shopping carts.</p>
+                <p>CopyCart ("the Extension", "we", "us") is dedicated to protecting your privacy. This policy details how data is handled when you use our browser extension to copy, save, and share shopping carts.</p>
             </div>
 
             <div class="section">
                 <h2>2. Data Collection & Processing</h2>
                 <p>We believe in absolute data minimization. The Extension operates according to the following principles:</p>
                 <ul>
-                    <li><strong>Active Tab Reading:</strong> The Extension accesses open Amazon cart pages solely when you actively trigger the popup. It parses item titles, quantities, and ASIN numbers to build share links or folder lists.</li>
+                    <li><strong>Active Tab Reading:</strong> The Extension accesses open shopping cart pages solely when you actively trigger the popup. It parses item titles, quantities, and product IDs to build share links or folder lists.</li>
                     <li><strong>Local Storage:</strong> All saved cart folders and custom user preferences are stored directly on your computer via <code>chrome.storage.local</code> / <code>browser.storage.local</code>.</li>
                     <li><strong>No Server Collection:</strong> We do not host central servers or databases that transmit, analyze, or collect your personal identifiable information (PII).</li>
                 </ul>
             </div>
 
             <div class="section">
-                <h2>3. Amazon Associates & Referral Transparency</h2>
-                <p>The Extension generates consolidated cart URLs by formatting standard Amazon links. As an Amazon Associate, the extension author may append a referral tracking tag to generated links. If a user clicks a shared cart link and completes a purchase, a small referral commission may be earned to support extension development. This process involves <strong>no personal user profile tracking or data collection</strong>.</p>
+                <h2>3. Affiliate & Referral Transparency</h2>
+                <p>The Extension generates consolidated cart URLs by formatting standard checkout links. The extension author may append a referral tracking tag to generated links. If a user clicks a shared cart link and completes a purchase, a small referral commission may be earned to support extension development. This process involves <strong>no personal user profile tracking or data collection</strong>.</p>
             </div>
 
             <div class="section">
                 <h2>4. Third-Party Web Interactions</h2>
-                <p>The Extension interacts exclusively with official Amazon domains (e.g., <code>amazon.com</code>, <code>amazon.co.uk</code>, etc.) to perform cart formatting actions. Your browsing activity on Amazon is governed by Amazon's official Privacy Policy.​</p>
-                  <p>  Disclaimer: CopyCart is an independent browser extension and is not affiliated with, endorsed by, or sponsored by Amazon.com, Inc. or its affiliates.</p>
-​Turn your online shopping cart into clean, shareable purchase links and organized saved folders with one click!
-​Whether you are managing wishlist items, sharing gear lists, saving project supplies, or saving affiliate carts, CopyCart makes managing your shopping cart effortless.
-​Key Features:
-​Extract Cart Items: Instantly select active items with checkboxes and generate direct multi-item checkout links.
-​Save & Organize: Group items into custom, reusable folders for future purchases or project planning.
-​Global Compatibility: Fully compatible with Amazon regional stores worldwide.
-​Share with One Click: Send curated lists and cart links directly to friends, clients, or followers</p>
+                <p>The Extension interacts exclusively with supported e-commerce domains to perform cart formatting actions. Your browsing activity on those sites is governed by their respective official privacy policies.</p>
+                <p><em>Disclaimer: CopyCart is an independent browser extension and is not affiliated with, endorsed by, or sponsored by Amazon.com, Inc. or its affiliates.</em></p>
             </div>
 
             <div class="section">
@@ -353,7 +332,7 @@
 
             <div class="section">
                 <h2>6. Support & Contact</h2>
-                <p>If you have questions or concerns regarding this policy or the extension's data handling practices, please contact us via our official repository support tab or Chrome Web Store listing page.</p>
+                <p>If you have questions or concerns regarding this policy or the extension's data handling practices, please contact us via our official repository support tab or Web Store listing page.</p>
             </div>
         </main>
 
