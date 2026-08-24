@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Amazon CopyCart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --amazon-orange: #ff9900;
+            --amazon-orange-hover: #e68a00;
+            --amazon-navy: #232f3e;
+            --accent-green: #10b981;
+            --border-color: #334155;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        .glow-top {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 153, 0, 0.12) 0%, rgba(15, 23, 42, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            padding: 28px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: var(--amazon-navy);
+            border: 1px solid rgba(255, 153, 0, 0.4);
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: #f3a847;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 153, 0, 0.4);
+        }
+
+        .policy-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .policy-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+            margin-bottom: 36px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-green);
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.8px;
+            margin-bottom: 8px;
+        }
+
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background-color: var(--amazon-orange);
+            border-radius: 2px;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 16px;
+        }
+
+        li {
+            color: var(--text-muted);
+            font-size: 15px;
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 10px;
+        }
+
+        li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            color: #f3a847;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: 1px solid rgba(255, 153, 0, 0.2);
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 24px 0 36px;
+        }
+
+        .highlight-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+        }
+
+        .highlight-title {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 14px;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .highlight-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        footer {
+            padding-top: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--amazon-orange);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .policy-card { padding: 24px; }
+            h1 { font-size: 28px; }
+            header { flex-direction: column; gap: 16px; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-top"></div>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 512 512">
+                        <path d="M14 0C6.3 0 0 6.3 0 14c0 7.7 6.3 14 14 14h51.7l32.2 161c1.8 9.2 9.9 16 19.3 16h331.6c9.4 0 17.5-6.8 19.3-16l32.2-161H512c7.7 0 14-6.3 14-14s-6.3-14-14-14H14zM128 64h312l-22.4 112H105.6L128 64zm-16 192c-26.5 0-48 21.5-48 48s21.5 48 48 48c22.1 0 40.8-15 46.2-35.2h203.6c5.4 20.2 24.1 35.2 46.2 35.2 26.5 0 48-21.5 48-48s-21.5-48-48-48c-22.1 0-40.8 15-46.2 35.2H158.2c-5.4-20.2-24.1-35.2-46.2-35.2zm0 28c11 0 20 9 20 20s-9 20-20 20-20-9-20-20 9-20 20-20zm288 0c11 0 20 9 20 20s-9 20-20 20-20-9-20-20 9-20 20-20z"/>
+                    </svg>
+                </div>
+                Amazon CopyCart
+            </a>
+            <a href="index.html" class="back-link">
+                ← Back to Home
+            </a>
+        </header>
+
+        <main class="policy-card">
+            <div class="policy-header">
+                <div class="badge">🔒 Privacy First</div>
+                <h1>Privacy Policy</h1>
+                <p class="last-updated">Effective Date: August 2026</p>
+            </div>
+
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <div class="highlight-title">🛡️ 100% Local Storage</div>
+                    <div class="highlight-desc">Your saved carts stay safely inside your browser.</div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-title">🚫 Zero Tracking</div>
+                    <div class="highlight-desc">We do not track your browsing activity or search history.</div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-title">🔐 No External Servers</div>
+                    <div class="highlight-desc">No central database exists that captures your personal data.</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>1. Overview</h2>
+                <p>Amazon CopyCart ("the Extension", "we", "us") is dedicated to protecting your privacy. This policy details how data is handled when you use our browser extension to copy, save, and share Amazon shopping carts.</p>
+            </div>
+
+            <div class="section">
+                <h2>2. Data Collection & Processing</h2>
+                <p>We believe in absolute data minimization. The Extension operates according to the following principles:</p>
+                <ul>
+                    <li><strong>Active Tab Reading:</strong> The Extension accesses open Amazon cart pages solely when you actively trigger the popup. It parses item titles, quantities, and ASIN numbers to build share links or folder lists.</li>
+                    <li><strong>Local Storage:</strong> All saved cart folders and custom user preferences are stored directly on your computer via <code>chrome.storage.local</code> / <code>browser.storage.local</code>.</li>
+                    <li><strong>No Server Collection:</strong> We do not host central servers or databases that transmit, analyze, or collect your personal identifiable information (PII).</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>3. Amazon Associates & Referral Transparency</h2>
+                <p>The Extension generates consolidated cart URLs by formatting standard Amazon links. As an Amazon Associate, the extension author may append a referral tracking tag to generated links. If a user clicks a shared cart link and completes a purchase, a small referral commission may be earned to support extension development. This process involves <strong>no personal user profile tracking or data collection</strong>.</p>
+            </div>
+
+            <div class="section">
+                <h2>4. Third-Party Web Interactions</h2>
+                <p>The Extension interacts exclusively with official Amazon domains (e.g., <code>amazon.com</code>, <code>amazon.co.uk</code>, etc.) to perform cart formatting actions. Your browsing activity on Amazon is governed by Amazon's official Privacy Policy.</p>
+            </div>
+
+            <div class="section">
+                <h2>5. Changes & Policy Updates</h2>
+                <p>We may update this Privacy Policy periodically to reflect enhancements or changes in browser permissions. Any updates will be reflected on this page with a revised effective date.</p>
+            </div>
+
+            <div class="section">
+                <h2>6. Support & Contact</h2>
+                <p>If you have questions or concerns regarding this policy or the extension's data handling practices, please contact us via our official repository support tab or Chrome Web Store listing page.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Amazon CopyCart. Built for Chrome & Firefox.</p>
+            <p style="margin-top: 8px;">
+                <a href="index.html">Return to Main Landing Page</a>
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>
