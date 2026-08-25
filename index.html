@@ -10,12 +10,12 @@
     <style>
         :root {
             --bg-dark: #0B192C;
-            --bg-card: rgba(20, 36, 59, 0.85); /* Slightly translucent to reveal background logo */
+            --bg-card: rgba(20, 36, 59, 0.65); /* Made cards more transparent to reveal background logo */
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --gold-accent: #D4AF37;
             --gold-hover: #C5A028;
-            --border-color: #23354E;
+            --border-color: rgba(35, 53, 78, 0.6);
             --radius-lg: 16px;
             --radius-md: 10px;
         }
@@ -35,22 +35,22 @@
             position: relative;
         }
 
-        /* Fixed Centered Parallax Background Logo */
+        /* Fixed Centered Parallax Background Logo - Made significantly sharper & more distinct */
         .parallax-bg {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 500px;
-            height: 500px;
+            width: 550px;
+            height: 550px;
             background-image: url('https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0.06; /* Low opacity so content remains fully readable */
+            opacity: 0.18; /* Increased opacity for greater visibility */
             pointer-events: none;
             z-index: 0;
-            filter: blur(1px);
+            filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.25)); /* Glow effect to highlight icon contours */
         }
 
         .glow-top {
@@ -60,7 +60,7 @@
             transform: translateX(-50%);
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(11, 25, 44, 0) 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(11, 25, 44, 0) 70%);
             z-index: 1;
             pointer-events: none;
         }
@@ -79,8 +79,8 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(11, 25, 44, 0.6);
-            backdrop-filter: blur(8px);
+            background: rgba(11, 25, 44, 0.45);
+            backdrop-filter: blur(12px);
         }
 
         .logo {
@@ -131,7 +131,8 @@
             gap: 8px;
             padding: 6px 16px;
             border-radius: 30px;
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(212, 175, 55, 0.25);
             color: var(--gold-accent);
             font-size: 13px;
@@ -196,12 +197,13 @@
 
         .btn-secondary {
             background-color: var(--bg-card);
+            backdrop-filter: blur(12px);
             color: var(--text-main);
             border: 1px solid var(--border-color);
         }
 
         .btn-secondary:hover {
-            background-color: #1e304b;
+            background-color: rgba(30, 48, 75, 0.8);
             border-color: #334a68;
             transform: translateY(-2px);
         }
@@ -215,15 +217,16 @@
 
         .feature-card {
             background-color: var(--bg-card);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             padding: 32px;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
         }
 
         .feature-card:hover {
             transform: translateY(-4px);
+            background-color: rgba(20, 36, 59, 0.8);
             border-color: rgba(212, 175, 55, 0.4);
         }
 
@@ -283,7 +286,7 @@
             text-align: center;
             padding: 24px;
             background-color: var(--bg-card);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
         }
@@ -334,13 +337,13 @@
             .hero h1 { font-size: 36px; }
             .hero p { font-size: 16px; }
             header { flex-direction: column; gap: 16px; }
-            .parallax-bg { width: 300px; height: 300px; }
+            .parallax-bg { width: 340px; height: 340px; opacity: 0.15; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Parallax Fixed Watermark Background -->
+    <!-- Fixed Watermark Background Logo (Higher Visibility) -->
     <div class="parallax-bg"></div>
 
     <div class="glow-top"></div>
