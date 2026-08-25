@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy — CopyCart</title>
+    <!-- Favicon Link -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0B192C;
-            --bg-card: rgba(20, 36, 59, 0.4);
+            --bg-card: rgba(20, 36, 59, 0.65);
             --text-main: #f8fafc;
-            --text-muted: #cbd5e1;
+            --text-muted: #94a3b8;
             --gold-accent: #D4AF37;
             --gold-hover: #C5A028;
-            --accent-green: #10b981;
-            --border-color: rgba(255, 255, 255, 0.12);
+            --border-color: rgba(35, 53, 78, 0.6);
             --radius-lg: 16px;
             --radius-md: 10px;
         }
@@ -31,9 +32,8 @@
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
-            line-height: 1.7;
+            line-height: 1.6;
             overflow-x: hidden;
-            padding-bottom: 60px;
             position: relative;
         }
 
@@ -48,10 +48,10 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0.22;
+            opacity: 0.18;
             pointer-events: none;
             z-index: 0;
-            filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.3));
+            filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.25));
         }
 
         .glow-top {
@@ -62,25 +62,30 @@
             width: 600px;
             height: 600px;
             background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(11, 25, 44, 0) 70%);
-            z-index: 0;
+            z-index: 1;
             pointer-events: none;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 24px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         header {
-            padding: 28px 0;
+            padding: 24px 0;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(11, 25, 44, 0.45);
+            backdrop-filter: blur(12px);
+        }
+
+        .header-spacer {
+            visibility: hidden;
         }
 
         .logo {
@@ -103,171 +108,99 @@
             filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
         }
 
-        .back-link {
+        .nav-links {
             grid-column: 3;
-            justify-self: end;
-            display: inline-flex;
+            display: flex;
+            gap: 24px;
             align-items: center;
-            gap: 8px;
-            color: var(--text-main);
+            justify-self: end;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 14px;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            transition: all 0.2s;
+            font-weight: 500;
+            transition: color 0.2s;
         }
 
-        .back-link:hover {
+        .nav-link:hover {
             color: #ffffff;
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(212, 175, 55, 0.5);
         }
 
-        .policy-card {
-            background-color: var(--bg-card);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 48px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        .privacy-content {
+            padding: 60px 0 40px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .policy-header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 28px;
-            margin-bottom: 36px;
-            text-align: center;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 16px;
-            border-radius: 20px;
-            background: rgba(16, 185, 129, 0.15);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            color: var(--accent-green);
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        h1 {
+        .privacy-content h1 {
             font-size: 40px;
             font-weight: 800;
+            margin-bottom: 24px;
             color: #ffffff;
-            letter-spacing: -0.8px;
-            margin-bottom: 8px;
+            letter-spacing: -1px;
         }
 
-        .last-updated {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        .section {
+        .privacy-card {
+            background-color: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
             margin-bottom: 32px;
         }
 
-        h2 {
-            font-size: 20px;
+        .privacy-card h2 {
+            font-size: 22px;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--gold-accent);
+            margin-top: 24px;
             margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        h2::before {
-            content: '';
-            display: inline-block;
-            width: 4px;
-            height: 18px;
-            background-color: var(--gold-accent);
-            border-radius: 2px;
+        .privacy-card h2:first-child {
+            margin-top: 0;
         }
 
-        p {
+        .privacy-card p, .privacy-card li {
             color: var(--text-muted);
             font-size: 15px;
-            margin-bottom: 12px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
+            line-height: 1.7;
             margin-bottom: 16px;
         }
 
-        li {
-            color: var(--text-muted);
-            font-size: 15px;
-            position: relative;
-            padding-left: 24px;
-            margin-bottom: 10px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        .privacy-card ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
         }
 
-        li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-            font-weight: bold;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            color: var(--gold-accent);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 13px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .highlights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin: 24px 0 36px;
-        }
-
-        .highlight-item {
-            background: rgba(11, 25, 44, 0.35);
-            backdrop-filter: blur(8px);
+        .affiliate-disclaimer-card {
+            background-color: var(--bg-card);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
-            padding: 16px 20px;
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
+            padding: 28px 32px;
+            margin: 40px 0;
+            text-align: center;
         }
 
-        .highlight-title {
+        .affiliate-disclaimer-card h3 {
+            font-size: 18px;
             font-weight: 700;
             color: #ffffff;
-            font-size: 14px;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            margin-bottom: 8px;
         }
 
-        .highlight-desc {
-            font-size: 13px;
+        .affiliate-disclaimer-card p {
+            font-size: 14px;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         footer {
-            padding-top: 40px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
             color: var(--text-muted);
             font-size: 14px;
@@ -289,15 +222,14 @@
             line-height: 1.4;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
             header {
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
             }
-            .policy-card { padding: 24px; }
-            h1 { font-size: 30px; }
-            .parallax-bg { width: 340px; height: 340px; opacity: 0.18; }
+            .privacy-content h1 { font-size: 30px; }
+            .privacy-card { padding: 24px; }
         }
     </style>
 </head>
@@ -308,79 +240,55 @@
 
     <div class="container">
         <header>
-            <div></div>
+            <div class="header-spacer"></div>
             <a href="index.html" class="logo">
                 <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Logo" class="logo-icon">
                 CopyCart
             </a>
-            <a href="index.html" class="back-link">
-                ← Back to Home
-            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#how-it-works" class="nav-link">How it Works</a>
+            </div>
         </header>
 
-        <main class="policy-card">
-            <div class="policy-header">
-                <div class="badge">🔒 Privacy First</div>
-                <h1>Privacy Policy</h1>
-                <p class="last-updated">Effective Date: August 2026</p>
-            </div>
+        <main class="privacy-content">
+            <h1>Privacy Policy</h1>
+            
+            <div class="privacy-card">
+                <h2>1. Introduction</h2>
+                <p>Welcome to CopyCart. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how our browser extension handles your information when you use our service.</p>
 
-            <div class="highlights-grid">
-                <div class="highlight-item">
-                    <div class="highlight-title">🛡️ 100% Local Storage</div>
-                    <div class="highlight-desc">Your saved carts stay safely inside your browser.</div>
-                </div>
-                <div class="highlight-item">
-                    <div class="highlight-title">🚫 Zero Tracking</div>
-                    <div class="highlight-desc">We do not track your browsing activity or search history.</div>
-                </div>
-                <div class="highlight-item">
-                    <div class="highlight-title">🔐 No External Servers</div>
-                    <div class="highlight-desc">No central database exists that captures your personal data.</div>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2>1. Overview</h2>
-                <p>CopyCart ("the Extension", "we", "us") is dedicated to protecting your privacy. This policy details how data is handled when you use our browser extension to copy, save, and share shopping carts.</p>
-            </div>
-
-            <div class="section">
-                <h2>2. Data Collection & Processing</h2>
-                <p>We believe in absolute data minimization. The Extension operates according to the following principles:</p>
+                <h2>2. Data Collection & Local Processing</h2>
+                <p><strong>CopyCart is built with privacy-first principles.</strong> Everything runs locally on your machine:</p>
                 <ul>
-                    <li><strong>Active Tab Reading:</strong> The Extension accesses open shopping cart pages solely when you actively trigger the popup. It parses item titles, quantities, and product IDs to build share links or folder lists.</li>
-                    <li><strong>Local Storage:</strong> All saved cart folders and custom user preferences are stored directly on your computer via <code>chrome.storage.local</code> / <code>browser.storage.local</code>.</li>
-                    <li><strong>No Server Collection:</strong> We do not host central servers or databases that transmit, analyze, or collect your personal identifiable information (PII).</li>
+                    <li>We do not collect, store, or transmit your personal shopping history or credentials to any external database.</li>
+                    <li>Cart configurations and saved folders are kept securely within your browser's local storage.</li>
+                    <li>No external trackers or analytics scripts are embedded within the extension's functional core.</li>
                 </ul>
-            </div>
 
-            <div class="section">
-                <h2>3. Independent Status & Affiliate Transparency</h2>
-                <p>CopyCart is an independent, third-party browser extension and is not affiliated with, endorsed by, or sponsored by Amazon.com, Inc. or its affiliates. All product names, logos, and brands are property of their respective owners.</p>
-                <p>The Extension generates consolidated cart URLs by formatting standard checkout links. As an Amazon Associate, CopyCart earns from qualifying purchases made through links created or shared via the extension. This process involves <strong>no personal user profile tracking, browser history storage, or personal data collection</strong>.</p>
-            </div>
+                <h2>3. Third-Party Services & Links</h2>
+                <p>CopyCart interacts with retail platforms (such as Amazon) strictly to parse your active cart items and format shareable URLs. When you click referral links or make purchases, third-party affiliate networks may use cookies to track referral traffic in accordance with their respective privacy policies.</p>
 
-            <div class="section">
-                <h2>4. Third-Party Web Interactions</h2>
-                <p>The Extension interacts exclusively with supported e-commerce domains to perform cart formatting actions. Your browsing activity on those sites is governed by their respective official privacy policies.</p>
-            </div>
+                <h2>4. Changes to This Policy</h2>
+                <p>We may update our privacy policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
 
-            <div class="section">
-                <h2>5. Changes & Policy Updates</h2>
-                <p>We may update this Privacy Policy periodically to reflect enhancements or changes in browser permissions. Any updates will be reflected on this page with a revised effective date.</p>
-            </div>
-
-            <div class="section">
-                <h2>6. Support & Contact</h2>
-                <p>If you have questions or concerns regarding this policy or the extension's data handling practices, please contact us via our official repository support tab or Web Store listing page.</p>
+                <h2>5. Contact Us</h2>
+                <p>If you have any questions or suggestions about our Privacy Policy, please feel free to reach out via our GitHub repository or support channels.</p>
             </div>
         </main>
 
+        <section class="affiliate-disclaimer-card">
+            <h3>Third-Party Notice & Affiliate Disclosure</h3>
+            <p>CopyCart is an independent, third-party browser extension and is not affiliated with, endorsed by, or sponsored by Amazon.com, Inc. or its affiliates. All product names, logos, and brands are property of their respective owners.</p>
+            <p style="margin-top: 10px;">As an Amazon Associate, CopyCart earns from qualifying purchases made through links generated or shared using our extension.</p>
+        </section>
+
         <footer>
-            <p>&copy; 2026 CopyCart. Built for Chrome & Firefox.</p>
+            <p>All Rights Reserved.</p>
+            <p style="margin-top: 4px;">&copy; 2026 CopyCart. Built for Chrome & Firefox.</p>
             <p style="margin-top: 8px;">
-                <a href="index.html">Return to Main Landing Page</a>
+                <a href="privacy.html">Privacy Policy</a>
             </p>
             <p class="footer-compliance">
                 CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. <br>
