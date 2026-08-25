@@ -10,7 +10,7 @@
     <style>
         :root {
             --bg-dark: #0B192C;
-            --bg-card: rgba(20, 36, 59, 0.4); /* Reduced opacity for higher foreground transparency */
+            --bg-card: rgba(20, 36, 59, 0.4);
             --text-main: #f8fafc;
             --text-muted: #cbd5e1;
             --gold-accent: #D4AF37;
@@ -37,7 +37,6 @@
             position: relative;
         }
 
-        /* Fixed Centered Parallax Background Logo */
         .parallax-bg {
             position: fixed;
             top: 50%;
@@ -77,14 +76,15 @@
 
         header {
             padding: 28px 0;
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             margin-bottom: 40px;
         }
 
         .logo {
+            grid-column: 2;
             display: flex;
             align-items: center;
             gap: 14px;
@@ -93,6 +93,7 @@
             letter-spacing: -0.5px;
             color: #ffffff;
             text-decoration: none;
+            justify-self: center;
         }
 
         .logo-icon {
@@ -103,6 +104,8 @@
         }
 
         .back-link {
+            grid-column: 3;
+            justify-self: end;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -124,10 +127,9 @@
             border-color: rgba(212, 175, 55, 0.5);
         }
 
-        /* Glassmorphism Foreground Container */
         .policy-card {
             background-color: var(--bg-card);
-            backdrop-filter: blur(8px); /* Keeps text legible while letting the background show through clearly */
+            backdrop-filter: blur(8px);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             padding: 48px;
@@ -280,23 +282,33 @@
             color: var(--gold-accent);
         }
 
+        .footer-compliance {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
         @media (max-width: 640px) {
+            header {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
             .policy-card { padding: 24px; }
             h1 { font-size: 30px; }
-            header { flex-direction: column; gap: 16px; align-items: flex-start; }
             .parallax-bg { width: 340px; height: 340px; opacity: 0.18; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Fixed Parallax Background Image -->
     <div class="parallax-bg"></div>
-
     <div class="glow-top"></div>
 
     <div class="container">
         <header>
+            <div></div>
             <a href="index.html" class="logo">
                 <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Logo" class="logo-icon">
                 CopyCart
@@ -345,7 +357,7 @@
 
             <div class="section">
                 <h2>3. Affiliate & Referral Transparency</h2>
-                <p>The Extension generates consolidated cart URLs by formatting standard checkout links. The extension author may append a referral tracking tag to generated links. If a user clicks a shared cart link and completes a purchase, a small referral commission may be earned to support extension development. This process involves <strong>no personal user profile tracking or data collection</strong>.</p>
+                <p>The Extension generates consolidated cart URLs by formatting standard checkout links. As an Amazon Associate, CopyCart earns from qualifying purchases made through links created or shared via the extension to support development at no cost to you. This process involves <strong>no personal user profile tracking, browser history storage, or personal data collection</strong>.</p>
             </div>
 
             <div class="section">
@@ -368,6 +380,9 @@
             <p>&copy; 2026 CopyCart. Built for Chrome & Firefox.</p>
             <p style="margin-top: 8px;">
                 <a href="index.html">Return to Main Landing Page</a>
+            </p>
+            <p class="footer-compliance">
+                As an Amazon Associate I earn from qualifying purchases to support development.
             </p>
         </footer>
     </div>
