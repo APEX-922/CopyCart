@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CopyCart — Simplify Your Online Shopping & Sharing</title>
+<!-- Favicon Link -->
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg-dark: #0B192C;
+--bg-card: rgba(20, 36, 59, 0.65);
+--text-main: #f8fafc;
+--text-muted: #94a3b8;
+--gold-accent: #D4AF37;
+--gold-hover: #C5A028;
+--border-color: rgba(35, 53, 78, 0.6);
+--radius-lg: 16px;
+--radius-md: 10px;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+background-color: var(--bg-dark);
+color: var(--text-main);
+line-height: 1.6;
+overflow-x: hidden;
+position: relative;
+}
+
+.parallax-bg {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 550px;
+height: 550px;
+background-image: url('https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png');
+background-repeat: no-repeat;
+background-position: center;
+background-size: contain;
+opacity: 0.18;
+pointer-events: none;
+z-index: 0;
+filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.25));
+}
+
+.glow-top {
+position: absolute;
+top: -150px;
+left: 50%;
+transform: translateX(-50%);
+width: 600px;
+height: 600px;
+background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(11, 25, 44, 0) 70%);
+z-index: 1;
+pointer-events: none;
+}
+
+.container {
+max-width: 1100px;
+margin: 0 auto;
+padding: 0 24px;
+position: relative;
+z-index: 2;
+}
+
+header {
+padding: 32px 0;
+display: flex;
+justify-content: center;
+align-items: center;
+border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+background: rgba(11, 25, 44, 0.45);
+backdrop-filter: blur(12px);
+}
+
+.logo {
+display: flex;
+align-items: center;
+gap: 18px;
+font-weight: 800;
+font-size: 38px;
+letter-spacing: -0.5px;
+color: #ffffff;
+text-decoration: none;
+text-shadow:
+-1px -1px 0 rgba(212, 175, 55, 0.8),
+ 1px -1px 0 rgba(212, 175, 55, 0.8),
+-1px 1px 0 rgba(212, 175, 55, 0.8),
+1px 1px 0 rgba(212, 175, 55, 0.8),
+0 0 16px rgba(212, 175, 55, 0.4);
+}
+
+.logo-icon {
+width: 88px;
+height: 88px;
+object-fit: contain;
+filter: drop-shadow(0 4px 16px rgba(212, 175, 55, 0.45));
+}
+
+.main-content {
+padding: 40px 0 60px;
+}
+
+/* Link Generator Card Styling */
+.generator-card {
+background-color: var(--bg-card);
+backdrop-filter: blur(16px);
+border: 1px solid var(--border-color);
+border-radius: var(--radius-lg);
+padding: 36px;
+max-width: 640px;
+margin: 0 auto 40px;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+text-align: left;
+}
+
+.generator-card h2 {
+font-size: 22px;
+font-weight: 700;
+color: #ffffff;
+margin-bottom: 8px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.card-header-icon {
+width: 28px;
+height: 28px;
+object-fit: contain;
+filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.4));
+}
+
+.generator-card p.desc {
+font-size: 14px;
+color: var(--text-muted);
+margin-bottom: 24px;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+.form-group label {
+display: block;
+font-size: 14px;
+font-weight: 600;
+color: var(--text-main);
+margin-bottom: 8px;
+}
+
+.form-control {
+width: 100%;
+padding: 14px 16px;
+background: rgba(11, 25, 44, 0.7);
+border: 1px solid var(--border-color);
+border-radius: var(--radius-md);
+color: #ffffff;
+font-size: 15px;
+outline: none;
+transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+border-color: var(--gold-accent);
+box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+.form-control::placeholder {
+color: #64748b;
+}
+
+.btn-generate {
+width: 100%;
+padding: 16px;
+border-radius: var(--radius-md);
+background: var(--gold-accent);
+color: #0B192C;
+font-size: 16px;
+font-weight: 700;
+border: none;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+transition: all 0.2s ease;
+box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+margin-top: 24px;
+}
+
+.btn-generate:hover {
+background: var(--gold-hover);
+transform: translateY(-1px);
+box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+}
+
+.btn-generate:active {
+transform: translateY(0);
+}
+
+.result-box {
+display: none;
+margin-top: 24px;
+padding-top: 20px;
+border-top: 1px solid var(--border-color);
+}
+
+.result-box.active {
+display: block;
+}
+
+.result-label {
+font-size: 13px;
+font-weight: 600;
+color: var(--gold-accent);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+margin-bottom: 8px;
+}
+
+.result-input-group {
+display: flex;
+gap: 8px;
+}
+
+.btn-copy {
+padding: 0 20px;
+background: rgba(212, 175, 55, 0.15);
+border: 1px solid var(--gold-accent);
+color: var(--gold-accent);
+border-radius: var(--radius-md);
+font-weight: 600;
+cursor: pointer;
+white-space: nowrap;
+transition: all 0.2s;
+}
+
+.btn-copy:hover {
+background: var(--gold-accent);
+color: #0B192C;
+}
+
+.affiliate-disclaimer-card {
+background-color: var(--bg-card);
+backdrop-filter: blur(16px);
+border: 1px solid var(--border-color);
+border-radius: var(--radius-lg);
+padding: 28px 32px;
+max-width: 640px;
+margin: 0 auto;
+text-align: center;
+}
+
+.affiliate-disclaimer-card h3 {
+font-size: 18px;
+font-weight: 700;
+color: #ffffff;
+margin-bottom: 8px;
+}
+
+.affiliate-disclaimer-card p {
+font-size: 14px;
+color: var(--text-muted);
+line-height: 1.6;
+}
+
+footer {
+padding: 40px 0;
+border-top: 1px solid rgba(255, 255, 255, 0.05);
+text-align: center;
+color: var(--text-muted);
+font-size: 14px;
+}
+
+footer a {
+color: var(--text-muted);
+text-decoration: underline;
+}
+
+footer a:hover {
+color: var(--gold-accent);
+}
+
+.footer-compliance {
+font-size: 11px;
+color: #64748b;
+margin-top: 10px;
+line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+.logo { font-size: 28px; }
+.logo-icon { width: 64px; height: 64px; }
+.parallax-bg { width: 340px; height: 340px; opacity: 0.15; }
+.generator-card, .affiliate-disclaimer-card {
+padding: 24px;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="parallax-bg"></div>
+<div class="glow-top"></div>
+
+<div class="container">
+<header>
+<a href="#" class="logo">
+<img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Logo" class="logo-icon">
+CopyCart
+</a>
+</header>
+
+<main class="main-content">
+<!-- Automatic Shareable Link Generator Form Card placed directly below logo -->
+<div class="generator-card" id="link-generator">
+<h2>
+<img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Icon" class="card-header-icon">
+Generate Shareable Cart Link
+</h2>
+<p class="desc">Paste your product or cart URL below and click the button to get your custom CopyCart link instantly.</p>
+
+<form id="tagForm" onsubmit="generateShareLink(event)">
+<div class="form-group">
+<label for="cartUrl">Enter Store or Cart URL</label>
+<input type="url" id="cartUrl" class="form-control" placeholder="https://www.amazon.com/dp/B08N5WRWNW" required>
+</div>
+
+<button type="submit" class="btn-generate">
+<span>Generate Shareable Link</span>
+➔
+</button>
+</form>
+
+<div class="result-box" id="resultBox">
+<div class="result-label">Your Shareable Link</div>
+<div class="result-input-group">
+<input type="text" id="shareableLink" class="form-control" readonly>
+<button type="button" class="btn-copy" onclick="copyShareLink()" id="copyBtn">Copy Link</button>
+</div>
+</div>
+</div>
+
+<!-- Third Party Notice & Affiliate Disclosure -->
+<section class="affiliate-disclaimer-card">
+<h3>Third-Party Notice & Affiliate Disclosure</h3>
+<p>CopyCart is an independent, third-party tool and is not affiliated with, endorsed by, or sponsored by Amazon.com, Inc. or its affiliates. All product names, logos, and brands are property of their respective owners.</p>
+<p style="margin-top: 10px;">As an Amazon Associate, CopyCart earns from qualifying purchases made through links generated or shared using our platform.</p>
+</section>
+</main>
+
+<footer>
+<p>All Rights Reserved.</p>
+<p style="margin-top: 4px;">© 2026 CopyCart.</p>
+<p style="margin-top: 8px;">
+<a href="privacy.html">Privacy Policy</a>
+</p>
+<p class="footer-compliance">
+CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. <br>
+As an Amazon Associate I earn from qualifying purchases.
+</p>
+</footer>
+</div>
+
+<script>
+// Your hardcoded Associate Tag ID:
+const ASSOCIATE_TAG = 'apex087e-20';
+
+function generateShareLink(event) {
+event.preventDefault();
+const inputUrl = document.getElementById('cartUrl').value.trim();
+
+if (!inputUrl) return;
+
+try {
+const url = new URL(inputUrl);
+// Appends your associate tag automatically
+url.searchParams.set('tag', ASSOCIATE_TAG);
+
+const shareableLinkInput = document.getElementById('shareableLink');
+shareableLinkInput.value = url.toString();
+
+const resultBox = document.getElementById('resultBox');
+resultBox.classList.add('active');
+} catch (e) {
+alert('Please enter a valid URL (including http:// or https://)');
+}
+}
+
+function copyShareLink() {
+const shareableLinkInput = document.getElementById('shareableLink');
+shareableLinkInput.select();
+shareableLinkInput.setSelectionRange(0, 99999);
+
+navigator.clipboard.writeText(shareableLinkInput.value).then(() => {
+const copyBtn = document.getElementById('copyBtn');
+copyBtn.textContent = 'Copied!';
+setTimeout(() => {
+copyBtn.textContent = 'Copy Link';
+}, 2000);
+});
+}
+</script>
+</body>
+</html>
+
