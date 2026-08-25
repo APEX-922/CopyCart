@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CopyCart — Simplify Your Amazon Shopping & Sharing</title>
+    <title>CopyCart</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
+            --bg-dark: #0B192C;
+            --bg-card: #14243B;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --amazon-orange: #ff9900;
-            --amazon-orange-hover: #e68a00;
-            --amazon-navy: #232f3e;
-            --accent-green: #10b981;
-            --border-color: #334155;
+            --gold-accent: #D4AF37;
+            --gold-hover: #C5A028;
+            --border-color: #23354E;
             --radius-lg: 16px;
             --radius-md: 10px;
         }
@@ -43,7 +41,7 @@
             transform: translateX(-50%);
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(255, 153, 0, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(11, 25, 44, 0) 70%);
             z-index: 0;
             pointer-events: none;
         }
@@ -80,7 +78,7 @@
             height: 40px;
             border-radius: 10px;
             object-fit: contain;
-            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
 
         .nav-links {
@@ -112,9 +110,9 @@
             gap: 8px;
             padding: 6px 16px;
             border-radius: 30px;
-            background: rgba(255, 153, 0, 0.1);
-            border: 1px solid rgba(255, 153, 0, 0.25);
-            color: var(--amazon-orange);
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            color: var(--gold-accent);
             font-size: 13px;
             font-weight: 600;
             margin-bottom: 24px;
@@ -132,8 +130,8 @@
         }
 
         .hero h1 span {
-            color: var(--amazon-orange);
-            -webkit-text-fill-color: var(--amazon-orange);
+            color: var(--gold-accent);
+            -webkit-text-fill-color: var(--gold-accent);
         }
 
         .hero p {
@@ -164,15 +162,15 @@
         }
 
         .btn-primary {
-            background-color: var(--amazon-orange);
-            color: #000000;
-            box-shadow: 0 4px 20px rgba(255, 153, 0, 0.35);
+            background-color: var(--gold-accent);
+            color: #0B192C;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
         }
 
         .btn-primary:hover {
-            background-color: var(--amazon-orange-hover);
+            background-color: var(--gold-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(255, 153, 0, 0.45);
+            box-shadow: 0 6px 24px rgba(212, 175, 55, 0.35);
         }
 
         .btn-secondary {
@@ -182,8 +180,8 @@
         }
 
         .btn-secondary:hover {
-            background-color: #2d3748;
-            border-color: #475569;
+            background-color: #1e304b;
+            border-color: #334a68;
             transform: translateY(-2px);
         }
 
@@ -204,15 +202,15 @@
 
         .feature-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(255, 153, 0, 0.4);
+            border-color: rgba(212, 175, 55, 0.4);
         }
 
         .feature-icon {
             width: 48px;
             height: 48px;
             border-radius: 12px;
-            background: rgba(255, 153, 0, 0.1);
-            color: var(--amazon-orange);
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-accent);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -268,8 +266,8 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--amazon-orange);
-            color: #000;
+            background: var(--gold-accent);
+            color: #0B192C;
             font-weight: 800;
             display: flex;
             align-items: center;
@@ -303,7 +301,7 @@
         }
 
         footer a:hover {
-            color: var(--amazon-orange);
+            color: var(--gold-accent);
         }
 
         @media (max-width: 768px) {
@@ -334,8 +332,8 @@
             <div class="badge">
                 <span>⚡ Browser Extension v1.3.7</span>
             </div>
-            <h1>Share & Save Amazon Carts <br><span>In One Single Click</span></h1>
-            <p>Extract items from your Amazon active cart, generate instant multi-item share links, and organize saved shopping folders effortlessly.</p>
+            <h1>Share & Save Shopping Carts <br><span>In One Single Click</span></h1>
+            <p>Extract items from your active store cart, generate instant multi-item share links, and organize saved shopping folders effortlessly.</p>
             
             <div class="cta-group">
                 <a href="privacy.html" class="btn btn-primary">Read Privacy Policy</a>
@@ -362,18 +360,18 @@
 
         <section class="how-it-works" id="how-it-works">
             <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">Start sharing full Amazon shopping carts in 3 simple steps</p>
+            <p class="section-subtitle">Start sharing full shopping carts in 3 simple steps</p>
 
             <div class="steps-grid">
                 <div class="step-item">
                     <div class="step-number">1</div>
-                    <h4>Open Amazon Cart</h4>
-                    <p>Navigate to your active shopping cart on any supported Amazon regional site.</p>
+                    <h4>Open Store Cart</h4>
+                    <p>Navigate to your active shopping cart on any supported retail website.</p>
                 </div>
                 <div class="step-item">
                     <div class="step-number">2</div>
                     <h4>Click Extension</h4>
-                    <p>Launch CopyCart to automatically parse items, quantities, and ASINs instantly.</p>
+                    <p>Launch CopyCart to automatically parse items, quantities, and product IDs instantly.</p>
                 </div>
                 <div class="step-item">
                     <div class="step-number">3</div>
@@ -386,7 +384,7 @@
         <footer>
             <p>&copy; 2026 CopyCart. Built for Chrome & Firefox.</p>
             <p style="margin-top: 8px;">
-                <a href="privacy.html">Privacy Policy</a> • Supports development via Amazon referral links.
+                <a href="privacy.html">Privacy Policy</a> • Supports development via affiliate shopping links.
             </p>
         </footer>
     </div>
