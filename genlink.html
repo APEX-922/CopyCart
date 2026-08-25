@@ -394,6 +394,9 @@ shareableLinkInput.value = url.toString();
 
 const resultBox = document.getElementById('resultBox');
 resultBox.classList.add('active');
+
+// Resets the input text box after generating the link
+event.target.reset();
 } catch (e) {
 alert('Please enter a valid URL (including http:// or https://)');
 }
@@ -415,4 +418,3 @@ copyBtn.textContent = 'Copy Link';
 </script>
 </body>
 </html>
-
