@@ -10,7 +10,7 @@
     <style>
         :root {
             --bg-dark: #0B192C;
-            --bg-card: #14243B;
+            --bg-card: rgba(20, 36, 59, 0.85); /* Slightly translucent to reveal background logo */
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --gold-accent: #D4AF37;
@@ -32,6 +32,25 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fixed Centered Parallax Background Logo */
+        .parallax-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background-image: url('https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.06; /* Low opacity so content remains fully readable */
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(1px);
         }
 
         .glow-top {
@@ -42,7 +61,7 @@
             width: 600px;
             height: 600px;
             background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(11, 25, 44, 0) 70%);
-            z-index: 0;
+            z-index: 1;
             pointer-events: none;
         }
 
@@ -51,7 +70,7 @@
             margin: 0 auto;
             padding: 0 24px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         header {
@@ -60,6 +79,8 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(11, 25, 44, 0.6);
+            backdrop-filter: blur(8px);
         }
 
         .logo {
@@ -194,6 +215,7 @@
 
         .feature-card {
             background-color: var(--bg-card);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             padding: 32px;
@@ -260,6 +282,10 @@
         .step-item {
             text-align: center;
             padding: 24px;
+            background-color: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
         }
 
         .step-number {
@@ -308,10 +334,14 @@
             .hero h1 { font-size: 36px; }
             .hero p { font-size: 16px; }
             header { flex-direction: column; gap: 16px; }
+            .parallax-bg { width: 300px; height: 300px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Parallax Fixed Watermark Background -->
+    <div class="parallax-bg"></div>
 
     <div class="glow-top"></div>
 
