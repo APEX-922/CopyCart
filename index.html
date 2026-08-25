@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CopyCart — Simplify Your Online Shopping & Sharing</title>
+    <!-- Favicon Link -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -146,6 +148,12 @@
             margin-bottom: 24px;
         }
 
+        .badge-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
         .hero h1 {
             font-size: 52px;
             font-weight: 800;
@@ -176,29 +184,38 @@
             flex-wrap: wrap;
         }
 
-        .btn {
+        /* 3x scaled badge button with inverted color hover */
+        .btn-badge-styled {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            border-radius: var(--radius-md);
+            gap: 24px;
+            padding: 18px 48px;
+            border-radius: 50px;
+            background: rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(212, 175, 55, 0.35);
+            color: var(--gold-accent);
+            font-size: 39px;
             font-weight: 700;
-            font-size: 15px;
             text-decoration: none;
-            transition: all 0.2s ease;
             cursor: pointer;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            transition: all 0.25s ease;
         }
 
-        .btn-primary {
-            background-color: var(--gold-accent);
+        .btn-badge-styled .btn-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.3));
+        }
+
+        .btn-badge-styled:hover {
+            background: var(--gold-accent);
             color: #0B192C;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--gold-hover);
+            border-color: var(--gold-accent);
+            box-shadow: 0 6px 28px rgba(212, 175, 55, 0.4);
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(212, 175, 55, 0.35);
         }
 
         .features {
@@ -365,6 +382,14 @@
             .hero h1 { font-size: 36px; }
             .hero p { font-size: 16px; }
             .parallax-bg { width: 340px; height: 340px; opacity: 0.15; }
+            .btn-badge-styled {
+                font-size: 24px;
+                padding: 14px 28px;
+            }
+            .btn-badge-styled .btn-icon {
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -389,13 +414,17 @@
 
         <section class="hero">
             <div class="badge">
-                <span>⚡ Browser Extension v1.3.7</span>
+                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Icon" class="badge-icon">
+                <span>Browser Extension v1.2</span>
             </div>
-            <h1>Share & Save Shopping Carts <br><span>In One Single Click</span></h1>
+            <h1>Share & Save Shopping Carts <br><span>Like A Pro</span></h1>
             <p>Extract items from your active store cart, generate instant multi-item share links, and organize saved shopping folders effortlessly.</p>
             
             <div class="cta-group">
-                <a href="privacy.html" class="btn btn-primary">Read Privacy Policy</a>
+                <a href="https://addons.mozilla.org/en-US/firefox/addon/copycart/" target="_blank" rel="noopener noreferrer" class="btn-badge-styled">
+                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Cart Icon" class="btn-icon">
+                    <span>Add to Firefox</span>
+                </a>
             </div>
         </section>
 
@@ -447,7 +476,8 @@
         </section>
 
         <footer>
-            <p>&copy; 2026 CopyCart. Built for Chrome & Firefox.</p>
+            <p>All Rights Reserved.</p>
+            <p style="margin-top: 4px;">&copy; 2026 CopyCart. Built for Chrome & Firefox.</p>
             <p style="margin-top: 8px;">
                 <a href="privacy.html">Privacy Policy</a>
             </p>
