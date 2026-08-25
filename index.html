@@ -10,7 +10,7 @@
     <style>
         :root {
             --bg-dark: #0B192C;
-            --bg-card: rgba(20, 36, 59, 0.65); /* Made cards more transparent to reveal background logo */
+            --bg-card: rgba(20, 36, 59, 0.65);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --gold-accent: #D4AF37;
@@ -35,7 +35,7 @@
             position: relative;
         }
 
-        /* Fixed Centered Parallax Background Logo - Made significantly sharper & more distinct */
+        /* Fixed Centered Parallax Background Logo */
         .parallax-bg {
             position: fixed;
             top: 50%;
@@ -47,10 +47,10 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0.18; /* Increased opacity for greater visibility */
+            opacity: 0.18;
             pointer-events: none;
             z-index: 0;
-            filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.25)); /* Glow effect to highlight icon contours */
+            filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.25));
         }
 
         .glow-top {
@@ -83,23 +83,23 @@
             backdrop-filter: blur(12px);
         }
 
+        /* Logo matched to Privacy Policy page */
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             font-weight: 800;
-            font-size: 20px;
+            font-size: 22px;
             letter-spacing: -0.5px;
             color: #ffffff;
             text-decoration: none;
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 52px;
+            height: 52px;
             object-fit: contain;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
         }
 
         .nav-links {
@@ -343,7 +343,7 @@
 </head>
 <body>
 
-    <!-- Fixed Watermark Background Logo (Higher Visibility) -->
+    <!-- Fixed Watermark Background Logo -->
     <div class="parallax-bg"></div>
 
     <div class="glow-top"></div>
