@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — CopyCart</title>
+    <title>CopyCart — Smart Affiliate Link Generator</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +11,7 @@
     <style>
         :root {
             --bg-dark: #080A0F;
-            --card-bg: rgba(18, 22, 31, 0.35); /* Even more translucent for gorgeous background view */
+            --card-bg: rgba(18, 22, 31, 0.30); /* High transparency for background visibility */
             --card-border: rgba(223, 186, 103, 0.25);
             --card-border-glow: rgba(223, 186, 103, 0.75);
             --text-main: #ffffff;
@@ -88,7 +87,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 24px;
             position: relative;
@@ -162,60 +161,106 @@
 
         .main-content {
             padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
         }
 
-        /* Highly Translucent Frosted Glass Card */
-        .policy-card {
+        .hero-card {
             background-color: var(--card-bg);
             backdrop-filter: blur(22px);
             -webkit-backdrop-filter: blur(22px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-lg);
-            padding: 48px;
+            padding: 50px;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-            text-align: left;
             transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .policy-card:hover {
+        .hero-card:hover {
             border-color: var(--card-border-glow);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(223, 186, 103, 0.2);
         }
 
-        .policy-card h2 {
-            font-size: 30px;
+        .hero-card h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--text-gold);
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-card p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 36px;
+            border-radius: var(--radius-md);
+            background: var(--gold-gradient);
+            color: #080A0F;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(223, 186, 103, 0.3);
+            transition: transform 0.2s ease, filter 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 35px rgba(223, 186, 103, 0.6), 0 6px 25px rgba(0,0,0,0.5);
+            filter: brightness(1.05);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            text-align: left;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--card-border-glow);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
             font-weight: 700;
             color: var(--text-gold);
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            margin-bottom: 12px;
             font-family: 'Cinzel Decorative', serif;
         }
 
-        .policy-card h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-gold);
-            margin-top: 28px;
-            margin-bottom: 10px;
-        }
-
-        .policy-card p {
+        .feature-card p {
             font-size: 15px;
             color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .policy-card ul {
-            margin-left: 20px;
-            margin-bottom: 16px;
-            color: var(--text-muted);
-        }
-
-        .policy-card li {
-            margin-bottom: 8px;
-            font-size: 15px;
         }
 
         footer {
@@ -255,39 +300,34 @@
             <span>CopyCart</span>
         </a>
         <nav class="nav-links">
-            <a href="index.html#features" class="nav-link">Features</a>
-            <a href="index.html#how-it-works" class="nav-link">How It Works</a>
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#how-it-works" class="nav-link">How It Works</a>
             <a href="genlink" class="nav-link">Link Gen</a>
-            <a href="privacy.html" class="nav-link active">Privacy</a>
+            <a href="privacy.html" class="nav-link">Privacy</a>
         </nav>
     </header>
 
     <main class="main-content">
-        <div class="policy-card magnetic-target">
-            <h2>Privacy Policy</h2>
-            <p>Last updated: August 2026</p>
+        <section class="hero-card magnetic-target">
+            <h1>Welcome to CopyCart</h1>
+            <p>Generate clean, optimized, and tracking-ready affiliate links instantly for your audience with unmatched speed and elegance.</p>
+            <a href="genlink" class="btn-primary">Launch Link Generator ➔</a>
+        </section>
 
-            <p>Welcome to CopyCart. We respect your privacy and are committed to protecting any information you interact with while using our link generation services.</p>
-
-            <h3>1. Information We Do Not Collect</h3>
-            <p>CopyCart operates client-side for generating links. When you paste an Amazon URL into our link generator:</p>
-            <ul>
-                <li>We do not store your personal Amazon URLs or browsing logs on our servers.</li>
-                <li>We do not require user accounts, logins, or personal credentials to generate tracking links.</li>
-            </ul>
-
-            <h3>2. Affiliate Link Tracking</h3>
-            <p>CopyCart appends an authorized affiliate tracking tag (such as our Amazon Associates ID) to your shared product links. When individuals purchase items through these links, qualifying transactions generate referral fees for us in accordance with standard affiliate network operations.</p>
-
-            <h3>3. Cookies and Analytics</h3>
-            <p>We may use basic analytical tools or functional cookies to ensure site reliability and performance. Third-party vendors, including Amazon, may use cookies to track clicks originating from affiliate links.</p>
-
-            <h3>4. Third-Party Links</h3>
-            <p>Our platform handles redirection to Amazon.com and affiliated platforms. We are not responsible for the privacy practices, tracking policies, or terms of service enforced by external sites.</p>
-
-            <h3>5. Policy Updates</h3>
-            <p>We reserve the right to update this Privacy Policy at any time. Changes will be posted directly to this page with a revised modification date.</p>
-        </div>
+        <section class="features-grid" id="features">
+            <div class="feature-card magnetic-target">
+                <h3>Instant Generation</h3>
+                <p>Paste any standard Amazon product URL and get your clean referral link prepared in a single click.</p>
+            </div>
+            <div class="feature-card magnetic-target">
+                <h3>Secure & Client-Side</h3>
+                <p>Your links and browsing habits are never stored or logged on our servers. Complete privacy guaranteed.</p>
+            </div>
+            <div class="feature-card magnetic-target">
+                <h3>Seamless Earnings</h3>
+                <p>Automatically appends verified tracking tags so your referrals are tracked seamlessly and reliably.</p>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -314,51 +354,37 @@ document.addEventListener('mousemove', (e) => {
 
     const threshold = 380;
 
-    // Center Logo Spotlight & Sparkle Glitter
     if (centerDist < threshold) {
         const intensity = 1 - (centerDist / threshold);
         centerLogo.style.opacity = 0.15 + (intensity * 0.6);
         centerLogo.style.filter = `drop-shadow(0 0 ${35 + intensity * 40}px rgba(223, 186, 103, ${0.3 + intensity * 0.7})) brightness(${1 + intensity * 0.25})`;
-        
-        // Spawn subtle background glitter particles when mouse interacts closely with logos
-        if (Math.random() < 0.25) {
-            spawnBgGlitter(e.clientX + (Math.random() * 60 - 30), e.clientY + (Math.random() * 60 - 30));
-        }
+        if (Math.random() < 0.25) spawnBgGlitter(e.clientX + (Math.random() * 60 - 30), e.clientY + (Math.random() * 60 - 30));
     } else {
         centerLogo.style.opacity = 0.15;
         centerLogo.style.filter = 'drop-shadow(0 0 35px rgba(223, 186, 103, 0.25)) brightness(1)';
     }
 
-    // Left Logo Spotlight & Sparkle Glitter
     if (leftDist < threshold) {
         const intensity = 1 - (leftDist / threshold);
         leftLogo.style.opacity = 0.35 + (intensity * 0.65);
         leftLogo.style.filter = `drop-shadow(0 0 ${20 + intensity * 30}px rgba(223, 186, 103, ${0.4 + intensity * 0.6})) brightness(${1 + intensity * 0.25})`;
-        
-        if (Math.random() < 0.25) {
-            spawnBgGlitter(e.clientX + (Math.random() * 60 - 30), e.clientY + (Math.random() * 60 - 30));
-        }
+        if (Math.random() < 0.25) spawnBgGlitter(e.clientX + (Math.random() * 60 - 30), e.clientY + (Math.random() * 60 - 30));
     } else {
         leftLogo.style.opacity = 0.35;
         leftLogo.style.filter = 'drop-shadow(0 0 15px rgba(223, 186, 103, 0.2)) brightness(1)';
     }
 
-    // Right Logo Spotlight & Sparkle Glitter
     if (rightDist < threshold) {
         const intensity = 1 - (rightDist / threshold);
         rightLogo.style.opacity = 0.35 + (intensity * 0.65);
         rightLogo.style.filter = `drop-shadow(0 0 ${20 + intensity * 30}px rgba(223, 186, 103, ${0.4 + intensity * 0.6})) brightness(${1 + intensity * 0.25})`;
-        
-        if (Math.random() < 0.25) {
-            spawnBgGlitter(e.clientX + (Math.random() * 60 - 30), e.clientY + (Math.random() * 60 - 30));
-        }
+        if (Math.random() < 0.25) spawnBgGlitter(e.clientX + (Math.random() * 60 - 30), e.clientY + (Math.random() * 60 - 30));
     } else {
         rightLogo.style.opacity = 0.35;
         rightLogo.style.filter = 'drop-shadow(0 0 15px rgba(223, 186, 103, 0.2)) brightness(1)';
     }
 });
 
-// Helper function to create interactive background glitter sparks
 function spawnBgGlitter(x, y) {
     const spark = document.createElement('div');
     spark.style.position = 'fixed';
@@ -374,21 +400,18 @@ function spawnBgGlitter(x, y) {
     spark.style.opacity = '1';
     spark.style.transform = 'translate(-50%, -50%) scale(0.5)';
     spark.style.transition = 'all 0.6s cubic-bezier(0.1, 0.8, 0.3, 1)';
-    
     document.body.appendChild(spark);
-
     setTimeout(() => {
         const angle = Math.random() * Math.PI * 2;
         const dist = 30 + Math.random() * 50;
         spark.style.transform = `translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) scale(0)`;
         spark.style.opacity = '0';
     }, 20);
-
     setTimeout(() => spark.remove(), 650);
 }
 
 // Magnetic Attraction Effect
-document.querySelectorAll('.magnetic-target, .nav-link, .policy-card').forEach(el => {
+document.querySelectorAll('.magnetic-target, .nav-link, .hero-card, .feature-card').forEach(el => {
     el.addEventListener('mousemove', (e) => {
         const rect = el.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
@@ -402,5 +425,3 @@ document.querySelectorAll('.magnetic-target, .nav-link, .policy-card').forEach(e
 </script>
 </body>
 </html>
-
-```
