@@ -8,18 +8,21 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Luxurious, Fierce Free Commercial Font: Cinzel Decorative & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0B192C;
-            --bg-card: rgba(20, 36, 59, 0.65);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --gold-accent: #D4AF37;
-            --gold-hover: #C5A028;
-            --border-color: rgba(35, 53, 78, 0.6);
-            --radius-lg: 16px;
-            --radius-md: 10px;
+            --bg-dark: #080A0F;
+            --card-bg: rgba(18, 22, 31, 0.85);
+            --card-border: rgba(223, 186, 103, 0.25);
+            --card-border-glow: rgba(223, 186, 103, 0.45);
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --text-gold: #F3D99B;
+            --gold-gradient: linear-gradient(135deg, #F9E4B7 0%, #DFBA67 50%, #9E7D3B 100%);
+            --gold-solid: #DFBA67;
+            --radius-lg: 12px;
+            --radius-md: 8px;
         }
 
         * {
@@ -31,6 +34,9 @@
 
         body {
             background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(223, 186, 103, 0.12) 0%, transparent 65%),
+                radial-gradient(circle at 80% 90%, rgba(158, 125, 59, 0.08) 0%, transparent 50%);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
@@ -48,10 +54,10 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0.18;
+            opacity: 0.12;
             pointer-events: none;
             z-index: 0;
-            filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.25));
+            filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.25));
         }
 
         .glow-top {
@@ -61,7 +67,7 @@
             transform: translateX(-50%);
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(11, 25, 44, 0) 70%);
+            background: radial-gradient(circle, rgba(223, 186, 103, 0.15) 0%, rgba(8, 10, 15, 0) 70%);
             z-index: 1;
             pointer-events: none;
         }
@@ -75,64 +81,67 @@
         }
 
         header {
-            padding: 32px 0;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            padding: 28px 0;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(11, 25, 44, 0.45);
+            border-bottom: 1px solid var(--card-border);
+            background: rgba(10, 13, 20, 0.85);
             backdrop-filter: blur(12px);
-        }
-
-        .header-spacer {
-            visibility: hidden;
+            gap: 16px;
         }
 
         .logo {
-            grid-column: 2;
             display: flex;
             align-items: center;
-            gap: 18px;
-            font-weight: 800;
-            font-size: 38px; /* Bigger text */
-            letter-spacing: -0.5px;
+            gap: 14px;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 900;
+            font-size: 38px;
+            letter-spacing: 1px;
             color: #ffffff;
             text-decoration: none;
-            justify-self: center;
-            /* Gold outline and glow effect */
-            text-shadow: 
-                -1px -1px 0 rgba(212, 175, 55, 0.8),  
-                 1px -1px 0 rgba(212, 175, 55, 0.8),
-                -1px  1px 0 rgba(212, 175, 55, 0.8),
-                 1px  1px 0 rgba(212, 175, 55, 0.8),
-                 0 0 16px rgba(212, 175, 55, 0.4);
+        }
+
+        .logo span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(223, 186, 103, 0.4));
         }
 
         .logo-icon {
-            width: 88px; /* Bigger icon */
-            height: 88px; /* Bigger icon */
+            width: 48px;
+            height: 48px;
             object-fit: contain;
-            filter: drop-shadow(0 4px 16px rgba(212, 175, 55, 0.45));
+            filter: drop-shadow(0 2px 8px rgba(223, 186, 103, 0.4));
         }
 
         .nav-links {
-            grid-column: 3;
             display: flex;
-            gap: 24px;
+            gap: 12px;
             align-items: center;
-            justify-self: end;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .nav-link {
-            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(18, 22, 31, 0.6);
+            border: 1px solid var(--card-border);
+            color: var(--text-gold);
             text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s ease;
         }
 
-        .nav-link:hover {
-            color: #ffffff;
+        .nav-link:hover, .nav-link.active {
+            background: var(--gold-gradient);
+            color: #080A0F;
+            border-color: var(--card-border-glow);
+            transform: translateY(-1px);
         }
 
         .hero {
@@ -146,18 +155,19 @@
             gap: 8px;
             padding: 6px 16px;
             border-radius: 30px;
-            background: rgba(212, 175, 55, 0.08);
+            background: rgba(18, 22, 31, 0.85);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            color: var(--gold-accent);
+            border: 1px solid var(--card-border);
+            color: var(--text-gold);
             font-size: 13px;
             font-weight: 600;
             margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
 
         .badge-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             object-fit: contain;
         }
 
@@ -165,16 +175,15 @@
             font-size: 52px;
             font-weight: 800;
             line-height: 1.15;
-            letter-spacing: -1.5px;
+            letter-spacing: -1px;
             margin-bottom: 20px;
-            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
         }
 
         .hero h1 span {
-            color: var(--gold-accent);
-            -webkit-text-fill-color: var(--gold-accent);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
@@ -191,37 +200,36 @@
             flex-wrap: wrap;
         }
 
-        /* 3x scaled badge button with inverted color hover */
         .btn-badge-styled {
             display: inline-flex;
             align-items: center;
-            gap: 24px;
-            padding: 18px 48px;
-            border-radius: 50px;
-            background: rgba(212, 175, 55, 0.08);
+            gap: 12px;
+            padding: 12px 30px;
+            border-radius: 30px;
+            background: rgba(18, 22, 31, 0.85);
             backdrop-filter: blur(12px);
-            border: 2px solid rgba(212, 175, 55, 0.35);
-            color: var(--gold-accent);
-            font-size: 39px;
-            font-weight: 700;
+            border: 1px solid var(--card-border);
+            color: var(--text-gold);
+            font-size: 16px;
+            font-weight: 600;
             text-decoration: none;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
-            transition: all 0.25s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
         }
 
         .btn-badge-styled .btn-icon {
-            width: 60px;
-            height: 60px;
+            width: 22px;
+            height: 22px;
             object-fit: contain;
-            filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.3));
+            filter: drop-shadow(0 2px 4px rgba(223, 186, 103, 0.3));
         }
 
         .btn-badge-styled:hover {
-            background: var(--gold-accent);
-            color: #0B192C;
-            border-color: var(--gold-accent);
-            box-shadow: 0 6px 28px rgba(212, 175, 55, 0.4);
+            background: var(--gold-gradient);
+            color: #080A0F;
+            border-color: var(--card-border-glow);
+            box-shadow: 0 6px 24px rgba(223, 186, 103, 0.35);
             transform: translateY(-2px);
         }
 
@@ -233,30 +241,31 @@
         }
 
         .feature-card {
-            background-color: var(--bg-card);
+            background: var(--card-bg);
             backdrop-filter: blur(16px);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--card-border);
             border-radius: var(--radius-lg);
             padding: 32px;
-            transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-4px);
-            background-color: rgba(20, 36, 59, 0.8);
-            border-color: rgba(212, 175, 55, 0.4);
+            border-color: var(--card-border-glow);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 15px rgba(223, 186, 103, 0.1);
         }
 
         .feature-icon {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--gold-accent);
+            border-radius: 10px;
+            background: rgba(223, 186, 103, 0.1);
+            border: 1px solid rgba(223, 186, 103, 0.2);
+            color: var(--text-gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 20px;
         }
 
@@ -264,7 +273,7 @@
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 12px;
-            color: #ffffff;
+            color: var(--text-gold);
         }
 
         .feature-card p {
@@ -275,7 +284,7 @@
 
         .how-it-works {
             padding: 80px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid var(--card-border);
         }
 
         .section-title {
@@ -283,7 +292,9 @@
             font-size: 32px;
             font-weight: 800;
             margin-bottom: 12px;
-            color: #ffffff;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-subtitle {
@@ -301,10 +312,10 @@
 
         .step-item {
             text-align: center;
-            padding: 24px;
-            background-color: var(--bg-card);
+            padding: 28px 24px;
+            background: var(--card-bg);
             backdrop-filter: blur(16px);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--card-border);
             border-radius: var(--radius-lg);
         }
 
@@ -312,20 +323,22 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--gold-accent);
-            color: #0B192C;
+            background: var(--gold-gradient);
+            color: #080A0F;
             font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 16px;
             font-size: 16px;
+            box-shadow: 0 2px 8px rgba(223, 186, 103, 0.3);
         }
 
         .step-item h4 {
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 8px;
+            color: var(--text-gold);
         }
 
         .step-item p {
@@ -334,9 +347,9 @@
         }
 
         .affiliate-disclaimer-card {
-            background-color: var(--bg-card);
+            background: var(--card-bg);
             backdrop-filter: blur(16px);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--card-border);
             border-radius: var(--radius-lg);
             padding: 28px 32px;
             margin: 40px 0;
@@ -346,7 +359,7 @@
         .affiliate-disclaimer-card h3 {
             font-size: 18px;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-gold);
             margin-bottom: 8px;
         }
 
@@ -358,135 +371,125 @@
 
         footer {
             padding: 40px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid var(--card-border);
             text-align: center;
             color: var(--text-muted);
             font-size: 14px;
         }
 
         footer a {
-            color: var(--text-muted);
+            color: var(--text-gold);
             text-decoration: underline;
         }
 
         footer a:hover {
-            color: var(--gold-accent);
+            color: #ffffff;
         }
 
         .footer-compliance {
             font-size: 11px;
-            color: #64748b;
+            color: rgba(255, 255, 255, 0.4);
             margin-top: 10px;
             line-height: 1.4;
         }
 
         @media (max-width: 768px) {
-            header {
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
+            .hero h1 {
+                font-size: 36px;
             }
-            .logo { font-size: 28px; }
-            .logo-icon { width: 64px; height: 64px; }
-            .hero h1 { font-size: 36px; }
-            .hero p { font-size: 16px; }
-            .parallax-bg { width: 340px; height: 340px; opacity: 0.15; }
-            .btn-badge-styled {
-                font-size: 24px;
-                padding: 14px 28px;
+            .hero p {
+                font-size: 16px;
             }
-            .btn-badge-styled .btn-icon {
-                width: 40px;
-                height: 40px;
+            .logo {
+                font-size: 28px;
             }
         }
     </style>
 </head>
 <body>
-
     <div class="parallax-bg"></div>
     <div class="glow-top"></div>
 
     <div class="container">
         <header>
-            <div class="header-spacer"></div>
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Logo" class="logo-icon">
-                CopyCart
+                <span>CopyCart</span>
             </a>
-            <div class="nav-links">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#how-it-works" class="nav-link">How it Works</a>
-                <a href="privacy.html" class="nav-link">Privacy Policy</a>
-            </div>
+            <nav class="nav-links">
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#how-it-works" class="nav-link">How It Works</a>
+                <a href="genlink" class="nav-link">Link Gen</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+            </nav>
         </header>
 
         <section class="hero">
             <div class="badge">
-                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Icon" class="badge-icon">
-                <span>Browser Extension v1.2</span>
+                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
+                <span>Version 1.2 — Now Available for Firefox & Chrome</span>
             </div>
-            <h1>Share & Save Shopping Carts <br><span>Like A Pro</span></h1>
-            <p>Extract items from your active store cart, generate instant multi-item share links, and organize saved shopping folders effortlessly.</p>
+            <h1>Simplify Your Online Shopping <span>& Sharing</span></h1>
+            <p>Extract active Amazon cart items instantly, generate multi-cart quick purchase links, organize custom cart folders, and share curated product lists effortlessly.</p>
             
             <div class="cta-group">
-                <a href="https://addons.mozilla.org/en-US/firefox/addon/copycart/" target="_blank" rel="noopener noreferrer" class="btn-badge-styled">
-                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Cart Icon" class="btn-icon">
-                    <span>Add to Firefox</span>
+                <a href="genlink" class="btn-badge-styled">
+                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Browser Icon" class="btn-icon">
+                    Open Link Generator
                 </a>
             </div>
         </section>
 
-        <section class="features" id="features">
+        <section id="features" class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🛒</div>
+                <h3>Instant Extraction</h3>
+                <p>Pull all ASINs, quantities, and product titles straight from your active Amazon cart with a single click.</p>
+            </div>
             <div class="feature-card">
                 <div class="feature-icon">🔗</div>
-                <h3>Multi-Item Share Links</h3>
-                <p>Bundle your entire cart or selected items into a single link. Share it with friends, family, or followers so they can add everything to their cart at once.</p>
+                <h3>Multi-Cart Links</h3>
+                <p>Generate batch checkout links containing multiple items to share shopping lists or move items across accounts seamlessly.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📁</div>
+                <div class="feature-icon">📂</div>
                 <h3>Saved Cart Folders</h3>
-                <p>Save custom cart configurations directly in your browser. Perfect for recurring orders, supply lists, gift guides, or project materials.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>100% Private & Local</h3>
-                <p>Your data stays on your machine. CopyCart processes everything locally within your browser with zero external database tracking.</p>
+                <p>Store and organize custom-named cart templates locally so you can reload or copy them whenever you need.</p>
             </div>
         </section>
 
-        <section class="how-it-works" id="how-it-works">
+        <section id="how-it-works" class="how-it-works">
             <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">Start sharing full shopping carts in 3 simple steps</p>
+            <p class="section-subtitle">Get started with CopyCart in three simple steps</p>
 
             <div class="steps-grid">
                 <div class="step-item">
                     <div class="step-number">1</div>
-                    <h4>Open Store Cart</h4>
-                    <p>Navigate to your active shopping cart on any supported retail website.</p>
+                    <h4>Open Your Cart</h4>
+                    <p>Navigate to your active Amazon shopping cart page on any supported regional domain.</p>
                 </div>
                 <div class="step-item">
                     <div class="step-number">2</div>
-                    <h4>Click Extension</h4>
-                    <p>Launch CopyCart to automatically parse items, quantities, and product IDs instantly.</p>
+                    <h4>Generate & Select</h4>
+                    <p>Click the extension icon to parse your items. Select or unselect specific products using checkboxes.</p>
                 </div>
                 <div class="step-item">
                     <div class="step-number">3</div>
                     <h4>Copy or Save</h4>
-                    <p>Generate a unified link to copy to your clipboard or save the list into a folder for later.</p>
+                    <p>Copy a multi-cart batch link to your clipboard or save the configuration as a named cart template.</p>
                 </div>
             </div>
         </section>
 
-        <section class="affiliate-disclaimer-card">
-            <h3>Third-Party Notice & Affiliate Disclosure</h3>
-            <p>CopyCart is an independent, third-party browser extension and is not affiliated with, endorsed by, or sponsored by Amazon.com, Inc. or its affiliates. All product names, logos, and brands are property of their respective owners.</p>
-            <p style="margin-top: 10px;">As an Amazon Associate, CopyCart earns from qualifying purchases made through links generated or shared using our extension.</p>
-        </section>
+        <div class="affiliate-disclaimer-card">
+            <h3>Affiliate Disclosure</h3>
+            <p>We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites.</p>
+            <p style="margin-top: 10px;">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc.</p>
+        </div>
 
         <footer>
-            <p>All Rights Reserved.</p>
-            <p style="margin-top: 4px;">&copy; 2026 CopyCart. Built for Chrome & Firefox.</p>
+            <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
+            <p style="margin-top: 4px;">CopyCart is built for Chrome & Firefox.</p>
             <p style="margin-top: 8px;">
                 <a href="privacy.html">Privacy Policy</a>
             </p>
@@ -496,6 +499,5 @@
             </p>
         </footer>
     </div>
-
 </body>
 </html>
