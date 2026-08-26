@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link Generator — CopyCart</title>
-    <!-- Favicon Link -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Luxurious, Fierce Free Commercial Font: Cinzel Decorative & Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -58,18 +56,6 @@
             pointer-events: none;
             z-index: 0;
             filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.25));
-        }
-
-        .glow-top {
-            position: absolute;
-            top: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(223, 186, 103, 0.2) 0%, rgba(8, 10, 15, 0) 70%);
-            z-index: 1;
-            pointer-events: none;
         }
 
         .container {
@@ -134,7 +120,8 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -142,15 +129,13 @@
             color: #080A0F;
             border-color: var(--card-border-glow);
             box-shadow: 0 0 20px rgba(223, 186, 103, 0.4);
-            transform: translateY(-2px) scale(1.03);
         }
 
         .main-content {
             padding: 60px 0;
         }
 
-        /* Link Generator Card Styling */
-        .generator-card {
+        .generator-card, .affiliate-disclaimer-card {
             background-color: var(--card-bg);
             backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
@@ -160,10 +145,10 @@
             margin: 0 auto 40px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             text-align: left;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .generator-card:hover {
+        .generator-card:hover, .affiliate-disclaimer-card:hover {
             border-color: var(--card-border-glow);
             box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.15);
         }
@@ -217,14 +202,9 @@
 
         .form-control:focus {
             border-color: var(--gold-solid);
-            box-shadow: 0 0 0 4px rgba(223, 186, 103, 0.2), 0 0 15px rgba(223, 186, 103, 0.15);
+            box-shadow: 0 0 0 4px rgba(223, 186, 103, 0.2);
         }
 
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Generate Button with Dim State Support */
         .btn-generate {
             width: 100%;
             padding: 16px;
@@ -239,51 +219,25 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.2s ease, filter 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 16px rgba(223, 186, 103, 0.25);
             margin-top: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-generate::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-            transform: rotate(30deg) translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .btn-generate:hover::after {
-            transform: rotate(30deg) translateX(100%);
         }
 
         .btn-generate:hover {
-            transform: translateY(-2px) scale(1.01);
             box-shadow: 0 0 30px rgba(223, 186, 103, 0.5), 0 6px 20px rgba(0,0,0,0.4);
             filter: brightness(1.05);
         }
 
-        /* Dim state after generation */
         .btn-generate.dimmed {
-            background: rgba(158, 125, 59, 0.2);
-            color: rgba(243, 217, 155, 0.4);
-            border: 1px solid rgba(223, 186, 103, 0.1);
+            background: rgba(158, 125, 59, 0.15);
+            color: rgba(243, 217, 155, 0.3);
+            border: 1px solid rgba(223, 186, 103, 0.08);
             box-shadow: none;
             cursor: not-allowed;
             transform: none !important;
-            filter: none !important;
         }
 
-        .btn-generate.dimmed::after {
-            display: none;
-        }
-
-        /* Result Box Center-Aligned Styles */
         .result-box {
             display: none;
             margin-top: 24px;
@@ -310,123 +264,108 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 12px;
-            text-align: center;
         }
 
-        /* Bigger Epic Badge Button Spanning Section with Firework Container */
+        /* Prominent & Dramatic Epic Copy Button */
         .btn-copy-badge {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 14px;
             width: 100%;
-            padding: 20px 28px;
+            padding: 22px 32px;
             border-radius: var(--radius-md);
             background: rgba(18, 22, 31, 0.95);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
+            border: 2px solid var(--card-border-glow);
             color: var(--text-gold);
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 20px;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.3);
+            transition: transform 0.2s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: visible;
         }
 
-        .btn-copy-badge::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: calc(var(--radius-md) + 2px);
-            background: var(--gold-gradient);
-            z-index: -1;
-            opacity: 0.3;
-            transition: opacity 0.3s ease;
-        }
-
         .btn-copy-badge .btn-icon {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             object-fit: contain;
             filter: drop-shadow(0 2px 6px rgba(223, 186, 103, 0.4));
-            transition: transform 0.3s ease;
-        }
-
-        .btn-copy-badge:hover .btn-icon {
-            transform: scale(1.15) rotate(-10deg);
         }
 
         .btn-copy-badge:hover {
             background: var(--gold-gradient);
             color: #080A0F;
             border-color: #ffffff;
-            box-shadow: 0 0 35px rgba(223, 186, 103, 0.6), 0 8px 30px rgba(0, 0, 0, 0.6);
-            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 45px rgba(223, 186, 103, 0.8), 0 10px 35px rgba(0, 0, 0, 0.7);
         }
 
-        .btn-copy-badge:hover::before {
+        /* Copied Green State */
+        .btn-copy-badge.copied-state {
+            background: #10B981 !important;
+            color: #ffffff !important;
+            border-color: #34D399 !important;
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.8), 0 10px 30px rgba(0,0,0,0.5) !important;
+        }
+
+        /* High-Intensity Dramatic Firework Sparks & Background Expanding Ring */
+        .firework-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid #F9E4B7;
+            transform: translate(-50%, -50%) scale(0.2);
+            pointer-events: none;
+            z-index: 9;
             opacity: 1;
+            animation: expandRing 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
         }
 
-        /* Firework Spark Particle Styling */
+        @keyframes expandRing {
+            0% {
+                transform: translate(-50%, -50%) scale(0.2);
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(243, 217, 155, 0.8);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(9);
+                opacity: 0;
+                box-shadow: 0 0 60px rgba(223, 186, 103, 0);
+            }
+        }
+
         .firework-particle {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #F9E4B7;
-            box-shadow: 0 0 10px #DFBA67, 0 0 20px #F3D99B;
+            box-shadow: 0 0 16px #DFBA67, 0 0 28px #F3D99B;
             pointer-events: none;
             z-index: 10;
             opacity: 1;
-            animation: explodeSpark 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+            animation: explodeSpark 0.9s cubic-bezier(0.08, 0.82, 0.25, 1) forwards;
         }
 
         @keyframes explodeSpark {
             0% {
-                transform: translate(-50%, -50%) scale(0.5);
+                transform: translate(-50%, -50%) scale(0.6);
                 opacity: 1;
             }
-            60% {
+            50% {
                 opacity: 1;
             }
             100% {
                 transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
                 opacity: 0;
             }
-        }
-
-        .affiliate-disclaimer-card {
-            background-color: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-lg);
-            padding: 28px 32px;
-            max-width: 680px;
-            margin: 0 auto;
-            text-align: center;
-            transition: border-color 0.3s ease;
-        }
-
-        .affiliate-disclaimer-card:hover {
-            border-color: var(--card-border-glow);
-        }
-
-        .affiliate-disclaimer-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-gold);
-            margin-bottom: 8px;
-        }
-
-        .affiliate-disclaimer-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
         }
 
         footer {
@@ -440,12 +379,6 @@
         footer a {
             color: var(--text-gold);
             text-decoration: underline;
-            transition: color 0.2s ease;
-        }
-
-        footer a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 8px rgba(223, 186, 103, 0.6);
         }
 
         .footer-compliance {
@@ -454,26 +387,16 @@
             margin-top: 10px;
             line-height: 1.4;
         }
-
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 28px;
-            }
-            .generator-card, .affiliate-disclaimer-card {
-                padding: 24px;
-            }
-        }
     </style>
 </head>
 <body>
 
 <div class="parallax-bg"></div>
-<div class="glow-top"></div>
 
 <div class="container">
     <header>
         <a href="index.html" class="logo">
-            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Logo" class="logo-icon">
+            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
             <span>CopyCart</span>
         </a>
         <nav class="nav-links">
@@ -485,10 +408,9 @@
     </header>
 
     <main class="main-content">
-        <!-- Automatic Shareable Link Generator Form Card -->
-        <div class="generator-card" id="link-generator">
+        <div class="generator-card magnetic-target" id="link-generator">
             <h2>
-                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Icon" class="card-header-icon">
+                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="card-header-icon">
                 Generate Shareable Cart Link
             </h2>
             <p class="desc">Paste your Amazon product or cart URL below to instantly generate your custom tracking link.</p>
@@ -507,93 +429,80 @@
 
             <div class="result-box" id="resultBox">
                 <div class="result-label">Link Generated Successfully</div>
-                <!-- Bigger Epic Badge Button Spanning Section with Firework Spark Container -->
-                <button type="button" class="btn-copy-badge" onclick="copyShareLink(event)" id="copyBtn">
+                <button type="button" class="btn-copy-badge magnetic-target" onclick="copyShareLink(event)" id="copyBtn">
                     <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="btn-icon">
                     <span id="copyBtnText">Your CopyCart link is ready to share</span>
                 </button>
             </div>
         </div>
 
-        <!-- Fully Compliant Affiliate Disclosure Card -->
-        <section class="affiliate-disclaimer-card">
+        <section class="affiliate-disclaimer-card magnetic-target">
             <h3>Affiliate Disclosure</h3>
             <p>We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites.</p>
-            <p style="margin-top: 10px;">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc.</p>
         </section>
     </main>
 
     <footer>
         <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
-        <p style="margin-top: 4px;">CopyCart is built for Chrome & Firefox.</p>
-        <p style="margin-top: 8px;">
-            <a href="privacy.html">Privacy Policy</a>
-        </p>
-        <p class="footer-compliance">
-            CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. <br>
-            As an Amazon Associate I earn from qualifying purchases.
-        </p>
+        <p style="margin-top: 8px;"><a href="privacy.html">Privacy Policy</a></p>
+        <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
     </footer>
 </div>
 
 <script>
-// Hardcoded Associate Tag ID:
 const ASSOCIATE_TAG = 'apex087e-20';
 let generatedUrlString = '';
 
 function generateShareLink(event) {
     event.preventDefault();
     const inputUrl = document.getElementById('cartUrl').value.trim();
-
     if (!inputUrl) return;
 
     try {
         const url = new URL(inputUrl);
-        
-        // Compliance safety check: Ensures it's an Amazon domain before generating tag
         if (!url.hostname.includes('amazon.')) {
             alert('Please enter a valid Amazon product or cart URL.');
             return;
         }
 
-        // Appends your associate tag automatically
         url.searchParams.set('tag', ASSOCIATE_TAG);
         generatedUrlString = url.toString();
 
-        const resultBox = document.getElementById('resultBox');
-        resultBox.classList.add('active');
-
-        // Dim the generate button so it is no longer bright
+        document.getElementById('resultBox').classList.add('active');
         const generateBtn = document.getElementById('generateBtn');
         generateBtn.classList.add('dimmed');
         document.getElementById('generateBtnText').textContent = 'Link Generated';
 
-        // Trigger Epic Firework Sparks Expanding Outward from Center of Copy Button
-        triggerFireworkSparks();
+        // Trigger prominent & dramatic firework explosion
+        triggerDramaticFireworks();
 
-        // Reset button copy text state
         const copyBtnText = document.getElementById('copyBtnText');
         copyBtnText.textContent = 'Your CopyCart link is ready to share';
+        document.getElementById('copyBtn').classList.remove('copied-state');
 
-        // Resets the input text box after generating the link
         event.target.reset();
     } catch (e) {
         alert('Please enter a valid URL (including http:// or https://)');
     }
 }
 
-function triggerFireworkSparks() {
+function triggerDramaticFireworks() {
     const copyBtn = document.getElementById('copyBtn');
     
-    // Create 28 fiery spark particles expanding in a circle
-    const totalSparks = 28;
+    // Add glowing background shockwave ring
+    const ring = document.createElement('div');
+    ring.className = 'firework-ring';
+    copyBtn.appendChild(ring);
+    setTimeout(() => ring.remove(), 900);
+
+    // Create 45 large prominent spark particles expanding outward
+    const totalSparks = 45;
     for (let i = 0; i < totalSparks; i++) {
         const spark = document.createElement('div');
         spark.className = 'firework-particle';
         
-        // Calculate random outward trajectory angles & distances
-        const angle = (i / totalSparks) * 360 + (Math.random() * 15);
-        const distance = 80 + Math.random() * 140; // distance in pixels
+        const angle = (i / totalSparks) * 360 + (Math.random() * 20);
+        const distance = 110 + Math.random() * 180; // wider dramatic range
         const rad = angle * (Math.PI / 180);
         
         const dx = Math.cos(rad) * distance;
@@ -602,21 +511,16 @@ function triggerFireworkSparks() {
         spark.style.setProperty('--dx', `${dx}px`);
         spark.style.setProperty('--dy', `${dy}px`);
         
-        // Randomize individual spark scale/color variation
-        if (i % 3 === 0) {
+        if (i % 4 === 0) {
             spark.style.background = '#ffffff';
-            spark.style.boxShadow = '0 0 12px #F9E4B7';
+            spark.style.boxShadow = '0 0 20px #F9E4B7';
         } else if (i % 2 === 0) {
             spark.style.background = '#F3D99B';
-            spark.style.boxShadow = '0 0 12px #DFBA67';
+            spark.style.boxShadow = '0 0 20px #DFBA67';
         }
 
         copyBtn.appendChild(spark);
-
-        // Clean up spark node after animation completes
-        setTimeout(() => {
-            spark.remove();
-        }, 800);
+        setTimeout(() => spark.remove(), 900);
     }
 }
 
@@ -624,13 +528,31 @@ function copyShareLink(event) {
     if (!generatedUrlString) return;
 
     navigator.clipboard.writeText(generatedUrlString).then(() => {
+        const copyBtn = document.getElementById('copyBtn');
         const copyBtnText = document.getElementById('copyBtnText');
-        copyBtnText.textContent = 'Copied to Clipboard!';
+        
+        copyBtn.classList.add('copied-state');
+        copyBtnText.textContent = 'Copied';
+
         setTimeout(() => {
+            copyBtn.classList.remove('copied-state');
             copyBtnText.textContent = 'Your CopyCart link is ready to share';
         }, 2000);
     });
 }
+
+// Universal Magnetic Attraction Pull Toward Mouse Direction
+document.querySelectorAll('.magnetic-target, .nav-link, .generator-card, .affiliate-disclaimer-card').forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px) translateY(-2px)`;
+    });
+    el.addEventListener('mouseleave', () => {
+        el.style.transform = 'translate(0px, 0px)';
+    });
+});
 </script>
 </body>
 </html>
