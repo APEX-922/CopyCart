@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CopyCart — Simplify Your Online Shopping & Sharing</title>
-    <!-- Favicon Link -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Luxurious, Fierce Free Commercial Font: Cinzel Decorative & Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -58,19 +56,6 @@
             pointer-events: none;
             z-index: 0;
             filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.25));
-        }
-
-        .glow-top {
-            position: absolute;
-            top: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(223, 186, 103, 0.2) 0%, rgba(8, 10, 15, 0) 70%);
-            z-index: 1;
-            pointer-events: none;
-            transition: transform 0.4s ease;
         }
 
         .container {
@@ -126,7 +111,7 @@
             flex-wrap: wrap;
         }
 
-        .nav-link {
+        .nav-link, .magnetic-element {
             padding: 8px 18px;
             border-radius: 20px;
             background: rgba(18, 22, 31, 0.6);
@@ -135,9 +120,8 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -145,7 +129,6 @@
             color: #080A0F;
             border-color: var(--card-border-glow);
             box-shadow: 0 0 20px rgba(223, 186, 103, 0.4);
-            transform: translateY(-2px) scale(1.03);
         }
 
         .hero {
@@ -167,13 +150,6 @@
             font-weight: 600;
             margin-bottom: 24px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .badge:hover {
-            border-color: var(--card-border-glow);
-            box-shadow: 0 0 15px rgba(223, 186, 103, 0.25);
-            transform: scale(1.02);
         }
 
         .badge-icon {
@@ -226,25 +202,9 @@
             text-decoration: none;
             cursor: pointer;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
-        }
-
-        .btn-badge-styled::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transform: rotate(30deg) translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .btn-badge-styled:hover::after {
-            transform: rotate(30deg) translateX(100%);
         }
 
         .btn-badge-styled .btn-icon {
@@ -259,7 +219,6 @@
             color: #080A0F;
             border-color: var(--card-border-glow);
             box-shadow: 0 0 30px rgba(223, 186, 103, 0.5), 0 8px 25px rgba(0,0,0,0.5);
-            transform: translateY(-3px) scale(1.02);
         }
 
         .features {
@@ -269,19 +228,18 @@
             gap: 24px;
         }
 
-        .feature-card {
+        .feature-card, .step-item, .affiliate-disclaimer-card {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-lg);
             padding: 32px;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .feature-card:hover {
-            transform: translateY(-6px) scale(1.01);
+        .feature-card:hover, .step-item:hover, .affiliate-disclaimer-card:hover {
             border-color: var(--card-border-glow);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.2);
         }
@@ -298,12 +256,11 @@
             justify-content: center;
             font-size: 22px;
             margin-bottom: 20px;
-            transition: transform 0.3s ease, background 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .feature-card:hover .feature-icon {
             transform: scale(1.1) rotate(5deg);
-            background: rgba(223, 186, 103, 0.2);
         }
 
         .feature-card h3 {
@@ -313,7 +270,7 @@
             color: var(--text-gold);
         }
 
-        .feature-card p {
+        .feature-card p, .step-item p, .affiliate-disclaimer-card p {
             color: var(--text-muted);
             font-size: 15px;
             line-height: 1.6;
@@ -350,17 +307,6 @@
         .step-item {
             text-align: center;
             padding: 28px 24px;
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-lg);
-            transition: all 0.3s ease;
-        }
-
-        .step-item:hover {
-            border-color: var(--card-border-glow);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 15px rgba(223,186,103,0.15);
         }
 
         .step-number {
@@ -376,11 +322,6 @@
             margin: 0 auto 16px;
             font-size: 16px;
             box-shadow: 0 2px 8px rgba(223, 186, 103, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .step-item:hover .step-number {
-            transform: scale(1.15) rotate(360deg);
         }
 
         .step-item h4 {
@@ -390,24 +331,9 @@
             color: var(--text-gold);
         }
 
-        .step-item p {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
         .affiliate-disclaimer-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-lg);
-            padding: 28px 32px;
             margin: 40px 0;
             text-align: center;
-            transition: border-color 0.3s ease;
-        }
-
-        .affiliate-disclaimer-card:hover {
-            border-color: var(--card-border-glow);
         }
 
         .affiliate-disclaimer-card h3 {
@@ -415,12 +341,6 @@
             font-weight: 700;
             color: var(--text-gold);
             margin-bottom: 8px;
-        }
-
-        .affiliate-disclaimer-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
         }
 
         footer {
@@ -434,12 +354,6 @@
         footer a {
             color: var(--text-gold);
             text-decoration: underline;
-            transition: color 0.2s ease;
-        }
-
-        footer a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 8px rgba(223, 186, 103, 0.6);
         }
 
         .footer-compliance {
@@ -448,28 +362,15 @@
             margin-top: 10px;
             line-height: 1.4;
         }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-            .hero p {
-                font-size: 16px;
-            }
-            .logo {
-                font-size: 28px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="parallax-bg"></div>
-    <div class="glow-top"></div>
 
     <div class="container">
         <header>
             <a href="index.html" class="logo">
-                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="CopyCart Logo" class="logo-icon">
+                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
                 <span>CopyCart</span>
             </a>
             <nav class="nav-links">
@@ -489,25 +390,25 @@
             <p>Extract active Amazon cart items instantly, generate multi-cart quick purchase links, organize custom cart folders, and share curated product lists effortlessly.</p>
             
             <div class="cta-group">
-                <a href="genlink" class="btn-badge-styled">
-                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Browser Icon" class="btn-icon">
+                <a href="genlink" class="btn-badge-styled magnetic-target">
+                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="btn-icon">
                     Open Link Generator
                 </a>
             </div>
         </section>
 
         <section id="features" class="features">
-            <div class="feature-card">
+            <div class="feature-card magnetic-target">
                 <div class="feature-icon">🛒</div>
                 <h3>Instant Extraction</h3>
                 <p>Pull all ASINs, quantities, and product titles straight from your active Amazon cart with a single click.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card magnetic-target">
                 <div class="feature-icon">🔗</div>
                 <h3>Multi-Cart Links</h3>
                 <p>Generate batch checkout links containing multiple items to share shopping lists or move items across accounts seamlessly.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card magnetic-target">
                 <div class="feature-icon">📂</div>
                 <h3>Saved Cart Folders</h3>
                 <p>Store and organize custom-named cart templates locally so you can reload or copy them whenever you need.</p>
@@ -519,17 +420,17 @@
             <p class="section-subtitle">Get started with CopyCart in three simple steps</p>
 
             <div class="steps-grid">
-                <div class="step-item">
+                <div class="step-item magnetic-target">
                     <div class="step-number">1</div>
                     <h4>Open Your Cart</h4>
                     <p>Navigate to your active Amazon shopping cart page on any supported regional domain.</p>
                 </div>
-                <div class="step-item">
+                <div class="step-item magnetic-target">
                     <div class="step-number">2</div>
                     <h4>Generate & Select</h4>
                     <p>Click the extension icon to parse your items. Select or unselect specific products using checkboxes.</p>
                 </div>
-                <div class="step-item">
+                <div class="step-item magnetic-target">
                     <div class="step-number">3</div>
                     <h4>Copy or Save</h4>
                     <p>Copy a multi-cart batch link to your clipboard or save the configuration as a named cart template.</p>
@@ -537,23 +438,31 @@
             </div>
         </section>
 
-        <div class="affiliate-disclaimer-card">
+        <div class="affiliate-disclaimer-card magnetic-target">
             <h3>Affiliate Disclosure</h3>
             <p>We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites.</p>
-            <p style="margin-top: 10px;">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc.</p>
         </div>
 
         <footer>
             <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
-            <p style="margin-top: 4px;">CopyCart is built for Chrome & Firefox.</p>
-            <p style="margin-top: 8px;">
-                <a href="privacy.html">Privacy Policy</a>
-            </p>
-            <p class="footer-compliance">
-                CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. <br>
-                As an Amazon Associate I earn from qualifying purchases.
-            </p>
+            <p style="margin-top: 8px;"><a href="privacy.html">Privacy Policy</a></p>
+            <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
         </footer>
     </div>
+
+    <script>
+        // Universal Magnetic Attraction Pull Toward Mouse Direction
+        document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .feature-card, .step-item').forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) translateY(-3px)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0px, 0px)';
+            });
+        });
+    </script>
 </body>
 </html>
