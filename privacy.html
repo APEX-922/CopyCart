@@ -11,11 +11,11 @@
     <style>
         :root {
             --bg-dark: #080A0F;
-            --card-bg: rgba(18, 22, 31, 0.45); /* More translucent for better background visibility */
+            --card-bg: rgba(18, 22, 31, 0.30);
             --card-border: rgba(223, 186, 103, 0.25);
             --card-border-glow: rgba(223, 186, 103, 0.75);
             --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.75);
             --text-gold: #F3D99B;
             --gold-gradient: linear-gradient(135deg, #F9E4B7 0%, #DFBA67 50%, #9E7D3B 100%);
             --gold-solid: #DFBA67;
@@ -41,7 +41,7 @@
             position: relative;
         }
 
-        /* Center Parallax Background Logo with Flashlight Effect */
+        /* Center Parallax Background Logo with Flashlight & Glitter Effect */
         .parallax-bg {
             position: fixed;
             top: 50%;
@@ -60,7 +60,7 @@
             transition: opacity 0.3s ease, filter 0.3s ease;
         }
 
-        /* Left & Right Side Flashlight Logos */
+        /* Left & Right Side Flashlight & Glitter Logos */
         .side-logo {
             position: fixed;
             top: 50%;
@@ -100,7 +100,7 @@
             flex-direction: column;
             align-items: center;
             border-bottom: 1px solid var(--card-border);
-            background: rgba(10, 13, 20, 0.65);
+            background: rgba(10, 13, 20, 0.55);
             backdrop-filter: blur(12px);
             gap: 16px;
         }
@@ -142,7 +142,7 @@
         .nav-link {
             padding: 8px 18px;
             border-radius: 20px;
-            background: rgba(18, 22, 31, 0.6);
+            background: rgba(18, 22, 31, 0.5);
             border: 1px solid var(--card-border);
             color: var(--text-gold);
             text-decoration: none;
@@ -163,11 +163,10 @@
             padding: 60px 0;
         }
 
-        /* Frosted Glass Privacy Policy Card */
         .policy-card {
             background-color: var(--card-bg);
-            backdrop-filter: blur(20px); /* Enhanced blur for a gorgeous frosted glass appearance */
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-lg);
             padding: 48px;
@@ -240,10 +239,10 @@
 </head>
 <body>
 
-<!-- Center Background Logo with Flashlight Effect -->
+<!-- Center Background Logo with Flashlight & Glitter Effect -->
 <div class="parallax-bg" id="bgLogoCenter"></div>
 
-<!-- Side Flashlight Logos -->
+<!-- Side Flashlight & Glitter Logos -->
 <div class="side-logo left" id="sideLogoLeft"></div>
 <div class="side-logo right" id="sideLogoRight"></div>
 
@@ -297,7 +296,7 @@
 </div>
 
 <script>
-// Flashlight/Spotlight effect tracking mouse proximity for ALL logos
+// Flashlight/Spotlight & Continuous Glitter Effect for Background Logos
 document.addEventListener('mousemove', (e) => {
     const centerLogo = document.getElementById('bgLogoCenter');
     const leftLogo = document.getElementById('sideLogoLeft');
@@ -311,38 +310,63 @@ document.addEventListener('mousemove', (e) => {
     const leftDist = Math.hypot(e.clientX - (leftRect.left + leftRect.width/2), e.clientY - (leftRect.top + leftRect.height/2));
     const rightDist = Math.hypot(e.clientX - (rightRect.left + rightRect.width/2), e.clientY - (rightRect.top + rightRect.height/2));
 
-    const threshold = 350;
+    const threshold = 380;
 
-    // Center Logo Spotlight
     if (centerDist < threshold) {
         const intensity = 1 - (centerDist / threshold);
-        centerLogo.style.opacity = 0.15 + (intensity * 0.55);
-        centerLogo.style.filter = `drop-shadow(0 0 ${35 + intensity * 35}px rgba(223, 186, 103, ${0.25 + intensity * 0.6}))`;
+        centerLogo.style.opacity = 0.15 + (intensity * 0.6);
+        centerLogo.style.filter = `drop-shadow(0 0 ${35 + intensity * 40}px rgba(223, 186, 103, ${0.3 + intensity * 0.7})) brightness(${1 + intensity * 0.25})`;
+        if (Math.random() < 0.25) spawnBgGlitter(e.clientX + (Math.random() * 60 - 30), e.clientY + (Math.random() * 60 - 30));
     } else {
         centerLogo.style.opacity = 0.15;
-        centerLogo.style.filter = 'drop-shadow(0 0 35px rgba(223, 186, 103, 0.25))';
+        centerLogo.style.filter = 'drop-shadow(0 0 35px rgba(223, 186, 103, 0.25)) brightness(1)';
     }
 
-    // Left Logo Spotlight
     if (leftDist < threshold) {
         const intensity = 1 - (leftDist / threshold);
         leftLogo.style.opacity = 0.35 + (intensity * 0.65);
-        leftLogo.style.filter = `drop-shadow(0 0 ${20 + intensity * 25}px rgba(223, 186, 103, ${0.4 + intensity * 0.5}))`;
+        leftLogo.style.filter = `drop-shadow(0 0 ${20 + intensity * 30}px rgba(223, 186, 103, ${0.4 + intensity * 0.6})) brightness(${1 + intensity * 0.25})`;
+        if (Math.random() < 0.25) spawnBgGlitter(e.clientX + (Math.random() * 60 - 30), e.clientY + (Math.random() * 60 - 30));
     } else {
         leftLogo.style.opacity = 0.35;
-        leftLogo.style.filter = 'drop-shadow(0 0 15px rgba(223, 186, 103, 0.2))';
+        leftLogo.style.filter = 'drop-shadow(0 0 15px rgba(223, 186, 103, 0.2)) brightness(1)';
     }
 
-    // Right Logo Spotlight
     if (rightDist < threshold) {
         const intensity = 1 - (rightDist / threshold);
         rightLogo.style.opacity = 0.35 + (intensity * 0.65);
-        rightLogo.style.filter = `drop-shadow(0 0 ${20 + intensity * 25}px rgba(223, 186, 103, ${0.4 + intensity * 0.5}))`;
+        rightLogo.style.filter = `drop-shadow(0 0 ${20 + intensity * 30}px rgba(223, 186, 103, ${0.4 + intensity * 0.6})) brightness(${1 + intensity * 0.25})`;
+        if (Math.random() < 0.25) spawnBgGlitter(e.clientX + (Math.random() * 60 - 30), e.clientY + (Math.random() * 60 - 30));
     } else {
         rightLogo.style.opacity = 0.35;
-        rightLogo.style.filter = 'drop-shadow(0 0 15px rgba(223, 186, 103, 0.2))';
+        rightLogo.style.filter = 'drop-shadow(0 0 15px rgba(223, 186, 103, 0.2)) brightness(1)';
     }
 });
+
+function spawnBgGlitter(x, y) {
+    const spark = document.createElement('div');
+    spark.style.position = 'fixed';
+    spark.style.left = `${x}px`;
+    spark.style.top = `${y}px`;
+    spark.style.width = '5px';
+    spark.style.height = '5px';
+    spark.style.borderRadius = '50%';
+    spark.style.background = Math.random() > 0.5 ? '#ffffff' : '#F9E4B7';
+    spark.style.boxShadow = '0 0 10px #DFBA67, 0 0 18px #F3D99B';
+    spark.style.pointerEvents = 'none';
+    spark.style.zIndex = '5';
+    spark.style.opacity = '1';
+    spark.style.transform = 'translate(-50%, -50%) scale(0.5)';
+    spark.style.transition = 'all 0.6s cubic-bezier(0.1, 0.8, 0.3, 1)';
+    document.body.appendChild(spark);
+    setTimeout(() => {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 30 + Math.random() * 50;
+        spark.style.transform = `translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) scale(0)`;
+        spark.style.opacity = '0';
+    }, 20);
+    setTimeout(() => spark.remove(), 650);
+}
 
 // Magnetic Attraction Effect
 document.querySelectorAll('.magnetic-target, .nav-link, .policy-card').forEach(el => {
