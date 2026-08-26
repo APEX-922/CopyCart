@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CopyCart — Simplify Your Online Shopping & Sharing</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #080A0F;
+            --card-bg: rgba(18, 22, 31, 0.85);
+            --card-border: rgba(223, 186, 103, 0.25);
+            --card-border-glow: rgba(223, 186, 103, 0.9);
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --text-gold: #F3D99B;
+            --gold-gradient: linear-gradient(135deg, #F9E4B7 0%, #DFBA67 50%, #9E7D3B 100%);
+            --gold-solid: #DFBA67;
+            --radius-lg: 12px;
+            --radius-md: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(223, 186, 103, 0.15) 0%, transparent 65%),
+                radial-gradient(circle at 80% 90%, rgba(158, 125, 59, 0.1) 0%, transparent 50%);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Pulsing & Cursor-Reveal Flashlight Background Logo */
+        .parallax-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background-image: url('https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 0;
+            animation: pulseGlow 4s ease-in-out infinite;
+            transition: opacity 0.4s ease;
+            filter: drop-shadow(0 0 40px rgba(223, 186, 103, 0.4));
+            -webkit-mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
+            mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 25px rgba(223, 186, 103, 0.2)); }
+            50% { transform: translate(-50%, -50%) scale(1.06); filter: drop-shadow(0 0 50px rgba(223, 186, 103, 0.5)); }
+        }
+
+        /* Glitter Container & Sparkle Animation */
+        .glitter-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #F9E4B7;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #DFBA67, 0 0 15px #F9E4B7;
+            animation: sparkleFly 2.5s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkleFly {
+            0% { transform: translateY(0) translateX(0) scale(0.2); opacity: 0; }
+            25% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(calc(var(--rand-x) * 50px)) scale(1.3); opacity: 0; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            padding: 28px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            background: rgba(10, 13, 20, 0.85);
+            backdrop-filter: blur(12px);
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 900;
+            font-size: 38px;
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .logo span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(223, 186, 103, 0.4));
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(223, 186, 103, 0.4));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link, .magnetic-element {
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(18, 22, 31, 0.6);
+            border: 1px solid var(--card-border);
+            color: var(--text-gold);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: var(--gold-gradient);
+            color: #080A0F;
+            border-color: var(--card-border-glow);
+            box-shadow: 0 0 25px rgba(223, 186, 103, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 30px;
+            background: rgba(18, 22, 31, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            color: var(--text-gold);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .badge-icon {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero h1 span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 36px;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-badge-styled {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 32px;
+            border-radius: 30px;
+            background: rgba(18, 22, 31, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            color: var(--text-gold);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-badge-styled .btn-icon {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(223, 186, 103, 0.3));
+        }
+
+        .btn-badge-styled:hover {
+            background: var(--gold-gradient);
+            color: #080A0F;
+            border-color: var(--card-border-glow);
+            box-shadow: 0 0 35px rgba(223, 186, 103, 0.7), 0 8px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .features {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card, .step-item, .affiliate-disclaimer-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover, .step-item:hover, .affiliate-disclaimer-card:hover {
+            border-color: var(--card-border-glow);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: rgba(223, 186, 103, 0.1);
+            border: 1px solid rgba(223, 186, 103, 0.2);
+            color: var(--text-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-gold);
+        }
+
+        .feature-card p, .step-item p, .affiliate-disclaimer-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .how-it-works {
+            padding: 80px 0;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 48px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .step-item {
+            text-align: center;
+            padding: 28px 24px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            color: #080A0F;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(223, 186, 103, 0.3);
+        }
+
+        .step-item h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-gold);
+        }
+
+        .affiliate-disclaimer-card {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .affiliate-disclaimer-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-gold);
+            margin-bottom: 8px;
+        }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--text-gold);
+            text-decoration: underline;
+        }
+
+        .footer-compliance {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-bg" id="parallaxBg"></div>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">
+                <div style="position:relative; display:inline-block;">
+                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
+                    <div class="glitter-container" id="logoGlitter"></div>
+                </div>
+                <span>CopyCart</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#how-it-works" class="nav-link">How It Works</a>
+                <a href="genlink" class="nav-link">Link Gen</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="badge">
+                <div style="position:relative; display:inline-block;">
+                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
+                    <div class="glitter-container" id="badgeGlitter"></div>
+                </div>
+                <span>Version 1.2 — Now Available for Firefox & Chrome</span>
+            </div>
+            <h1>Simplify Your Online Shopping <span>& Sharing</span></h1>
+            <p>Extract active Amazon cart items instantly, generate multi-cart quick purchase links, organize custom cart folders, and share curated product lists effortlessly.</p>
+            
+            <div class="cta-group">
+                <a href="genlink" class="btn-badge-styled magnetic-target">
+                    <div style="position:relative; display:inline-block;">
+                        <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="btn-icon">
+                        <div class="glitter-container" id="btnGlitter"></div>
+                    </div>
+                    Open Link Generator
+                </a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="feature-card magnetic-target">
+                <div class="feature-icon">🛒</div>
+                <h3>Instant Extraction</h3>
+                <p>Pull all ASINs, quantities, and product titles straight from your active Amazon cart with a single click.</p>
+            </div>
+            <div class="feature-card magnetic-target">
+                <div class="feature-icon">🔗</div>
+                <h3>Multi-Cart Links</h3>
+                <p>Generate batch checkout links containing multiple items to share shopping lists or move items across accounts seamlessly.</p>
+            </div>
+            <div class="feature-card magnetic-target">
+                <div class="feature-icon">📂</div>
+                <h3>Saved Cart Folders</h3>
+                <p>Store and organize custom-named cart templates locally so you can reload or copy them whenever you need.</p>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Get started with CopyCart in three simple steps</p>
+
+            <div class="steps-grid">
+                <div class="step-item magnetic-target">
+                    <div class="step-number">1</div>
+                    <h4>Open Your Cart</h4>
+                    <p>Navigate to your active Amazon shopping cart page on any supported regional domain.</p>
+                </div>
+                <div class="step-item magnetic-target">
+                    <div class="step-number">2</div>
+                    <h4>Generate & Select</h4>
+                    <p>Click the extension icon to parse your items. Select or unselect specific products using checkboxes.</p>
+                </div>
+                <div class="step-item magnetic-target">
+                    <div class="step-number">3</div>
+                    <h4>Copy or Save</h4>
+                    <p>Copy a multi-cart batch link to your clipboard or save the configuration as a named cart template.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="affiliate-disclaimer-card magnetic-target">
+            <h3>Affiliate Disclosure</h3>
+            <p>We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites.</p>
+        </div>
+
+        <footer>
+            <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
+            <p style="margin-top: 8px;"><a href="privacy.html">Privacy Policy</a></p>
+            <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Flashlight cursor tracking for background logo
+        window.addEventListener('mousemove', (e) => {
+            const bg = document.getElementById('parallaxBg');
+            const xPercent = (e.clientX / window.innerWidth) * 100;
+            const yPercent = (e.clientY / window.innerHeight) * 100;
+            bg.style.setProperty('--mouse-x', `${xPercent}%`);
+            bg.style.setProperty('--mouse-y', `${yPercent}%`);
+            bg.style.opacity = '1';
+        });
+
+        window.addEventListener('mouseleave', () => {
+            document.getElementById('parallaxBg').style.opacity = '0';
+        });
+
+        // Dynamic Glitter generator for baskets/logos
+        function createGlitter(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${80 + Math.random() * 20}%`;
+                sparkle.style.animationDelay = `${Math.random() * 2.5}s`;
+                sparkle.style.setProperty('--rand-x', (Math.random() - 0.5));
+                container.appendChild(sparkle);
+            }
+        }
+        createGlitter('logoGlitter', 6);
+        createGlitter('badgeGlitter', 4);
+        createGlitter('btnGlitter', 5);
+
+        // Universal Magnetic Attraction Pull Toward Mouse Direction
+        document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .feature-card, .step-item').forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) translateY(-3px)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0px, 0px)';
+            });
+        });
+    </script>
+</body>
+</html>
