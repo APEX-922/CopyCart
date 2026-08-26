@@ -15,7 +15,7 @@
             --bg-dark: #080A0F;
             --card-bg: rgba(18, 22, 31, 0.85);
             --card-border: rgba(223, 186, 103, 0.25);
-            --card-border-glow: rgba(223, 186, 103, 0.45);
+            --card-border-glow: rgba(223, 186, 103, 0.75);
             --text-main: #ffffff;
             --text-muted: rgba(255, 255, 255, 0.6);
             --text-gold: #F3D99B;
@@ -35,8 +35,8 @@
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(223, 186, 103, 0.12) 0%, transparent 65%),
-                radial-gradient(circle at 80% 90%, rgba(158, 125, 59, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(223, 186, 103, 0.15) 0%, transparent 65%),
+                radial-gradient(circle at 80% 90%, rgba(158, 125, 59, 0.1) 0%, transparent 50%);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
@@ -67,7 +67,7 @@
             transform: translateX(-50%);
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(223, 186, 103, 0.15) 0%, rgba(8, 10, 15, 0) 70%);
+            background: radial-gradient(circle, rgba(223, 186, 103, 0.2) 0%, rgba(8, 10, 15, 0) 70%);
             z-index: 1;
             pointer-events: none;
         }
@@ -134,14 +134,15 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .nav-link:hover, .nav-link.active {
             background: var(--gold-gradient);
             color: #080A0F;
             border-color: var(--card-border-glow);
-            transform: translateY(-1px);
+            box-shadow: 0 0 20px rgba(223, 186, 103, 0.4);
+            transform: translateY(-2px) scale(1.03);
         }
 
         .policy-content {
@@ -156,6 +157,11 @@
             padding: 40px;
             margin-bottom: 40px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: border-color 0.3s ease;
+        }
+
+        .policy-card:hover {
+            border-color: var(--card-border-glow);
         }
 
         .policy-card h1 {
@@ -211,10 +217,12 @@
         footer a {
             color: var(--text-gold);
             text-decoration: underline;
+            transition: color 0.2s ease;
         }
 
         footer a:hover {
             color: #ffffff;
+            text-shadow: 0 0 8px rgba(223, 186, 103, 0.6);
         }
 
         .footer-compliance {
