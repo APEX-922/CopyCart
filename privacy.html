@@ -13,7 +13,7 @@
             --bg-dark: #080A0F;
             --card-bg: rgba(18, 22, 31, 0.85);
             --card-border: rgba(223, 186, 103, 0.25);
-            --card-border-glow: rgba(223, 186, 103, 0.75);
+            --card-border-glow: rgba(223, 186, 103, 0.9);
             --text-main: #ffffff;
             --text-muted: rgba(255, 255, 255, 0.6);
             --text-gold: #F3D99B;
@@ -40,21 +40,60 @@
             position: relative;
         }
 
+        /* Pulsing & Cursor-Reveal Interactive Flashlight Background Logo */
         .parallax-bg {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 550px;
-            height: 550px;
+            width: 600px;
+            height: 600px;
             background-image: url('https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0.12;
+            opacity: 0;
             pointer-events: none;
             z-index: 0;
-            filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.25));
+            animation: pulseGlow 4s ease-in-out infinite;
+            transition: opacity 0.4s ease;
+            filter: drop-shadow(0 0 40px rgba(223, 186, 103, 0.4));
+            -webkit-mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
+            mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 25px rgba(223, 186, 103, 0.2)); }
+            50% { transform: translate(-50%, -50%) scale(1.06); filter: drop-shadow(0 0 50px rgba(223, 186, 103, 0.5)); }
+        }
+
+        /* Glitter / Star Container */
+        .glitter-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #F9E4B7;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #DFBA67, 0 0 20px #F9E4B7;
+            animation: sparkleFly 3s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkleFly {
+            0% { transform: translateY(0) translateX(0) scale(0.2); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-120px) translateX(calc(var(--rand-x) * 60px)) scale(1.2); opacity: 0; }
         }
 
         .container {
@@ -119,7 +158,7 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             display: inline-block;
         }
 
@@ -127,7 +166,7 @@
             background: var(--gold-gradient);
             color: #080A0F;
             border-color: var(--card-border-glow);
-            box-shadow: 0 0 20px rgba(223, 186, 103, 0.4);
+            box-shadow: 0 0 25px rgba(223, 186, 103, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
         }
 
         .policy-content {
@@ -147,7 +186,7 @@
 
         .policy-card:hover {
             border-color: var(--card-border-glow);
-            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.15);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
         }
 
         .policy-card h1 {
@@ -210,12 +249,15 @@
     </style>
 </head>
 <body>
-    <div class="parallax-bg"></div>
+    <div class="parallax-bg" id="parallaxBg"></div>
 
     <div class="container">
         <header>
             <a href="index.html" class="logo">
-                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
+                <div style="position:relative; display:inline-block;">
+                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
+                    <div class="glitter-container" id="logoGlitter"></div>
+                </div>
                 <span>CopyCart</span>
             </a>
             <nav class="nav-links">
@@ -254,6 +296,36 @@
     </div>
 
     <script>
+        // Flashlight cursor tracking for background logo
+        window.addEventListener('mousemove', (e) => {
+            const bg = document.getElementById('parallaxBg');
+            const xPercent = (e.clientX / window.innerWidth) * 100;
+            const yPercent = (e.clientY / window.innerHeight) * 100;
+            bg.style.setProperty('--mouse-x', `${xPercent}%`);
+            bg.style.setProperty('--mouse-y', `${yPercent}%`);
+            bg.style.opacity = '1';
+        });
+
+        window.addEventListener('mouseleave', () => {
+            document.getElementById('parallaxBg').style.opacity = '0';
+        });
+
+        // Dynamic Glitter generator for baskets/logos
+        function createGlitter(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${80 + Math.random() * 20}%`;
+                sparkle.style.animationDelay = `${Math.random() * 3}s`;
+                sparkle.style.setProperty('--rand-x', (Math.random() - 0.5));
+                container.appendChild(sparkle);
+            }
+        }
+        createGlitter('logoGlitter', 6);
+
         // Universal Magnetic Attraction Pull Toward Mouse Direction
         document.querySelectorAll('.magnetic-target, .nav-link, .policy-card').forEach(el => {
             el.addEventListener('mousemove', (e) => {
