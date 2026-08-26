@@ -15,7 +15,7 @@
             --bg-dark: #080A0F;
             --card-bg: rgba(18, 22, 31, 0.85);
             --card-border: rgba(223, 186, 103, 0.25);
-            --card-border-glow: rgba(223, 186, 103, 0.45);
+            --card-border-glow: rgba(223, 186, 103, 0.75);
             --text-main: #ffffff;
             --text-muted: rgba(255, 255, 255, 0.6);
             --text-gold: #F3D99B;
@@ -35,8 +35,8 @@
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(223, 186, 103, 0.12) 0%, transparent 65%),
-                radial-gradient(circle at 80% 90%, rgba(158, 125, 59, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(223, 186, 103, 0.15) 0%, transparent 65%),
+                radial-gradient(circle at 80% 90%, rgba(158, 125, 59, 0.1) 0%, transparent 50%);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
@@ -67,7 +67,7 @@
             transform: translateX(-50%);
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(223, 186, 103, 0.15) 0%, rgba(8, 10, 15, 0) 70%);
+            background: radial-gradient(circle, rgba(223, 186, 103, 0.2) 0%, rgba(8, 10, 15, 0) 70%);
             z-index: 1;
             pointer-events: none;
         }
@@ -134,14 +134,15 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .nav-link:hover, .nav-link.active {
             background: var(--gold-gradient);
             color: #080A0F;
             border-color: var(--card-border-glow);
-            transform: translateY(-1px);
+            box-shadow: 0 0 20px rgba(223, 186, 103, 0.4);
+            transform: translateY(-2px) scale(1.03);
         }
 
         .main-content {
@@ -159,12 +160,12 @@
             margin: 0 auto 40px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             text-align: left;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .generator-card:hover {
             border-color: var(--card-border-glow);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 15px rgba(223, 186, 103, 0.1);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.15);
         }
 
         .generator-card h2 {
@@ -211,18 +212,19 @@
             color: #ffffff;
             font-size: 15px;
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
         }
 
         .form-control:focus {
             border-color: var(--gold-solid);
-            box-shadow: 0 0 0 3px rgba(223, 186, 103, 0.15);
+            box-shadow: 0 0 0 4px rgba(223, 186, 103, 0.2), 0 0 15px rgba(223, 186, 103, 0.15);
         }
 
         .form-control::placeholder {
             color: rgba(255, 255, 255, 0.3);
         }
 
+        /* Generate Button with Dim State Support */
         .btn-generate {
             width: 100%;
             padding: 16px;
@@ -237,19 +239,48 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: 0 4px 16px rgba(223, 186, 103, 0.25);
             margin-top: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-generate::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transform: rotate(30deg) translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-generate:hover::after {
+            transform: rotate(30deg) translateX(100%);
         }
 
         .btn-generate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(223, 186, 103, 0.35);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 0 30px rgba(223, 186, 103, 0.5), 0 6px 20px rgba(0,0,0,0.4);
             filter: brightness(1.05);
         }
 
-        .btn-generate:active {
-            transform: translateY(0);
+        /* Dim state after generation */
+        .btn-generate.dimmed {
+            background: rgba(158, 125, 59, 0.2);
+            color: rgba(243, 217, 155, 0.4);
+            border: 1px solid rgba(223, 186, 103, 0.1);
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none !important;
+            filter: none !important;
+        }
+
+        .btn-generate.dimmed::after {
+            display: none;
         }
 
         /* Result Box Center-Aligned Styles */
@@ -259,10 +290,17 @@
             padding-top: 24px;
             border-top: 1px solid var(--card-border);
             text-align: center;
+            position: relative;
         }
 
         .result-box.active {
             display: block;
+            animation: fadeInResult 0.5s ease forwards;
+        }
+
+        @keyframes fadeInResult {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .result-label {
@@ -275,39 +313,91 @@
             text-align: center;
         }
 
-        /* Badge Button Spanning Section instead of Text Input */
+        /* Bigger Epic Badge Button Spanning Section with Firework Container */
         .btn-copy-badge {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 14px;
             width: 100%;
-            padding: 16px 24px;
+            padding: 20px 28px;
             border-radius: var(--radius-md);
-            background: rgba(18, 22, 31, 0.9);
+            background: rgba(18, 22, 31, 0.95);
             backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
             color: var(--text-gold);
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: visible;
+        }
+
+        .btn-copy-badge::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: calc(var(--radius-md) + 2px);
+            background: var(--gold-gradient);
+            z-index: -1;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
         }
 
         .btn-copy-badge .btn-icon {
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(223, 186, 103, 0.3));
+            filter: drop-shadow(0 2px 6px rgba(223, 186, 103, 0.4));
+            transition: transform 0.3s ease;
+        }
+
+        .btn-copy-badge:hover .btn-icon {
+            transform: scale(1.15) rotate(-10deg);
         }
 
         .btn-copy-badge:hover {
             background: var(--gold-gradient);
             color: #080A0F;
-            border-color: var(--card-border-glow);
-            box-shadow: 0 6px 24px rgba(223, 186, 103, 0.35);
-            transform: translateY(-2px);
+            border-color: #ffffff;
+            box-shadow: 0 0 35px rgba(223, 186, 103, 0.6), 0 8px 30px rgba(0, 0, 0, 0.6);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .btn-copy-badge:hover::before {
+            opacity: 1;
+        }
+
+        /* Firework Spark Particle Styling */
+        .firework-particle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #F9E4B7;
+            box-shadow: 0 0 10px #DFBA67, 0 0 20px #F3D99B;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 1;
+            animation: explodeSpark 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes explodeSpark {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 1;
+            }
+            60% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
+                opacity: 0;
+            }
         }
 
         .affiliate-disclaimer-card {
@@ -319,6 +409,11 @@
             max-width: 680px;
             margin: 0 auto;
             text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .affiliate-disclaimer-card:hover {
+            border-color: var(--card-border-glow);
         }
 
         .affiliate-disclaimer-card h3 {
@@ -345,10 +440,12 @@
         footer a {
             color: var(--text-gold);
             text-decoration: underline;
+            transition: color 0.2s ease;
         }
 
         footer a:hover {
             color: #ffffff;
+            text-shadow: 0 0 8px rgba(223, 186, 103, 0.6);
         }
 
         .footer-compliance {
@@ -402,18 +499,18 @@
                     <input type="url" id="cartUrl" class="form-control" placeholder="https://www.amazon.com/dp/B08N5WRWNW" required>
                 </div>
 
-                <button type="submit" class="btn-generate">
-                    <span>Generate Shareable Link</span>
+                <button type="submit" class="btn-generate" id="generateBtn">
+                    <span id="generateBtnText">Generate a CopyCart link</span>
                     ➔
                 </button>
             </form>
 
             <div class="result-box" id="resultBox">
-                <div class="result-label">Your Shareable Link</div>
-                <!-- Badge Button spanning section replacing text input -->
-                <button type="button" class="btn-copy-badge" onclick="copyShareLink()" id="copyBtn">
+                <div class="result-label">Link Generated Successfully</div>
+                <!-- Bigger Epic Badge Button Spanning Section with Firework Spark Container -->
+                <button type="button" class="btn-copy-badge" onclick="copyShareLink(event)" id="copyBtn">
                     <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="btn-icon">
-                    <span id="copyBtnText">Copy Shareable Link</span>
+                    <span id="copyBtnText">Your CopyCart link is ready to share</span>
                 </button>
             </div>
         </div>
@@ -466,9 +563,17 @@ function generateShareLink(event) {
         const resultBox = document.getElementById('resultBox');
         resultBox.classList.add('active');
 
-        // Reset button state
+        // Dim the generate button so it is no longer bright
+        const generateBtn = document.getElementById('generateBtn');
+        generateBtn.classList.add('dimmed');
+        document.getElementById('generateBtnText').textContent = 'Link Generated';
+
+        // Trigger Epic Firework Sparks Expanding Outward from Center of Copy Button
+        triggerFireworkSparks();
+
+        // Reset button copy text state
         const copyBtnText = document.getElementById('copyBtnText');
-        copyBtnText.textContent = 'Copy Shareable Link';
+        copyBtnText.textContent = 'Your CopyCart link is ready to share';
 
         // Resets the input text box after generating the link
         event.target.reset();
@@ -477,14 +582,52 @@ function generateShareLink(event) {
     }
 }
 
-function copyShareLink() {
+function triggerFireworkSparks() {
+    const copyBtn = document.getElementById('copyBtn');
+    
+    // Create 28 fiery spark particles expanding in a circle
+    const totalSparks = 28;
+    for (let i = 0; i < totalSparks; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'firework-particle';
+        
+        // Calculate random outward trajectory angles & distances
+        const angle = (i / totalSparks) * 360 + (Math.random() * 15);
+        const distance = 80 + Math.random() * 140; // distance in pixels
+        const rad = angle * (Math.PI / 180);
+        
+        const dx = Math.cos(rad) * distance;
+        const dy = Math.sin(rad) * distance;
+        
+        spark.style.setProperty('--dx', `${dx}px`);
+        spark.style.setProperty('--dy', `${dy}px`);
+        
+        // Randomize individual spark scale/color variation
+        if (i % 3 === 0) {
+            spark.style.background = '#ffffff';
+            spark.style.boxShadow = '0 0 12px #F9E4B7';
+        } else if (i % 2 === 0) {
+            spark.style.background = '#F3D99B';
+            spark.style.boxShadow = '0 0 12px #DFBA67';
+        }
+
+        copyBtn.appendChild(spark);
+
+        // Clean up spark node after animation completes
+        setTimeout(() => {
+            spark.remove();
+        }, 800);
+    }
+}
+
+function copyShareLink(event) {
     if (!generatedUrlString) return;
 
     navigator.clipboard.writeText(generatedUrlString).then(() => {
         const copyBtnText = document.getElementById('copyBtnText');
         copyBtnText.textContent = 'Copied to Clipboard!';
         setTimeout(() => {
-            copyBtnText.textContent = 'Copy Shareable Link';
+            copyBtnText.textContent = 'Your CopyCart link is ready to share';
         }, 2000);
     });
 }
