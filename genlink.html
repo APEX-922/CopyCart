@@ -13,7 +13,7 @@
             --bg-dark: #080A0F;
             --card-bg: rgba(18, 22, 31, 0.85);
             --card-border: rgba(223, 186, 103, 0.25);
-            --card-border-glow: rgba(223, 186, 103, 0.75);
+            --card-border-glow: rgba(223, 186, 103, 0.9);
             --text-main: #ffffff;
             --text-muted: rgba(255, 255, 255, 0.6);
             --text-gold: #F3D99B;
@@ -41,21 +41,60 @@
             position: relative;
         }
 
+        /* Pulsing & Cursor-Reveal Flashlight Background Logo */
         .parallax-bg {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 550px;
-            height: 550px;
+            width: 600px;
+            height: 600px;
             background-image: url('https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0.12;
+            opacity: 0;
             pointer-events: none;
             z-index: 0;
-            filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.25));
+            animation: pulseGlow 4s ease-in-out infinite;
+            transition: opacity 0.4s ease;
+            filter: drop-shadow(0 0 40px rgba(223, 186, 103, 0.4));
+            -webkit-mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
+            mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 25px rgba(223, 186, 103, 0.2)); }
+            50% { transform: translate(-50%, -50%) scale(1.06); filter: drop-shadow(0 0 50px rgba(223, 186, 103, 0.5)); }
+        }
+
+        /* Glitter Container & Sparkle Animation */
+        .glitter-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #F9E4B7;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #DFBA67, 0 0 15px #F9E4B7;
+            animation: sparkleFly 2.5s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkleFly {
+            0% { transform: translateY(0) translateX(0) scale(0.2); opacity: 0; }
+            25% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(calc(var(--rand-x) * 50px)) scale(1.3); opacity: 0; }
         }
 
         .container {
@@ -120,7 +159,7 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             display: inline-block;
         }
 
@@ -128,7 +167,7 @@
             background: var(--gold-gradient);
             color: #080A0F;
             border-color: var(--card-border-glow);
-            box-shadow: 0 0 20px rgba(223, 186, 103, 0.4);
+            box-shadow: 0 0 25px rgba(223, 186, 103, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
         }
 
         .main-content {
@@ -150,7 +189,7 @@
 
         .generator-card:hover, .affiliate-disclaimer-card:hover {
             border-color: var(--card-border-glow);
-            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.15);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
         }
 
         .generator-card h2 {
@@ -168,204 +207,6 @@
             height: 32px;
             object-fit: contain;
             filter: drop-shadow(0 2px 6px rgba(223, 186, 103, 0.4));
-        }
-
-        .generator-card p.desc {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(8, 10, 15, 0.7);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-md);
-            color: #ffffff;
-            font-size: 15px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--gold-solid);
-            box-shadow: 0 0 0 4px rgba(223, 186, 103, 0.2);
-        }
-
-        .btn-generate {
-            width: 100%;
-            padding: 16px;
-            border-radius: var(--radius-md);
-            background: var(--gold-gradient);
-            color: #080A0F;
-            font-size: 16px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: transform 0.2s ease, filter 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 16px rgba(223, 186, 103, 0.25);
-            margin-top: 24px;
-        }
-
-        .btn-generate:hover {
-            box-shadow: 0 0 30px rgba(223, 186, 103, 0.5), 0 6px 20px rgba(0,0,0,0.4);
-            filter: brightness(1.05);
-        }
-
-        .btn-generate.dimmed {
-            background: rgba(158, 125, 59, 0.15);
-            color: rgba(243, 217, 155, 0.3);
-            border: 1px solid rgba(223, 186, 103, 0.08);
-            box-shadow: none;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .result-box {
-            display: none;
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid var(--card-border);
-            text-align: center;
-            position: relative;
-        }
-
-        .result-box.active {
-            display: block;
-            animation: fadeInResult 0.5s ease forwards;
-        }
-
-        @keyframes fadeInResult {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-gold);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-
-        /* Prominent & Dramatic Epic Copy Button */
-        .btn-copy-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            width: 100%;
-            padding: 22px 32px;
-            border-radius: var(--radius-md);
-            background: rgba(18, 22, 31, 0.95);
-            backdrop-filter: blur(12px);
-            border: 2px solid var(--card-border-glow);
-            color: var(--text-gold);
-            font-size: 20px;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.3);
-            transition: transform 0.2s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: visible;
-        }
-
-        .btn-copy-badge .btn-icon {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 6px rgba(223, 186, 103, 0.4));
-        }
-
-        .btn-copy-badge:hover {
-            background: var(--gold-gradient);
-            color: #080A0F;
-            border-color: #ffffff;
-            box-shadow: 0 0 45px rgba(223, 186, 103, 0.8), 0 10px 35px rgba(0, 0, 0, 0.7);
-        }
-
-        /* Copied Green State */
-        .btn-copy-badge.copied-state {
-            background: #10B981 !important;
-            color: #ffffff !important;
-            border-color: #34D399 !important;
-            box-shadow: 0 0 40px rgba(16, 185, 129, 0.8), 0 10px 30px rgba(0,0,0,0.5) !important;
-        }
-
-        /* High-Intensity Dramatic Firework Sparks & Background Expanding Ring */
-        .firework-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 3px solid #F9E4B7;
-            transform: translate(-50%, -50%) scale(0.2);
-            pointer-events: none;
-            z-index: 9;
-            opacity: 1;
-            animation: expandRing 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-        }
-
-        @keyframes expandRing {
-            0% {
-                transform: translate(-50%, -50%) scale(0.2);
-                opacity: 1;
-                box-shadow: 0 0 20px rgba(243, 217, 155, 0.8);
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(9);
-                opacity: 0;
-                box-shadow: 0 0 60px rgba(223, 186, 103, 0);
-            }
-        }
-
-        .firework-particle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #F9E4B7;
-            box-shadow: 0 0 16px #DFBA67, 0 0 28px #F3D99B;
-            pointer-events: none;
-            z-index: 10;
-            opacity: 1;
-            animation: explodeSpark 0.9s cubic-bezier(0.08, 0.82, 0.25, 1) forwards;
-        }
-
-        @keyframes explodeSpark {
-            0% {
-                transform: translate(-50%, -50%) scale(0.6);
-                opacity: 1;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
-                opacity: 0;
-            }
         }
 
         footer {
@@ -390,169 +231,89 @@
     </style>
 </head>
 <body>
+    <div class="parallax-bg" id="parallaxBg"></div>
 
-<div class="parallax-bg"></div>
-
-<div class="container">
-    <header>
-        <a href="index.html" class="logo">
-            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
-            <span>CopyCart</span>
-        </a>
-        <nav class="nav-links">
-            <a href="index.html#features" class="nav-link">Features</a>
-            <a href="index.html#how-it-works" class="nav-link">How It Works</a>
-            <a href="genlink" class="nav-link active">Link Gen</a>
-            <a href="privacy.html" class="nav-link">Privacy</a>
-        </nav>
-    </header>
-
-    <main class="main-content">
-        <div class="generator-card magnetic-target" id="link-generator">
-            <h2>
-                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="card-header-icon">
-                Generate Shareable Cart Link
-            </h2>
-            <p class="desc">Paste your Amazon product or cart URL below to instantly generate your custom tracking link.</p>
-
-            <form id="tagForm" onsubmit="generateShareLink(event)">
-                <div class="form-group">
-                    <label for="cartUrl">Enter Amazon URL</label>
-                    <input type="url" id="cartUrl" class="form-control" placeholder="https://www.amazon.com/dp/B08N5WRWNW" required>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">
+                <div style="position:relative; display:inline-block;">
+                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
+                    <div class="glitter-container" id="logoGlitter"></div>
                 </div>
+                <span>CopyCart</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#how-it-works" class="nav-link">How It Works</a>
+                <a href="genlink" class="nav-link active">Link Gen</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+            </nav>
+        </header>
 
-                <button type="submit" class="btn-generate" id="generateBtn">
-                    <span id="generateBtnText">Generate a CopyCart link</span>
-                    ➔
-                </button>
-            </form>
-
-            <div class="result-box" id="resultBox">
-                <div class="result-label">Link Generated Successfully</div>
-                <button type="button" class="btn-copy-badge magnetic-target" onclick="copyShareLink(event)" id="copyBtn">
-                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="btn-icon">
-                    <span id="copyBtnText">Your CopyCart link is ready to share</span>
-                </button>
+        <main class="main-content">
+            <div class="generator-card magnetic-target">
+                <h2>
+                    <div style="position:relative; display:inline-block;">
+                        <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="card-header-icon">
+                        <div class="glitter-container" id="cardGlitter"></div>
+                    </div>
+                    Multi-Cart Link Generator
+                </h2>
+                <p style="color: var(--text-muted); font-size: 15px; margin-top: 10px;">Paste your collected ASIN lists below to output structured multi-item quick purchase cart links instantly.</p>
             </div>
-        </div>
+        </main>
 
-        <section class="affiliate-disclaimer-card magnetic-target">
-            <h3>Affiliate Disclosure</h3>
-            <p>We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites.</p>
-        </section>
-    </main>
+        <footer>
+            <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
+            <p style="margin-top: 8px;"><a href="privacy.html">Privacy Policy</a></p>
+            <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
+        </footer>
+    </div>
 
-    <footer>
-        <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
-        <p style="margin-top: 8px;"><a href="privacy.html">Privacy Policy</a></p>
-        <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
-    </footer>
-</div>
+    <script>
+        // Flashlight cursor tracking for background logo
+        window.addEventListener('mousemove', (e) => {
+            const bg = document.getElementById('parallaxBg');
+            const xPercent = (e.clientX / window.innerWidth) * 100;
+            const yPercent = (e.clientY / window.innerHeight) * 100;
+            bg.style.setProperty('--mouse-x', `${xPercent}%`);
+            bg.style.setProperty('--mouse-y', `${yPercent}%`);
+            bg.style.opacity = '1';
+        });
 
-<script>
-const ASSOCIATE_TAG = 'apex087e-20';
-let generatedUrlString = '';
+        window.addEventListener('mouseleave', () => {
+            document.getElementById('parallaxBg').style.opacity = '0';
+        });
 
-function generateShareLink(event) {
-    event.preventDefault();
-    const inputUrl = document.getElementById('cartUrl').value.trim();
-    if (!inputUrl) return;
-
-    try {
-        const url = new URL(inputUrl);
-        if (!url.hostname.includes('amazon.')) {
-            alert('Please enter a valid Amazon product or cart URL.');
-            return;
+        // Dynamic Glitter generator for baskets/logos
+        function createGlitter(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${80 + Math.random() * 20}%`;
+                sparkle.style.animationDelay = `${Math.random() * 2.5}s`;
+                sparkle.style.setProperty('--rand-x', (Math.random() - 0.5));
+                container.appendChild(sparkle);
+            }
         }
+        createGlitter('logoGlitter', 6);
+        createGlitter('cardGlitter', 4);
 
-        url.searchParams.set('tag', ASSOCIATE_TAG);
-        generatedUrlString = url.toString();
-
-        document.getElementById('resultBox').classList.add('active');
-        const generateBtn = document.getElementById('generateBtn');
-        generateBtn.classList.add('dimmed');
-        document.getElementById('generateBtnText').textContent = 'Link Generated';
-
-        // Trigger prominent & dramatic firework explosion
-        triggerDramaticFireworks();
-
-        const copyBtnText = document.getElementById('copyBtnText');
-        copyBtnText.textContent = 'Your CopyCart link is ready to share';
-        document.getElementById('copyBtn').classList.remove('copied-state');
-
-        event.target.reset();
-    } catch (e) {
-        alert('Please enter a valid URL (including http:// or https://)');
-    }
-}
-
-function triggerDramaticFireworks() {
-    const copyBtn = document.getElementById('copyBtn');
-    
-    // Add glowing background shockwave ring
-    const ring = document.createElement('div');
-    ring.className = 'firework-ring';
-    copyBtn.appendChild(ring);
-    setTimeout(() => ring.remove(), 900);
-
-    // Create 45 large prominent spark particles expanding outward
-    const totalSparks = 45;
-    for (let i = 0; i < totalSparks; i++) {
-        const spark = document.createElement('div');
-        spark.className = 'firework-particle';
-        
-        const angle = (i / totalSparks) * 360 + (Math.random() * 20);
-        const distance = 110 + Math.random() * 180; // wider dramatic range
-        const rad = angle * (Math.PI / 180);
-        
-        const dx = Math.cos(rad) * distance;
-        const dy = Math.sin(rad) * distance;
-        
-        spark.style.setProperty('--dx', `${dx}px`);
-        spark.style.setProperty('--dy', `${dy}px`);
-        
-        if (i % 4 === 0) {
-            spark.style.background = '#ffffff';
-            spark.style.boxShadow = '0 0 20px #F9E4B7';
-        } else if (i % 2 === 0) {
-            spark.style.background = '#F3D99B';
-            spark.style.boxShadow = '0 0 20px #DFBA67';
-        }
-
-        copyBtn.appendChild(spark);
-        setTimeout(() => spark.remove(), 900);
-    }
-}
-
-function copyShareLink(event) {
-    if (!generatedUrlString) return;
-
-    navigator.clipboard.writeText(generatedUrlString).then(() => {
-        const copyBtn = document.getElementById('copyBtn');
-        const copyBtnText = document.getElementById('copyBtnText');
-        
-        copyBtn.classList.add('copied-state');
-        copyBtnText.textContent = 'Copied';
-
-        setTimeout(() => {
-            copyBtn.classList.remove('copied-state');
-            copyBtnText.textContent = 'Your CopyCart link is ready to share';
-        }, 2000);
-    });
-}
-
-// Universal Magnetic Attraction Pull Toward Mouse Direction
-document.querySelectorAll('.magnetic-target, .nav-link, .generator-card, .affiliate-disclaimer-card').forEach(el => {
-    el.addEventListener('mousemove', (e) => {
-        const rect = el.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        el.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px) translateY(-2px)`;
-    });
-    el.addEventListener('mouseleave', () => {
-        el.style.transform = 'translate(0px, 0px)';
-    });
-});
-</script>
+        // Universal Magnetic Attraction Pull Toward Mouse Direction
+        document.querySelectorAll('.magnetic-target, .nav-link, .generator-card').forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                el.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px) translateY(-2px)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0px, 0px)';
+            });
+        });
+    </script>
 </body>
 </html>
