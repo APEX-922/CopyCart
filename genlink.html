@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,800;0,900;1,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #080A0F;
@@ -132,22 +132,23 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            font-family: 'Cinzel Decorative', serif;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 900;
             font-size: 38px;
-            letter-spacing: 1px;
+            letter-spacing: -0.5px;
             color: #ffffff;
             text-decoration: none;
         }
 
         .logo span {
+            font-family: 'Montserrat', sans-serif;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 2px 10px rgba(223, 186, 103, 0.4));
         }
 
-        .logo-icon, .card-header-icon, .btn-icon {
+        .logo-icon, .badge-icon {
             width: 48px;
             height: 48px;
             object-fit: contain;
@@ -155,19 +156,14 @@
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        .logo-icon:hover, .card-header-icon:hover, .btn-icon:hover {
+        .logo-icon:hover, .badge-icon:hover {
             transform: scale(1.12) rotate(5deg);
             filter: drop-shadow(0 0 15px rgba(223, 186, 103, 0.8)) brightness(1.2);
         }
 
-        .card-header-icon {
-            width: 32px;
-            height: 32px;
-        }
-
-        .btn-icon {
-            width: 28px;
-            height: 28px;
+        .badge-icon {
+            width: 20px;
+            height: 20px;
         }
 
         .nav-links {
@@ -187,22 +183,33 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
             display: inline-block;
+            will-change: transform;
         }
 
         .nav-link:hover, .nav-link.active {
             background: var(--gold-gradient);
             color: #080A0F;
             border-color: var(--card-border-glow);
-            box-shadow: 0 0 20px rgba(223, 186, 103, 0.4);
+            box-shadow: 0 0 25px rgba(223, 186, 103, 0.6);
         }
 
         .main-content {
             padding: 60px 0;
         }
 
-        .generator-card, .affiliate-disclaimer-card {
+        .intro-banner {
+            max-width: 680px;
+            margin: 0 auto 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+
+        .generator-card, .affiliate-disclaimer-card, .custom-middle-card {
             background-color: var(--card-bg);
             backdrop-filter: blur(22px);
             -webkit-backdrop-filter: blur(22px);
@@ -210,43 +217,178 @@
             border-radius: var(--radius-lg);
             padding: 40px;
             max-width: 680px;
-            margin: 0 auto 40px;
+            margin: 0 auto;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             text-align: left;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: transform;
+            position: relative;
+            overflow: hidden;
         }
 
-        .generator-card:hover, .affiliate-disclaimer-card:hover {
+        .custom-middle-card {
+            max-width: 680px;
+            margin: 24px auto;
+            text-align: center;
+        }
+
+        .affiliate-disclaimer-card {
+            text-align: left;
+            max-width: 800px;
+            margin-top: 24px;
+        }
+
+        .affiliate-disclaimer-card h3 {
+            color: var(--text-gold);
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .disclaimer-section {
+            margin-bottom: 18px;
+        }
+
+        .disclaimer-section h4 {
+            color: var(--text-gold);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .affiliate-disclaimer-card p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .generator-card::after, .affiliate-disclaimer-card::after, .custom-middle-card::after {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, 0px);
+            left: var(--mouse-x, 0px);
+            transform: translate(-50%, -50%);
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(223, 186, 103, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .generator-card:hover::after, .affiliate-disclaimer-card:hover::after, .custom-middle-card:hover::after {
+            opacity: 1;
+        }
+
+        .generator-card:hover, .affiliate-disclaimer-card:hover, .custom-middle-card:hover {
             border-color: var(--card-border-glow);
-            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.15);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 35px rgba(223, 186, 103, 0.25);
+        }
+
+        .generator-card > *, .affiliate-disclaimer-card > *, .custom-middle-card > * {
+            position: relative;
+            z-index: 2;
         }
 
         .generator-card h2 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-gold);
-            margin-bottom: 8px;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 14px;
+            text-align: center;
         }
 
-        .generator-card p.desc {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 28px;
+        .pulsing-arrow {
+            display: inline-block;
+            font-size: 22px;
+            color: var(--text-gold);
+            text-shadow: 0 0 10px rgba(223, 186, 103, 0.8), 0 0 20px rgba(243, 217, 155, 0.6);
+            animation: pulseArrow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseArrow {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.7;
+                text-shadow: 0 0 8px rgba(223, 186, 103, 0.5), 0 0 15px rgba(243, 217, 155, 0.4);
+            }
+            50% {
+                transform: translateY(4px) scale(1.15);
+                opacity: 1;
+                text-shadow: 0 0 16px rgba(223, 186, 103, 1), 0 0 30px rgba(243, 217, 155, 0.9);
+            }
+        }
+
+        .pulsing-arrow-left {
+            display: inline-block;
+            font-size: 22px;
+            color: var(--text-gold);
+            text-shadow: 0 0 10px rgba(223, 186, 103, 0.8), 0 0 20px rgba(243, 217, 155, 0.6);
+            animation: pulseArrowLeft 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseArrowLeft {
+            0%, 100% {
+                transform: translateX(0) scale(1);
+                opacity: 0.7;
+                text-shadow: 0 0 8px rgba(223, 186, 103, 0.5), 0 0 15px rgba(243, 217, 155, 0.4);
+            }
+            50% {
+                transform: translateX(-4px) scale(1.15);
+                opacity: 1;
+                text-shadow: 0 0 16px rgba(223, 186, 103, 1), 0 0 30px rgba(243, 217, 155, 0.9);
+            }
+        }
+
+        .pulsing-arrow-right {
+            display: inline-block;
+            font-size: 22px;
+            color: var(--text-gold);
+            text-shadow: 0 0 10px rgba(223, 186, 103, 0.8), 0 0 20px rgba(243, 217, 155, 0.6);
+            animation: pulseArrowRight 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseArrowRight {
+            0%, 100% {
+                transform: translateX(0) scale(1);
+                opacity: 0.7;
+                text-shadow: 0 0 8px rgba(223, 186, 103, 0.5), 0 0 15px rgba(243, 217, 155, 0.4);
+            }
+            50% {
+                transform: translateX(4px) scale(1.15);
+                opacity: 1;
+                text-shadow: 0 0 16px rgba(223, 186, 103, 1), 0 0 30px rgba(243, 217, 155, 0.9);
+            }
+        }
+
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(223, 186, 103, 0.1);
+            border: 1px solid var(--card-border-glow);
+            border-radius: 20px;
+            color: var(--text-gold);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0 auto 20px;
+            display: flex;
+            width: fit-content;
+            box-shadow: 0 0 15px rgba(223, 186, 103, 0.15);
+            font-family: 'Montserrat', sans-serif;
         }
 
         .form-group {
             margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 8px;
         }
 
         .form-control {
@@ -261,6 +403,15 @@
             transition: all 0.3s ease;
         }
 
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.12);
+            transition: color 0.2s ease;
+        }
+
+        .form-control:focus::placeholder {
+            color: transparent;
+        }
+
         .form-control:focus {
             border-color: var(--gold-solid);
             box-shadow: 0 0 0 4px rgba(223, 186, 103, 0.2);
@@ -268,26 +419,30 @@
 
         .btn-generate {
             width: 100%;
-            padding: 16px;
+            padding: 22px 32px;
             border-radius: var(--radius-md);
-            background: var(--gold-gradient);
-            color: #080A0F;
-            font-size: 16px;
-            font-weight: 700;
-            border: none;
+            background: rgba(18, 22, 31, 0.85);
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--card-border-glow);
+            color: var(--text-gold);
+            font-size: 20px;
+            font-weight: 800;
             cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            transition: filter 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 16px rgba(223, 186, 103, 0.25);
+            gap: 14px;
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
             margin-top: 24px;
+            will-change: transform;
         }
 
         .btn-generate:hover {
-            box-shadow: 0 0 30px rgba(223, 186, 103, 0.5), 0 6px 20px rgba(0,0,0,0.4);
-            filter: brightness(1.05);
+            background: var(--gold-gradient);
+            color: #080A0F;
+            border-color: #ffffff;
+            box-shadow: 0 0 50px rgba(223, 186, 103, 0.9), 0 10px 35px rgba(0, 0, 0, 0.7);
         }
 
         .btn-generate.dimmed {
@@ -296,6 +451,10 @@
             border: 1px solid rgba(223, 186, 103, 0.08);
             box-shadow: none;
             cursor: not-allowed;
+            transform: none !important;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 16px;
         }
 
         .result-box {
@@ -342,23 +501,27 @@
             font-weight: 800;
             cursor: pointer;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 186, 103, 0.3);
-            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: visible;
+            will-change: transform;
         }
 
         .btn-copy-badge:hover {
             background: var(--gold-gradient);
             color: #080A0F;
             border-color: #ffffff;
-            box-shadow: 0 0 45px rgba(223, 186, 103, 0.8), 0 10px 35px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 50px rgba(223, 186, 103, 0.9), 0 10px 35px rgba(0, 0, 0, 0.7);
         }
 
         .btn-copy-badge.copied-state {
             background: #10B981 !important;
-            color: #ffffff !important;
+            color: #0B1612 !important;
             border-color: #34D399 !important;
             box-shadow: 0 0 40px rgba(16, 185, 129, 0.8), 0 10px 30px rgba(0,0,0,0.5) !important;
+            font-size: 22px !important;
+            font-weight: 900 !important;
+            letter-spacing: 0.5px;
         }
 
         .firework-ring {
@@ -436,52 +599,86 @@
             <span>CopyCart</span>
         </a>
         <nav class="nav-links">
-            <a href="index.html#features" class="nav-link">Features</a>
-            <a href="index.html#how-it-works" class="nav-link">How It Works</a>
-            <a href="genlink" class="nav-link active">Link Gen</a>
-            <a href="privacy.html" class="nav-link">Privacy</a>
+            <a href="index.html#features" class="nav-link magnetic-btn">Features</a>
+            <a href="index.html#how-it-works" class="nav-link magnetic-btn">How It Works</a>
+            <a href="genlink" class="nav-link active magnetic-btn">Link Generator</a>
+            <a href="privacy.html" class="nav-link magnetic-btn">Privacy</a>
         </nav>
     </header>
 
     <main class="main-content">
-        <div class="generator-card" id="link-generator">
+        <div class="intro-banner">
+            This page is solely here to help support CopyCart. It is entirely optional and unnecessary because this is all automated within the extension itself. But feel free to copy any Amazon link u wish.
+        </div>
+
+        <div class="generator-card magnetic-btn" id="link-generator">
+            <div class="version-badge">
+                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon" id="badgeLogo">
+                CopyCart v1.3
+            </div>
             <h2>
-                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="card-header-icon" id="cardHeaderLogo">
-                Generate Shareable Cart Link
+                <span class="pulsing-arrow">↓</span>
+                Generate Shareable Link
+                <span class="pulsing-arrow">↓</span>
             </h2>
-            <p class="desc">Paste your Amazon product or cart URL below to instantly generate your custom tracking link.</p>
 
             <form id="tagForm" onsubmit="generateShareLink(event)">
                 <div class="form-group">
-                    <label for="cartUrl">Enter Amazon URL</label>
                     <input type="url" id="cartUrl" class="form-control" placeholder="https://www.amazon.com/dp/B08N5WRWNW" required>
                 </div>
 
-                <button type="submit" class="btn-generate" id="generateBtn">
-                    <span id="generateBtnText">Generate a CopyCart link</span>
-                    ➔
+                <button type="submit" class="btn-generate magnetic-btn" id="generateBtn">
+                    <span class="pulsing-arrow-right">→</span>
+                    <span id="generateBtnText">Generate Shareable Link</span>
+                    <span class="pulsing-arrow-left">←</span>
                 </button>
             </form>
 
             <div class="result-box" id="resultBox">
                 <div class="result-label">Link Generated Successfully</div>
-                <button type="button" class="btn-copy-badge" onclick="copyShareLink(event)" id="copyBtn">
-                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="btn-icon" id="copyBtnLogo">
-                    <span id="copyBtnText">Your CopyCart link is ready to share</span>
+                <button type="button" class="btn-copy-badge magnetic-btn" onclick="copyShareLink(event)" id="copyBtn">
+                    <span class="pulsing-arrow-right">→</span>
+                    <span id="copyBtnText">Click Here</span>
+                    <span class="pulsing-arrow-left">←</span>
                 </button>
             </div>
         </div>
 
-        <section class="affiliate-disclaimer-card">
-            <h3>Affiliate Disclosure</h3>
-            <p>We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites.</p>
+        <div class="custom-middle-card magnetic-btn">
+            <p style="color: var(--text-gold); font-size: 15px; font-weight: 600; font-family: 'Montserrat', sans-serif; letter-spacing: 0.3px;">
+                As an Amazon Associate I earn from qualifying purchases.
+            </p>
+        </div>
+
+        <section class="affiliate-disclaimer-card magnetic-btn">
+            <h3>Comprehensive Affiliate Compliance & Legal Disclosures</h3>
+            
+            <div class="disclaimer-section">
+                <h4>Affiliate Disclosure & Program Notice</h4>
+                <p>CopyCart is an independent, third-party browser extension and software tool created and operated solely by an individual developer. CopyCart is not owned, operated, endorsed, sponsored by, or formally affiliated with Amazon.com, Inc., Mozilla Corporation (Firefox), or any of their respective subsidiaries or affiliates.</p>
+            </div>
+
+            <div class="disclaimer-section">
+                <h4>Amazon Associates Program Statement</h4>
+                <p>As an independent participant in the Amazon Services LLC Associates Program, the sole author and operator of CopyCart earns advertising commissions from qualifying purchases. These commissions are generated when users utilize the CopyCart extension to create, format, or navigate through affiliate-enabled links that direct to Amazon.com and its localized international storefronts.</p>
+            </div>
+
+            <div class="disclaimer-section">
+                <h4>Operational Transparency & User Consent</h4>
+                <p>The CopyCart extension assists users in generating and managing product links. When the extension modifies or appends affiliate tracking tags (such as the developer's Amazon Associates tag) to URLs, it does so to monetize qualifying transactions. This monetization supports the ongoing maintenance, security updates, and free availability of the tool. Users maintain full transparency and control over links processed through the extension.</p>
+            </div>
+
+            <div class="disclaimer-section">
+                <h4>Limitation of Liability & Trademark Notice</h4>
+                <p>All product names, logos, trademarks, and brands—including but not limited to Amazon, the Amazon logo, and Firefox—are the property of their respective owners. All company, product, and service names used by CopyCart are for identification and utility purposes only. Use of these names, trademarks, and brands does not imply endorsement, sponsorship, or formal partnership. The sole creator and author of CopyCart assumes no legal liability or responsibility for third-party platform policy updates, program changes, link redirects, or transaction discrepancies occurring on external e-commerce sites.</p>
+            </div>
         </section>
     </main>
 
     <footer>
         <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
         <p style="margin-top: 8px;"><a href="privacy.html">Privacy Policy</a></p>
-        <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
+        <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. or Mozilla Corporation (Firefox). As an Amazon Associate, the sole author earns from qualifying purchases.</p>
     </footer>
 </div>
 
@@ -507,15 +704,14 @@ function generateShareLink(event) {
         document.getElementById('resultBox').classList.add('active');
         const generateBtn = document.getElementById('generateBtn');
         generateBtn.classList.add('dimmed');
-        document.getElementById('generateBtnText').textContent = 'Link Generated';
+        generateBtn.innerHTML = '<span id="generateBtnText">Link Generated</span>';
 
         triggerDramaticFireworks();
 
-        const copyBtnText = document.getElementById('copyBtnText');
-        copyBtnText.textContent = 'Your CopyCart link is ready to share';
-        document.getElementById('copyBtn').classList.remove('copied-state');
+        const copyBtn = document.getElementById('copyBtn');
+        copyBtn.innerHTML = '<span class="pulsing-arrow-right">→</span><span id="copyBtnText">Click Here</span><span class="pulsing-arrow-left">←</span>';
+        copyBtn.classList.remove('copied-state');
 
-        event.target.reset();
     } catch (e) {
         alert('Please enter a valid URL (including http:// or https://)');
     }
@@ -562,19 +758,38 @@ function copyShareLink(event) {
 
     navigator.clipboard.writeText(generatedUrlString).then(() => {
         const copyBtn = document.getElementById('copyBtn');
-        const copyBtnText = document.getElementById('copyBtnText');
         
         copyBtn.classList.add('copied-state');
-        copyBtnText.textContent = 'Copied';
+        copyBtn.innerHTML = '<span id="copyBtnText">Copied to Clipboard</span>';
 
         setTimeout(() => {
             copyBtn.classList.remove('copied-state');
-            copyBtnText.textContent = 'Your CopyCart link is ready to share';
+            copyBtn.innerHTML = '<span id="copyBtnText">Your CopyCart Shareable Link is Now Ready. Thanks for Your Support.</span>';
+            copyBtn.style.fontSize = '14px';
+            copyBtn.style.fontWeight = '700';
+
+            setTimeout(() => {
+                document.getElementById('resultBox').classList.remove('active');
+                
+                const generateBtn = document.getElementById('generateBtn');
+                generateBtn.classList.remove('dimmed');
+                generateBtn.innerHTML = '<span class="pulsing-arrow-right">→</span><span id="generateBtnText">Generate Shareable Link</span><span class="pulsing-arrow-left">←</span>';
+                
+                // Reset button style back to normal
+                copyBtn.style.fontSize = '';
+                copyBtn.style.fontWeight = '';
+                copyBtn.innerHTML = '<span class="pulsing-arrow-right">→</span><span id="copyBtnText">Click Here</span><span class="pulsing-arrow-left">←</span>';
+                
+                const cartInput = document.getElementById('cartUrl');
+                cartInput.value = '';
+                cartInput.placeholder = 'https://www.amazon.com/dp/B08N5WRWNW';
+                
+                generatedUrlString = '';
+            }, 3500);
         }, 2000);
     });
 }
 
-// Spotlight Effect for Background Logos
 document.addEventListener('mousemove', (e) => {
     const centerLogo = document.getElementById('bgLogoCenter');
     const leftLogo = document.getElementById('sideLogoLeft');
@@ -618,6 +833,27 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
+document.querySelectorAll('.magnetic-btn').forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+        if (btn.classList.contains('dimmed')) return;
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        const multiplier = (btn.classList.contains('generator-card') || btn.classList.contains('affiliate-disclaimer-card') || btn.classList.contains('custom-middle-card')) ? 0.08 : 0.25;
+        
+        btn.style.transform = `translate(${x * multiplier}px, ${y * multiplier}px)`;
+
+        const cardRect = btn.getBoundingClientRect();
+        btn.style.setProperty('--mouse-x', `${e.clientX - cardRect.left}px`);
+        btn.style.setProperty('--mouse-y', `${e.clientY - cardRect.top}px`);
+    });
+
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0px, 0px)';
+    });
+});
+
 function spawnRisingGlitter(targetEl) {
     if (!targetEl) return;
     const rect = targetEl.getBoundingClientRect();
@@ -640,14 +876,12 @@ function spawnRisingGlitter(targetEl) {
     setTimeout(() => glitter.remove(), 3500);
 }
 
-// Continuous rising glitter across all logos
 setInterval(() => {
     spawnRisingGlitter(document.getElementById('bgLogoCenter'));
     spawnRisingGlitter(document.getElementById('sideLogoLeft'));
     spawnRisingGlitter(document.getElementById('sideLogoRight'));
     spawnRisingGlitter(document.getElementById('headerLogo'));
-    spawnRisingGlitter(document.getElementById('cardHeaderLogo'));
-    spawnRisingGlitter(document.getElementById('copyBtnLogo'));
+    spawnRisingGlitter(document.getElementById('badgeLogo'));
 }, 220);
 </script>
 </body>
