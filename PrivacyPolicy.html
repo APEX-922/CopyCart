@@ -18,6 +18,7 @@
             --text-muted: rgba(255, 255, 255, 0.6);
             --text-gold: #F3D99B;
             --gold-gradient: linear-gradient(135deg, #F9E4B7 0%, #DFBA67 50%, #9E7D3B 100%);
+            --gold-solid: #DFBA67;
             --radius-lg: 12px;
             --radius-md: 8px;
         }
@@ -40,64 +41,8 @@
             position: relative;
         }
 
-        /* Pulsing & Cursor-Reveal Interactive Flashlight Background Logo */
-        .parallax-bg {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background-image: url('https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 0;
-            animation: pulseGlow 4s ease-in-out infinite;
-            transition: opacity 0.4s ease;
-            filter: drop-shadow(0 0 40px rgba(223, 186, 103, 0.4));
-            -webkit-mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
-            mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 25px rgba(223, 186, 103, 0.2)); }
-            50% { transform: translate(-50%, -50%) scale(1.06); filter: drop-shadow(0 0 50px rgba(223, 186, 103, 0.5)); }
-        }
-
-        /* Glitter / Star Container */
-        .glitter-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #F9E4B7;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #DFBA67, 0 0 20px #F9E4B7;
-            animation: sparkleFly 3s linear infinite;
-            opacity: 0;
-        }
-
-        @keyframes sparkleFly {
-            0% { transform: translateY(0) translateX(0) scale(0.2); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translateY(-120px) translateX(calc(var(--rand-x) * 60px)) scale(1.2); opacity: 0; }
-        }
-
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 24px;
             position: relative;
@@ -127,7 +72,7 @@
             text-decoration: none;
         }
 
-        .logo span {
+        .gold-text {
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -169,62 +114,32 @@
             box-shadow: 0 0 25px rgba(223, 186, 103, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
         }
 
-        .policy-content {
-            padding: 60px 0;
-        }
-
-        .policy-card {
+        .content-card {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-lg);
             padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            margin: 40px 0 60px;
         }
 
-        .policy-card:hover {
-            border-color: var(--card-border-glow);
-            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
-        }
-
-        .policy-card h1 {
+        .content-card h1 {
             font-size: 32px;
             font-weight: 800;
-            margin-bottom: 8px;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+            color: var(--text-gold);
         }
 
-        .policy-card .effective-date {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-        }
-
-        .policy-card h2 {
+        .content-card h2 {
             font-size: 20px;
             font-weight: 700;
+            margin: 24px 0 12px;
             color: var(--text-gold);
-            margin-top: 28px;
-            margin-bottom: 12px;
         }
 
-        .policy-card p, .policy-card ul {
+        .content-card p {
             color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.7;
             margin-bottom: 16px;
-        }
-
-        .policy-card ul {
-            padding-left: 20px;
-        }
-
-        .policy-card li {
-            margin-bottom: 8px;
         }
 
         footer {
@@ -249,44 +164,39 @@
     </style>
 </head>
 <body>
-    <div class="parallax-bg" id="parallaxBg"></div>
-
     <div class="container">
         <header>
             <a href="https://apex-922.github.io/CopyCart/" class="logo">
-                <div style="position:relative; display:inline-block;">
-                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
-                    <div class="glitter-container" id="logoGlitter"></div>
-                </div>
-                <span>CopyCart</span>
+                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
+                <span>Copy</span><span class="gold-text">Cart</span>
             </a>
             <nav class="nav-links">
-                <a href="https://apex-922.github.io/CopyCart/#features" class="nav-link magnetic-btn">Features</a>
-                <a href="https://apex-922.github.io/CopyCart/#how-it-works" class="nav-link magnetic-btn">How It Works</a>
-                <a href="https://apex-922.github.io/CopyCart/Support" class="nav-link magnetic-btn">Link Generator</a>
-                <a href="https://apex-922.github.io/CopyCart/Privacy" class="nav-link active magnetic-btn">Privacy</a>
+                <a href="https://apex-922.github.io/CopyCart/#features" class="nav-link">Features</a>
+                <a href="https://apex-922.github.io/CopyCart/#how-it-works" class="nav-link">How It Works</a>
+                <a href="https://apex-922.github.io/CopyCart/Support" class="nav-link">Link Generator</a>
+                <a href="https://apex-922.github.io/CopyCart/Privacy" class="nav-link active">Privacy</a>
             </nav>
         </header>
 
-        <main class="policy-content">
-            <div class="policy-card magnetic-target">
-                <h1>Privacy Policy</h1>
-                <p class="effective-date">Effective Date: January 1, 2026</p>
-                <p>At <strong>CopyCart</strong>, we respect your privacy and are committed to protecting any information you handle while using our browser extension and web services.</p>
+        <div class="content-card">
+            <h1>Privacy Policy</h1>
+            <p><strong>Effective Date:</strong> January 2026</p>
+            
+            <h2>1. Overview</h2>
+            <p>CopyCart values your privacy. This privacy policy explains how data is handled when using the CopyCart browser extension and web utility.</p>
 
-                <h2>1. Information We Do Not Collect</h2>
-                <p>CopyCart is designed with user privacy at its core. We <strong>do not</strong> collect, store, transmit, or monetize your personal data, browsing history, account credentials, or specific shopping cart contents on external servers.</p>
+            <h2>2. Data Collection and Usage</h2>
+            <p>CopyCart operates locally within your browser. We do not collect, store, or transmit any personal identifiable information (PII) to external servers.</p>
 
-                <h2>2. Local Storage and Data</h2>
-                <p>The extension may store custom cart templates and user preferences locally on your device using browser storage APIs (`chrome.storage.local`).</p>
+            <h2>3. Local Storage</h2>
+            <p>Cart templates, custom product lists, and temporary settings created within CopyCart are saved directly to your browser's local storage. You retain complete control over this data and can clear it at any time through browser settings.</p>
 
-                <h2>3. Affiliate Disclosure & Link Generation</h2>
-                <p>We participate in the Amazon Services LLC Associates Program. Standard referral tracking tags are appended to URLs to credit qualifying purchases, supporting ongoing development at no additional cost to you.</p>
+            <h2>4. Affiliate Links Disclosure</h2>
+            <p>CopyCart is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate, we earn from qualifying purchases made via generated links.</p>
 
-                <h2>4. Contact Us</h2>
-                <p>If you have any questions or concerns regarding this Privacy Policy, please reach out through our repository channels.</p>
-            </div>
-        </main>
+            <h2>5. Contact Information</h2>
+            <p>If you have any questions about this privacy policy, please reach out via our GitHub repository issues page.</p>
+        </div>
 
         <footer>
             <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
@@ -294,50 +204,5 @@
             <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
         </footer>
     </div>
-
-    <script>
-        // Flashlight cursor tracking for background logo
-        window.addEventListener('mousemove', (e) => {
-            const bg = document.getElementById('parallaxBg');
-            const xPercent = (e.clientX / window.innerWidth) * 100;
-            const yPercent = (e.clientY / window.innerHeight) * 100;
-            bg.style.setProperty('--mouse-x', `${xPercent}%`);
-            bg.style.setProperty('--mouse-y', `${yPercent}%`);
-            bg.style.opacity = '1';
-        });
-
-        window.addEventListener('mouseleave', () => {
-            document.getElementById('parallaxBg').style.opacity = '0';
-        });
-
-        // Dynamic Glitter generator for baskets/logos
-        function createGlitter(containerId, count) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            for (let i = 0; i < count; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.style.left = `${Math.random() * 100}%`;
-                sparkle.style.top = `${80 + Math.random() * 20}%`;
-                sparkle.style.animationDelay = `${Math.random() * 3}s`;
-                sparkle.style.setProperty('--rand-x', (Math.random() - 0.5));
-                container.appendChild(sparkle);
-            }
-        }
-        createGlitter('logoGlitter', 6);
-
-        // Universal Magnetic Attraction Pull Toward Mouse Direction
-        document.querySelectorAll('.magnetic-target, .nav-link, .policy-card').forEach(el => {
-            el.addEventListener('mousemove', (e) => {
-                const rect = el.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                el.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px) translateY(-2px)`;
-            });
-            el.addEventListener('mouseleave', () => {
-                el.style.transform = 'translate(0px, 0px)';
-            });
-        });
-    </script>
 </body>
 </html>
