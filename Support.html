@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@600;800;900&family=Inter:wght@300;400;500;600;700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -80,6 +81,7 @@
             box-shadow: 0 0 8px #DFBA67, 0 0 12px #F9E4B7;
             animation: sparkleFly 3s infinite ease-in-out;
             opacity: 0;
+            will-change: transform, opacity;
         }
 
         @keyframes sparkleFly {
@@ -96,7 +98,6 @@
             z-index: 2;
         }
 
-        /* --- EXACT HOME PAGE HEADER STYLES --- */
         header {
             padding: 40px 0 28px;
             display: flex;
@@ -134,6 +135,15 @@
             filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.75));
         }
 
+        .logo-text {
+            font-family: "Montserrat", "Arial Black", sans-serif;
+            font-weight: 900;
+            font-size: 76px;
+            letter-spacing: -3px;
+            fill: url("#goldGradient");
+            filter: url("#goldGlow");
+        }
+
         .nav-links {
             display: flex;
             gap: 12px;
@@ -164,9 +174,43 @@
             box-shadow: 0 0 25px rgba(223, 186, 103, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
         }
 
-        /* --- GENERATOR CONTENT STYLES --- */
         .main-content {
             padding: 50px 0 60px;
+        }
+
+        .badge-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            border-radius: 30px;
+            background: rgba(18, 22, 31, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            color: var(--text-gold);
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(223, 186, 103, 0.15);
+            position: relative;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .version-badge:hover {
+            border-color: var(--card-border-glow);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5), 0 0 25px rgba(223, 186, 103, 0.35);
+        }
+
+        .badge-icon {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
         }
 
         .intro-banner {
@@ -189,7 +233,7 @@
             margin: 0 auto;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
             text-align: left;
-            transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -307,32 +351,16 @@
             50% { transform: translateX(3px); opacity: 1; text-shadow: 0 0 12px var(--gold-solid); }
         }
 
-        .version-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            border-radius: 30px;
-            background: rgba(18, 22, 31, 0.85);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--card-border);
-            color: var(--text-gold);
-            font-size: 13px;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
-            margin: 0 auto 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        .form-group {
+            margin-bottom: 12px;
             position: relative;
         }
 
-        .badge-icon {
-            width: 18px;
-            height: 18px;
-            object-fit: contain;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
+        .input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
         .form-control {
@@ -361,79 +389,58 @@
             box-shadow: 0 0 0 4px rgba(223, 186, 103, 0.15);
         }
 
-        .btn-generate {
-            width: 100%;
-            padding: 16px 28px;
-            border-radius: 30px;
-            background: rgba(18, 22, 31, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            color: var(--text-gold);
-            font-size: 16px;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
+        .btn-remove-link {
+            background: rgba(255, 75, 75, 0.15);
+            border: 1px solid rgba(255, 75, 75, 0.3);
+            color: #ff6b6b;
+            border-radius: var(--radius-md);
+            width: 42px;
+            height: 50px;
+            font-size: 18px;
             cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .btn-remove-link:hover {
+            background: rgba(255, 75, 75, 0.3);
+            color: #ffffff;
+            border-color: #ff6b6b;
+        }
+
+        .btn-add-link {
+            background: rgba(223, 186, 103, 0.1);
+            border: 1px dashed var(--card-border);
+            color: var(--text-gold);
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .btn-add-link:hover {
+            background: rgba(223, 186, 103, 0.2);
+            border-color: var(--gold-solid);
+            box-shadow: 0 0 12px rgba(223, 186, 103, 0.2);
+        }
+
+        .action-buttons-wrapper {
+            display: flex;
             gap: 12px;
-            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             margin-top: 20px;
         }
 
-        .btn-generate:hover {
-            background: var(--gold-gradient);
-            color: #080A0F;
-            border-color: var(--card-border-glow);
-            box-shadow: 0 0 35px rgba(223, 186, 103, 0.7), 0 8px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 255, 255, 0.5);
-        }
-
-        .btn-generate.dimmed {
-            background: rgba(158, 125, 59, 0.12);
-            color: rgba(243, 217, 155, 0.35);
-            border: 1px solid rgba(223, 186, 103, 0.1);
-            box-shadow: none;
-            cursor: not-allowed;
-            transform: none !important;
-            font-size: 15px;
-            padding: 16px;
-        }
-
-        .result-box {
-            display: none;
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid var(--card-border);
-            text-align: center;
-            position: relative;
-        }
-
-        .result-box.active {
-            display: block;
-            animation: fadeInResult 0.4s ease forwards;
-        }
-
-        @keyframes fadeInResult {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text-gold);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 12px;
-        }
-
-        .btn-copy-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
+        .btn-generate, .btn-share {
             padding: 16px 28px;
             border-radius: 30px;
             background: rgba(18, 22, 31, 0.85);
@@ -445,19 +452,32 @@
             font-family: 'Montserrat', sans-serif;
             cursor: pointer;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
             position: relative;
             overflow: visible;
         }
 
-        .btn-copy-badge:hover {
+        .btn-generate {
+            flex: 1;
+        }
+
+        .btn-share {
+            display: none;
+            padding: 16px 20px;
+        }
+
+        .btn-generate:hover, .btn-share:hover {
             background: var(--gold-gradient);
             color: #080A0F;
             border-color: var(--card-border-glow);
             box-shadow: 0 0 35px rgba(223, 186, 103, 0.7), 0 8px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
-        .btn-copy-badge.copied-state {
+        .btn-generate.copied-state {
             background: #10B981 !important;
             color: #042F22 !important;
             border-color: #34D399 !important;
@@ -479,6 +499,7 @@
             pointer-events: none;
             z-index: 9;
             opacity: 1;
+            will-change: transform, opacity;
             animation: expandRing 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
         }
 
@@ -499,6 +520,7 @@
             pointer-events: none;
             z-index: 10;
             opacity: 1;
+            will-change: transform, opacity;
             animation: explodeSpark 0.9s cubic-bezier(0.08, 0.82, 0.25, 1) forwards;
         }
 
@@ -546,6 +568,20 @@
                 padding: 8px 16px;
                 font-size: 13px;
             }
+            .version-badge {
+                font-size: 14px;
+                padding: 8px 20px;
+            }
+            .badge-icon {
+                width: 22px;
+                height: 22px;
+            }
+            .action-buttons-wrapper {
+                flex-direction: column;
+            }
+            .btn-share {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -580,14 +616,7 @@
                             y="55%" 
                             dominant-baseline="middle" 
                             text-anchor="middle"
-                            style='
-                                font-family: "Montserrat", "Arial Black", sans-serif;
-                                font-weight: 900;
-                                font-size: 76px;
-                                letter-spacing: -3px;
-                                fill: url("#goldGradient");
-                                filter: url("#goldGlow");
-                            '>
+                            class="logo-text">
                             CopyCart
                         </text>
                     </svg>
@@ -603,11 +632,7 @@
         </header>
 
         <main class="main-content">
-            <div class="intro-banner">
-                This page is solely here to help support CopyCart. It is entirely optional and unnecessary because this is all automated within the extension itself. But feel free to copy any Amazon link u wish.
-            </div>
-
-            <div class="generator-card magnetic-target" id="link-generator">
+            <div class="badge-wrapper">
                 <div class="version-badge" id="badgeLogo">
                     <div style="position:relative; display:inline-block;">
                         <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
@@ -615,42 +640,52 @@
                     </div>
                     <span>CopyCart v1.3</span>
                 </div>
+            </div>
 
+            <div class="intro-banner">
+                This page is solely here to help support CopyCart. It is entirely optional and unnecessary because this is all automated within the extension itself. But feel free to copy any Amazon link u wish.
+            </div>
+
+            <div class="generator-card" id="link-generator">
                 <h2>
                     <span class="pulsing-arrow">↓</span>
-                    Generate Shareable Link
+                    Generate & Copy Shareable Link
                     <span class="pulsing-arrow">↓</span>
                 </h2>
 
-                <form id="tagForm" onsubmit="generateShareLink(event)">
-                    <div class="form-group">
-                        <input type="url" id="cartUrl" class="form-control" placeholder="https://www.amazon.com/dp/B08N5WRWNW" required>
+                <form id="tagForm" onsubmit="generateAndCopyLink(event)">
+                    <div id="urlInputsContainer">
+                        <div class="form-group input-row">
+                            <input type="url" class="form-control cartUrl" placeholder="https://www.amazon.com/dp/B08N5WRWNW" aria-label="Amazon Product URL" required>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn-generate magnetic-target" id="generateBtn">
-                        <span class="pulsing-arrow-right">→</span>
-                        <span id="generateBtnText">Generate Shareable Link</span>
-                        <span class="pulsing-arrow-left">←</span>
+                    <button type="button" class="btn-add-link" onclick="addUrlInput()">
+                        + Add Another Link
                     </button>
-                </form>
 
-                <div class="result-box" id="resultBox">
-                    <div class="result-label">Link Generated Successfully</div>
-                    <button type="button" class="btn-copy-badge magnetic-target" onclick="copyShareLink(event)" id="copyBtn">
-                        <span class="pulsing-arrow-right">→</span>
-                        <span id="copyBtnText">Click Here</span>
-                        <span class="pulsing-arrow-left">←</span>
-                    </button>
-                </div>
+                    <div class="action-buttons-wrapper">
+                        <button type="submit" class="btn-generate" id="generateBtn">
+                            <span class="pulsing-arrow-right">→</span>
+                            <span id="generateBtnText">Generate & Copy Link</span>
+                            <span class="pulsing-arrow-left">←</span>
+                        </button>
+
+                        <button type="button" class="btn-share" id="shareBtn" onclick="shareGeneratedLink(event)" title="Share Link" aria-label="Share Link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                            <span>Share</span>
+                        </button>
+                    </div>
+                </form>
             </div>
 
-            <div class="custom-middle-card magnetic-target">
+            <div class="custom-middle-card">
                 <p style="color: var(--text-gold); font-size: 14px; font-weight: 600; font-family: 'Montserrat', sans-serif; letter-spacing: 0.3px;">
                     As an Amazon Associate I earn from qualifying purchases.
                 </p>
             </div>
 
-            <section class="affiliate-disclaimer-card magnetic-target">
+            <section class="affiliate-disclaimer-card">
                 <h3>Comprehensive Affiliate Compliance & Legal Disclosures</h3>
                 
                 <div class="disclaimer-section">
@@ -670,7 +705,7 @@
 
                 <div class="disclaimer-section">
                     <h4>Limitation of Liability & Trademark Notice</h4>
-                    <p>All product names, logos, trademarks, and brands—including but not limited to Amazon, the Amazon logo, and Firefox—are the property of their respective owners. All company, product, and service names used by CopyCart are for identification and utility purposes only. Use of these names, trademarks, and brands does not imply endorsement, sponsorship, or formal partnership. The sole creator and author of CopyCart assumes no legal liability or responsibility for third-party platform policy updates, program changes, link redirects, or transaction discrepancies occurring on external e-commerce sites.</p>
+                    <p>All product names, logos, trademarks, and brands—including but not limited to Amazon, the Amazon logo, and Firefox—are the property of their respective owners. All company, product, and service names used by CopyCart are for identification and utility purposes only. Use of these names, trademarks, and brands does not imply endorsement, sponsorship, or formal partnership. The sole creator and author of CopyCreator assumes no legal liability or responsibility for third-party platform policy updates, program changes, link redirects, or transaction discrepancies occurring on external e-commerce sites.</p>
                 </div>
             </section>
         </main>
@@ -684,166 +719,219 @@
 
     <script>
         const ASSOCIATE_TAG = 'apex087e-20';
-        let generatedUrlString = '';
+        let copyTimeout = null;
 
-        function generateShareLink(event) {
-            event.preventDefault();
-            const inputUrl = document.getElementById('cartUrl').value.trim();
-            if (!inputUrl) return;
-
-            try {
-                const url = new URL(inputUrl);
-                if (!url.hostname.includes('amazon.')) {
-                    alert('Please enter a valid Amazon product or cart URL.');
-                    return;
-                }
-
-                url.searchParams.set('tag', ASSOCIATE_TAG);
-                generatedUrlString = url.toString();
-
-                document.getElementById('resultBox').classList.add('active');
-                const generateBtn = document.getElementById('generateBtn');
-                generateBtn.classList.add('dimmed');
-                generateBtn.innerHTML = '<span id="generateBtnText">Link Generated</span>';
-
-                triggerDramaticFireworks();
-
-                const copyBtn = document.getElementById('copyBtn');
-                copyBtn.innerHTML = '<span class="pulsing-arrow-right">→</span><span id="copyBtnText">Click Here</span><span class="pulsing-arrow-left">←</span>';
-                copyBtn.classList.remove('copied-state');
-
-            } catch (e) {
-                alert('Please enter a valid URL (including http:// or https://)');
-            }
-        }
-
-        function triggerDramaticFireworks() {
-            const copyBtn = document.getElementById('copyBtn');
-            
-            const ring = document.createElement('div');
-            ring.className = 'firework-ring';
-            copyBtn.appendChild(ring);
-            setTimeout(() => ring.remove(), 900);
-
-            const totalSparks = 45;
-            for (let i = 0; i < totalSparks; i++) {
-                const spark = document.createElement('div');
-                spark.className = 'firework-particle';
-                
-                const angle = (i / totalSparks) * 360 + (Math.random() * 20);
-                const distance = 110 + Math.random() * 180;
-                const rad = angle * (Math.PI / 180);
-                
-                const dx = Math.cos(rad) * distance;
-                const dy = Math.sin(rad) * distance;
-                
-                spark.style.setProperty('--dx', `${dx}px`);
-                spark.style.setProperty('--dy', `${dy}px`);
-                
-                if (i % 4 === 0) {
-                    spark.style.background = '#ffffff';
-                    spark.style.boxShadow = '0 0 20px #F9E4B7';
-                } else if (i % 2 === 0) {
-                    spark.style.background = '#F3D99B';
-                    spark.style.boxShadow = '0 0 20px #DFBA67';
-                }
-
-                copyBtn.appendChild(spark);
-                setTimeout(() => spark.remove(), 900);
-            }
-        }
-
-        function copyShareLink(event) {
-            if (!generatedUrlString) return;
-
-            navigator.clipboard.writeText(generatedUrlString).then(() => {
-                const copyBtn = document.getElementById('copyBtn');
-                
-                copyBtn.classList.add('copied-state');
-                copyBtn.innerHTML = '<span id="copyBtnText">Copied to Clipboard</span>';
-
-                setTimeout(() => {
-                    copyBtn.classList.remove('copied-state');
-                    copyBtn.innerHTML = '<span id="copyBtnText">Your CopyCart Shareable Link is Now Ready. Thanks for Your Support.</span>';
-                    copyBtn.style.fontSize = '13px';
-                    copyBtn.style.fontWeight = '700';
-
-                    setTimeout(() => {
-                        document.getElementById('resultBox').classList.remove('active');
-                        
-                        const generateBtn = document.getElementById('generateBtn');
-                        generateBtn.classList.remove('dimmed');
-                        generateBtn.innerHTML = '<span class="pulsing-arrow-right">→</span><span id="generateBtnText">Generate Shareable Link</span><span class="pulsing-arrow-left">←</span>';
-                        
-                        copyBtn.style.fontSize = '';
-                        copyBtn.style.fontWeight = '';
-                        copyBtn.innerHTML = '<span class="pulsing-arrow-right">→</span><span id="copyBtnText">Click Here</span><span class="pulsing-arrow-left">←</span>';
-                        
-                        const cartInput = document.getElementById('cartUrl');
-                        cartInput.value = '';
-                        cartInput.placeholder = 'https://www.amazon.com/dp/B08N5WRWNW';
-                        
-                        generatedUrlString = '';
-                    }, 3500);
-                }, 2000);
-            });
-        }
-
-        // Smooth background parallax logic
-        const centerLogo = document.getElementById('bgLogoCenter');
-        if (centerLogo) {
-            document.addEventListener('mousemove', (e) => {
-                const centerRect = centerLogo.getBoundingClientRect();
-                const centerDist = Math.hypot(
-                    e.clientX - (centerRect.left + centerRect.width / 2),
-                    e.clientY - (centerRect.top + centerRect.height / 2)
-                );
-                const threshold = 380;
-
-                if (centerDist < threshold) {
-                    const intensity = 1 - (centerDist / threshold);
-                    centerLogo.style.opacity = (0.15 + (intensity * 0.6)).toString();
-                    centerLogo.style.filter = `drop-shadow(0 0 ${35 + intensity * 40}px rgba(223, 186, 103, ${0.3 + intensity * 0.7})) brightness(${1 + intensity * 0.25})`;
-                } else {
-                    centerLogo.style.opacity = '0.15';
-                    centerLogo.style.filter = 'drop-shadow(0 0 35px rgba(223, 186, 103, 0.25)) brightness(1)';
-                }
-            });
-        }
-
-        // Generate fixed sparkle elements once on page load
-        function initGlitter(containerId, count) {
+        function createGlitter(containerId, count = 12) {
             const container = document.getElementById(containerId);
             if (!container) return;
+
             for (let i = 0; i < count; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
+                
                 sparkle.style.left = `${Math.random() * 100}%`;
                 sparkle.style.top = `${Math.random() * 100}%`;
                 sparkle.style.animationDelay = `${Math.random() * 3}s`;
+                sparkle.style.animationDuration = `${2 + Math.random() * 2}s`;
+                
                 container.appendChild(sparkle);
             }
         }
 
-        initGlitter('logoGlitter', 6);
-        initGlitter('badgeGlitter', 4);
+        function addUrlInput() {
+            const container = document.getElementById('urlInputsContainer');
+            const newRow = document.createElement('div');
+            newRow.className = 'form-group input-row';
+            
+            newRow.innerHTML = `
+                <input type="url" class="form-control cartUrl" placeholder="https://www.amazon.com/dp/B08N5WRWNW" aria-label="Amazon Product URL" required>
+                <button type="button" class="btn-remove-link" onclick="removeUrlInput(this)" title="Remove link" aria-label="Remove link">×</button>
+            `;
+            
+            container.appendChild(newRow);
+            const newInstInput = newRow.querySelector('input');
+            newInstInput.focus();
+            newRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
 
-        // Magnetic effect handling
-        document.querySelectorAll('.magnetic-target, .nav-link, .generator-card, .custom-middle-card, .affiliate-disclaimer-card').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                if (btn.classList.contains('dimmed')) return;
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                const multiplier = (btn.classList.contains('generator-card') || btn.classList.contains('affiliate-disclaimer-card') || btn.classList.contains('custom-middle-card')) ? 0.05 : 0.2;
-                
-                btn.style.transform = `translate(${x * multiplier}px, ${y * multiplier}px)`;
-                btn.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                btn.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        function removeUrlInput(button) {
+            const row = button.closest('.input-row');
+            if (row) {
+                row.remove();
+            }
+        }
+
+        function resetInputs() {
+            const container = document.getElementById('urlInputsContainer');
+            container.innerHTML = `
+                <div class="form-group input-row">
+                    <input type="url" class="form-control cartUrl" placeholder="https://www.amazon.com/dp/B08N5WRWNW" aria-label="Amazon Product URL" required>
+                </div>
+            `;
+        }
+
+        function extractASIN(urlStr) {
+            const asinRegex = /(?:dp|gp\/(?:product|aw\/d)|exec\/obidos\/ASIN|product-reviews)\/([A-Z0-9]{10})(?:[/?#]|$)/i;
+            const match = urlStr.match(asinRegex);
+            return match ? match[1] : null;
+        }
+
+        function getGeneratedUrl() {
+            const inputs = document.querySelectorAll('.cartUrl');
+            const asins = [];
+            let domain = 'www.amazon.com';
+
+            for (let input of inputs) {
+                const val = input.value.trim();
+                if (!val) continue;
+
+                try {
+                    const url = new URL(val);
+                    if (!url.hostname.includes('amazon.')) {
+                        alert('Please enter valid Amazon URLs only.');
+                        return null;
+                    }
+
+                    const asin = extractASIN(val);
+                    if (!asin) {
+                        alert('Could not find a valid 10-character Product ID (ASIN) in one of your Amazon URLs.');
+                        return null;
+                    }
+
+                    asins.push(asin);
+                    domain = url.hostname;
+                } catch (e) {
+                    alert('Please enter valid URLs (including http:// or https://)');
+                    return null;
+                }
+            }
+
+            if (asins.length === 0) return null;
+
+            const cartUrlParams = new URLSearchParams();
+            cartUrlParams.append('AssociateTag', ASSOCIATE_TAG);
+
+            asins.forEach((asin, index) => {
+                cartUrlParams.append(`ASIN.${index + 1}`, asin);
+                cartUrlParams.append(`Quantity.${index + 1}`, '1');
             });
 
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0px, 0px)';
+            return `https://${domain}/gp/aws/cart/add.html?${cartUrlParams.toString()}`;
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                return navigator.clipboard.writeText(text);
+            }
+            return new Promise((resolve, reject) => {
+                try {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = text;
+                    textArea.style.position = "fixed";
+                    textArea.style.opacity = "0";
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    if (successful) {
+                        resolve();
+                    } else {
+                        reject(new Error('Copy command failed'));
+                    }
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+
+        function generateAndCopyLink(event) {
+            event.preventDefault();
+            const generatedUrlString = getGeneratedUrl();
+            if (!generatedUrlString) return;
+
+            const generateBtn = document.getElementById('generateBtn');
+            const generateBtnText = document.getElementById('generateBtnText');
+
+            copyToClipboard(generatedUrlString).then(() => {
+                createFireworks(generateBtn);
+                
+                generateBtn.classList.add('copied-state');
+                generateBtnText.textContent = 'LINK COPIED!';
+
+                resetInputs();
+
+                if (copyTimeout) clearTimeout(copyTimeout);
+
+                copyTimeout = setTimeout(() => {
+                    generateBtn.classList.remove('copied-state');
+                    generateBtnText.textContent = 'Generate & Copy Link';
+                }, 2500);
+            }).catch(() => {
+                alert('Generated link:\n' + generatedUrlString);
+                resetInputs();
+            });
+        }
+
+        function shareGeneratedLink(event) {
+            event.preventDefault();
+            const generatedUrlString = getGeneratedUrl();
+            if (!generatedUrlString) return;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'CopyCart Link',
+                    text: 'Check out these items on Amazon:',
+                    url: generatedUrlString
+                }).then(() => {
+                    resetInputs();
+                }).catch(() => {});
+            }
+        }
+
+        function createFireworks(btn) {
+            btn.querySelectorAll('.firework-ring, .firework-particle').forEach(el => el.remove());
+
+            const ring = document.createElement('div');
+            ring.className = 'firework-ring';
+            btn.appendChild(ring);
+            setTimeout(() => ring.remove(), 900);
+
+            const particleCount = 18;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                
+                const angle = (i / particleCount) * (2 * Math.PI);
+                const distance = 80 + Math.random() * 50;
+                const dx = `${Math.cos(angle) * distance}px`;
+                const dy = `${Math.sin(angle) * distance}px`;
+                
+                particle.style.setProperty('--dx', dx);
+                particle.style.setProperty('--dy', dy);
+                
+                btn.appendChild(particle);
+                setTimeout(() => particle.remove(), 900);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createGlitter('logoGlitter', 14);
+            createGlitter('badgeGlitter', 6);
+
+            if (navigator.share) {
+                const shareBtn = document.getElementById('shareBtn');
+                if (shareBtn) shareBtn.style.display = 'inline-flex';
+            }
+
+            document.querySelectorAll('.generator-card, .affiliate-disclaimer-card, .custom-middle-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
             });
         });
     </script>
