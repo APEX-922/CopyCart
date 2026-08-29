@@ -46,25 +46,17 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
+            width: 550px;
+            height: 550px;
             background-image: url('https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0;
+            opacity: 0.15;
             pointer-events: none;
             z-index: 0;
-            animation: pulseGlow 4s ease-in-out infinite;
-            transition: opacity 0.4s ease;
-            filter: drop-shadow(0 0 40px rgba(223, 186, 103, 0.4));
-            -webkit-mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
-            mask-image: radial-gradient(circle 220px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 25px rgba(223, 186, 103, 0.2)); }
-            50% { transform: translate(-50%, -50%) scale(1.06); filter: drop-shadow(0 0 50px rgba(223, 186, 103, 0.5)); }
+            filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.25));
+            transition: opacity 0.3s ease, filter 0.3s ease;
         }
 
         .glitter-container {
@@ -80,45 +72,19 @@
 
         .sparkle {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background: #F9E4B7;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #DFBA67, 0 0 15px #F9E4B7;
-            animation: sparkleFly 2.5s linear infinite;
-            opacity: 0;
-        }
-
-        @keyframes sparkleFly {
-            0% { transform: translateY(0) translateX(0) scale(0.2); opacity: 0; }
-            25% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(calc(var(--rand-x) * 50px)) scale(1.3); opacity: 0; }
-        }
-
-        .logo-glitter {
-            position: absolute;
             width: 4px;
             height: 4px;
             background: #F9E4B7;
             border-radius: 50%;
-            pointer-events: none;
-            box-shadow: 0 0 6px #DFBA67;
-            animation: risingGlitter 3.5s ease-out forwards;
-            z-index: 10;
+            box-shadow: 0 0 8px #DFBA67, 0 0 12px #F9E4B7;
+            animation: sparkleFly 3s infinite ease-in-out;
+            opacity: 0;
         }
 
-        @keyframes risingGlitter {
-            0% {
-                transform: translateY(0) translateX(0) scale(0.3);
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-120px) translateX(var(--glitter-dx)) scale(1.2);
-                opacity: 0;
-            }
+        @keyframes sparkleFly {
+            0% { transform: translateY(10px) scale(0.3); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-40px) scale(1.1); opacity: 0; }
         }
 
         .container {
@@ -149,6 +115,7 @@
             position: relative;
             width: 100%;
             max-width: 650px;
+            cursor: pointer;
         }
 
         .svg-logo-banner {
@@ -173,7 +140,7 @@
             flex-wrap: wrap;
         }
 
-        .nav-link, .magnetic-element {
+        .nav-link {
             padding: 10px 22px;
             border-radius: 20px;
             background: rgba(18, 22, 31, 0.6);
@@ -185,6 +152,7 @@
             font-family: 'Montserrat', sans-serif;
             transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             display: inline-block;
+            cursor: pointer;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -450,13 +418,12 @@
     </style>
 </head>
 <body>
-    <div class="parallax-bg" id="parallaxBg"></div>
+    <div class="parallax-bg" id="bgLogoCenter"></div>
 
     <div class="container">
         <header>
             <a href="https://apex-922.github.io/CopyCart/Home" class="logo" id="headerLogo">
                 <div style="position:relative; width: 100%; display: flex; justify-content: center; align-items: center;">
-                    <!-- Inline Responsive SVG Text Logo -->
                     <svg class="svg-logo-banner" viewBox="0 0 650 100" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -526,17 +493,17 @@
 
         <section id="features" class="features">
             <div class="feature-card magnetic-target">
-                <div class="feature-icon" id="sideLogoLeft">🛒</div>
+                <div class="feature-icon">🛒</div>
                 <h3>Instant Extraction</h3>
                 <p>Pull all ASINs, quantities, and product titles straight from your active Amazon cart with a single click.</p>
             </div>
             <div class="feature-card magnetic-target">
-                <div class="feature-icon" id="bgLogoCenter">🔗</div>
+                <div class="feature-icon">🔗</div>
                 <h3>Multi-Cart Links</h3>
                 <p>Generate batch checkout links containing multiple items to share shopping lists or move items across accounts seamlessly.</p>
             </div>
             <div class="feature-card magnetic-target">
-                <div class="feature-icon" id="sideLogoRight">📂</div>
+                <div class="feature-icon">📂</div>
                 <h3>Saved Cart Folders</h3>
                 <p>Store and organize custom-named cart templates locally so you can reload or copy them whenever you need.</p>
             </div>
@@ -578,85 +545,63 @@
     </div>
 
     <script>
-        window.addEventListener('mousemove', (e) => {
-            const bg = document.getElementById('parallaxBg');
-            const xPercent = (e.clientX / window.innerWidth) * 100;
-            const yPercent = (e.clientY / window.innerHeight) * 100;
-            bg.style.setProperty('--mouse-x', `${xPercent}%`);
-            bg.style.setProperty('--mouse-y', `${yPercent}%`);
-            bg.style.opacity = '1';
-        });
+        // Smooth background parallax logic
+        const centerLogo = document.getElementById('bgLogoCenter');
+        if (centerLogo) {
+            document.addEventListener('mousemove', (e) => {
+                const centerRect = centerLogo.getBoundingClientRect();
+                const centerDist = Math.hypot(
+                    e.clientX - (centerRect.left + centerRect.width / 2),
+                    e.clientY - (centerRect.top + centerRect.height / 2)
+                );
+                const threshold = 380;
 
-        window.addEventListener('mouseleave', () => {
-            document.getElementById('parallaxBg').style.opacity = '0';
-        });
+                if (centerDist < threshold) {
+                    const intensity = 1 - (centerDist / threshold);
+                    centerLogo.style.opacity = (0.15 + (intensity * 0.6)).toString();
+                    centerLogo.style.filter = `drop-shadow(0 0 ${35 + intensity * 40}px rgba(223, 186, 103, ${0.3 + intensity * 0.7})) brightness(${1 + intensity * 0.25})`;
+                } else {
+                    centerLogo.style.opacity = '0.15';
+                    centerLogo.style.filter = 'drop-shadow(0 0 35px rgba(223, 186, 103, 0.25)) brightness(1)';
+                }
+            });
+        }
 
-        function createGlitter(containerId, count) {
+        // Generate fixed sparkle elements once on page load (prevents memory leak)
+        function initGlitter(containerId, count) {
             const container = document.getElementById(containerId);
             if (!container) return;
             for (let i = 0; i < count; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
                 sparkle.style.left = `${Math.random() * 100}%`;
-                sparkle.style.top = `${80 + Math.random() * 20}%`;
-                sparkle.style.animationDelay = `${Math.random() * 2.5}s`;
-                sparkle.style.setProperty('--rand-x', (Math.random() - 0.5));
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 3}s`;
                 container.appendChild(sparkle);
             }
         }
-        createGlitter('logoGlitter', 6);
-        createGlitter('badgeGlitter', 4);
-        createGlitter('btnGlitter', 5);
 
+        initGlitter('logoGlitter', 6);
+        initGlitter('badgeGlitter', 4);
+        initGlitter('btnGlitter', 5);
+
+        // Magnetic effect handling
         document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .feature-card, .step-item').forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-                
-                const multiplier = (btn.classList.contains('generator-card') || btn.classList.contains('affiliate-disclaimer-card') || btn.classList.contains('custom-middle-card')) ? 0.08 : 0.25;
+                const multiplier = btn.classList.contains('affiliate-disclaimer-card') ? 0.08 : 0.2;
                 
                 btn.style.transform = `translate(${x * multiplier}px, ${y * multiplier}px)`;
-
-                const cardRect = btn.getBoundingClientRect();
-                btn.style.setProperty('--mouse-x', `${e.clientX - cardRect.left}px`);
-                btn.style.setProperty('--mouse-y', `${e.clientY - cardRect.top}px`);
+                btn.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                btn.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
             });
 
             btn.addEventListener('mouseleave', () => {
                 btn.style.transform = 'translate(0px, 0px)';
             });
         });
-
-        function spawnRisingGlitter(targetEl) {
-            if (!targetEl) return;
-            const rect = targetEl.getBoundingClientRect();
-            const glitter = document.createElement('div');
-            glitter.className = 'logo-glitter';
-            
-            const startX = rect.left + rect.width * 0.2 + Math.random() * (rect.width * 0.6);
-            const startY = rect.top + rect.height * 0.3 + Math.random() * (rect.height * 0.4);
-            
-            glitter.style.left = `${startX}px`;
-            glitter.style.top = `${startY}px`;
-            glitter.style.setProperty('--glitter-dx', `${(Math.random() - 0.5) * 90}px`);
-            
-            if (Math.random() > 0.5) {
-                glitter.style.background = '#ffffff';
-                glitter.style.boxShadow = '0 0 10px #F9E4B7';
-            }
-
-            document.body.appendChild(glitter);
-            setTimeout(() => glitter.remove(), 3500);
-        }
-
-        setInterval(() => {
-            spawnRisingGlitter(document.getElementById('bgLogoCenter'));
-            spawnRisingGlitter(document.getElementById('sideLogoLeft'));
-            spawnRisingGlitter(document.getElementById('sideLogoRight'));
-            spawnRisingGlitter(document.getElementById('headerLogo'));
-            spawnRisingGlitter(document.getElementById('badgeLogo'));
-        }, 220);
     </script>
 </body>
 </html>
