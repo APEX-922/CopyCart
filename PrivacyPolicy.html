@@ -7,7 +7,8 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@600;800;900&family=Inter:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #080A0F;
@@ -39,6 +40,53 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            min-height: 100vh;
+        }
+
+        .parallax-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 550px;
+            height: 550px;
+            background-image: url('https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.25));
+            transition: opacity 0.3s ease, filter 0.3s ease;
+        }
+
+        .glitter-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #F9E4B7;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #DFBA67, 0 0 12px #F9E4B7;
+            animation: sparkleFly 3s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes sparkleFly {
+            0% { transform: translateY(10px) scale(0.3); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-40px) scale(1.1); opacity: 0; }
         }
 
         .container {
@@ -50,40 +98,40 @@
         }
 
         header {
-            padding: 28px 0;
+            padding: 40px 0 28px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             border-bottom: 1px solid var(--card-border);
             background: rgba(10, 13, 20, 0.85);
             backdrop-filter: blur(12px);
-            gap: 16px;
+            gap: 24px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 14px;
-            font-family: 'Cinzel Decorative', serif;
-            font-weight: 900;
-            font-size: 38px;
-            letter-spacing: 1px;
-            color: #ffffff;
+            justify-content: center;
             text-decoration: none;
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            cursor: pointer;
         }
 
-        .logo span {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 10px rgba(223, 186, 103, 0.4));
+        .svg-logo-banner {
+            width: 100%;
+            height: auto;
+            max-height: 95px;
+            overflow: visible;
+            filter: drop-shadow(0 0 25px rgba(223, 186, 103, 0.5));
+            transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 8px rgba(223, 186, 103, 0.4));
+        .logo:hover .svg-logo-banner {
+            transform: scale(1.03);
+            filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.75));
         }
 
         .nav-links {
@@ -95,16 +143,18 @@
         }
 
         .nav-link {
-            padding: 8px 18px;
+            padding: 10px 22px;
             border-radius: 20px;
             background: rgba(18, 22, 31, 0.6);
             border: 1px solid var(--card-border);
             color: var(--text-gold);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
             transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             display: inline-block;
+            cursor: pointer;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -114,31 +164,77 @@
             box-shadow: 0 0 25px rgba(223, 186, 103, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
         }
 
+        .main-content {
+            padding: 50px 0 60px;
+        }
+
         .content-card {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-lg);
-            padding: 40px;
-            margin: 40px 0 60px;
+            padding: 44px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+            text-align: left;
+            transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle 180px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(223, 186, 103, 0.15), transparent 80%);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .content-card:hover {
+            border-color: var(--card-border-glow);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
+        }
+
+        .content-card > * {
+            position: relative;
+            z-index: 2;
         }
 
         .content-card h1 {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
-            margin-bottom: 24px;
+            margin-bottom: 8px;
             color: var(--text-gold);
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+        }
+
+        .effective-date {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            border-bottom: 1px solid rgba(223, 186, 103, 0.15);
+            padding-bottom: 16px;
         }
 
         .content-card h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            margin: 24px 0 12px;
+            margin: 24px 0 8px;
             color: var(--text-gold);
+            font-family: 'Montserrat', sans-serif;
         }
 
         .content-card p {
             color: var(--text-muted);
+            font-size: 14.5px;
+            line-height: 1.65;
             margin-bottom: 16px;
         }
 
@@ -161,48 +257,159 @@
             margin-top: 10px;
             line-height: 1.4;
         }
+
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 28px 20px;
+            }
+            .content-card h1 {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <div class="parallax-bg" id="bgLogoCenter"></div>
+
     <div class="container">
         <header>
-            <a href="https://apex-922.github.io/CopyCart/" class="logo">
-                <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
-                <span>CopyCart</span>
+            <a href="https://apex-922.github.io/CopyCart/index" class="logo" id="headerLogo">
+                <div style="position:relative; width: 100%; display: flex; justify-content: center; align-items: center;">
+                    <svg class="svg-logo-banner" viewBox="0 0 650 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#F9E4B7" />
+                                <stop offset="50%" stop-color="#DFBA67" />
+                                <stop offset="100%" stop-color="#9E7D3B" />
+                            </linearGradient>
+                            <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="5" result="blur" />
+                                <feComponentTransfer in="blur" result="glow1">
+                                    <feFuncA type="linear" slope="0.8"/>
+                                </feComponentTransfer>
+                                <feMerge>
+                                    <feMergeNode in="glow1" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <text 
+                            x="50%" 
+                            y="55%" 
+                            dominant-baseline="middle" 
+                            text-anchor="middle"
+                            style='
+                                font-family: "Montserrat", "Arial Black", sans-serif;
+                                font-weight: 900;
+                                font-size: 76px;
+                                letter-spacing: -3px;
+                                fill: url("#goldGradient");
+                                filter: url("#goldGlow");
+                            '>
+                            CopyCart
+                        </text>
+                    </svg>
+                    <div class="glitter-container" id="logoGlitter"></div>
+                </div>
             </a>
             <nav class="nav-links">
-                <a href="https://apex-922.github.io/CopyCart/#features" class="nav-link">Features</a>
-                <a href="https://apex-922.github.io/CopyCart/#how-it-works" class="nav-link">How It Works</a>
+                <a href="https://apex-922.github.io/CopyCart/index#features" class="nav-link">Features</a>
+                <a href="https://apex-922.github.io/CopyCart/index#how-it-works" class="nav-link">How It Works</a>
                 <a href="https://apex-922.github.io/CopyCart/Support" class="nav-link">Link Generator</a>
-                <a href="https://apex-922.github.io/CopyCart/Privacy" class="nav-link active">Privacy</a>
+                <a href="https://apex-922.github.io/CopyCart/PrivacyPolicy" class="nav-link active">Privacy</a>
             </nav>
         </header>
 
-        <div class="content-card">
-            <h1>Privacy Policy</h1>
-            <p><strong>Effective Date:</strong> January 2026</p>
-            
-            <h2>1. Overview</h2>
-            <p>CopyCart values your privacy. This privacy policy explains how data is handled when using the CopyCart browser extension and web utility.</p>
+        <main class="main-content">
+            <div class="content-card magnetic-target">
+                <h1>Privacy Policy</h1>
+                <p class="effective-date"><strong>Effective Date:</strong> January 2026</p>
+                
+                <h2>1. Overview</h2>
+                <p>CopyCart values your privacy. This privacy policy explains how data is handled when using the CopyCart browser extension and web utility.</p>
 
-            <h2>2. Data Collection and Usage</h2>
-            <p>CopyCart operates locally within your browser. We do not collect, store, or transmit any personal identifiable information (PII) to external servers.</p>
+                <h2>2. Data Collection and Usage</h2>
+                <p>CopyCart operates locally within your browser. We do not collect, store, or transmit any personal identifiable information (PII) to external servers.</p>
 
-            <h2>3. Local Storage</h2>
-            <p>Cart templates, custom product lists, and temporary settings created within CopyCart are saved directly to your browser's local storage. You retain complete control over this data and can clear it at any time through browser settings.</p>
+                <h2>3. Local Storage</h2>
+                <p>Cart templates, custom product lists, and temporary settings created within CopyCart are saved directly to your browser's local storage. You retain complete control over this data and can clear it at any time through browser settings.</p>
 
-            <h2>4. Affiliate Links Disclosure</h2>
-            <p>CopyCart is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate, we earn from qualifying purchases made via generated links.</p>
+                <h2>4. Affiliate Links Disclosure</h2>
+                <p>CopyCart is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate, we earn from qualifying purchases made via generated links.</p>
 
-            <h2>5. Contact Information</h2>
-            <p>If you have any questions about this privacy policy, please reach out via our GitHub repository issues page.</p>
-        </div>
+                <h2>5. Contact Information</h2>
+                <p>If you have any questions about this privacy policy, please reach out via our GitHub repository issues page.</p>
+            </div>
+        </main>
 
         <footer>
             <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
-            <p style="margin-top: 8px;"><a href="https://apex-922.github.io/CopyCart/Privacy">Privacy Policy</a></p>
+            <p style="margin-top: 8px;"><a href="https://apex-922.github.io/CopyCart/PrivacyPolicy">Privacy Policy</a></p>
             <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
         </footer>
     </div>
+
+    <script>
+        // Smooth background parallax logic
+        const centerLogo = document.getElementById('bgLogoCenter');
+        if (centerLogo) {
+            document.addEventListener('mousemove', (e) => {
+                const centerRect = centerLogo.getBoundingClientRect();
+                const centerDist = Math.hypot(
+                    e.clientX - (centerRect.left + centerRect.width / 2),
+                    e.clientY - (centerRect.top + centerRect.height / 2)
+                );
+                const threshold = 380;
+
+                if (centerDist < threshold) {
+                    const intensity = 1 - (centerDist / threshold);
+                    centerLogo.style.opacity = (0.15 + (intensity * 0.6)).toString();
+                    centerLogo.style.filter = `drop-shadow(0 0 ${35 + intensity * 40}px rgba(223, 186, 103, ${0.3 + intensity * 0.7})) brightness(${1 + intensity * 0.25})`;
+                } else {
+                    centerLogo.style.opacity = '0.15';
+                    centerLogo.style.filter = 'drop-shadow(0 0 35px rgba(223, 186, 103, 0.25)) brightness(1)';
+                }
+            });
+        }
+
+        // Generate fixed sparkle elements
+        function initGlitter(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 3}s`;
+                container.appendChild(sparkle);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initGlitter('logoGlitter', 6);
+
+            // Magnetic and spotlight hover effects
+            document.querySelectorAll('.magnetic-target, .nav-link').forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    if (btn.classList.contains('nav-link')) {
+                        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                    }
+                    
+                    btn.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    btn.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                });
+
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0px, 0px)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
