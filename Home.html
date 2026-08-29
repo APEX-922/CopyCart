@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #080A0F;
@@ -95,6 +95,32 @@
             100% { transform: translateY(-100px) translateX(calc(var(--rand-x) * 50px)) scale(1.3); opacity: 0; }
         }
 
+        .logo-glitter {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #F9E4B7;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 6px #DFBA67;
+            animation: risingGlitter 3.5s ease-out forwards;
+            z-index: 10;
+        }
+
+        @keyframes risingGlitter {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.3);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120px) translateX(var(--glitter-dx)) scale(1.2);
+                opacity: 0;
+            }
+        }
+
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -104,40 +130,39 @@
         }
 
         header {
-            padding: 28px 0;
+            padding: 40px 0 28px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             border-bottom: 1px solid var(--card-border);
             background: rgba(10, 13, 20, 0.85);
             backdrop-filter: blur(12px);
-            gap: 16px;
+            gap: 24px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 14px;
-            font-family: 'Cinzel Decorative', serif;
-            font-weight: 900;
-            font-size: 38px;
-            letter-spacing: 1px;
-            color: #ffffff;
+            justify-content: center;
             text-decoration: none;
+            position: relative;
+            width: 100%;
+            max-width: 650px;
         }
 
-        .logo span {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 10px rgba(223, 186, 103, 0.4));
+        .svg-logo-banner {
+            width: 100%;
+            height: auto;
+            max-height: 95px;
+            overflow: visible;
+            filter: drop-shadow(0 0 25px rgba(223, 186, 103, 0.5));
+            transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 8px rgba(223, 186, 103, 0.4));
+        .logo:hover .svg-logo-banner {
+            transform: scale(1.03);
+            filter: drop-shadow(0 0 35px rgba(223, 186, 103, 0.75));
         }
 
         .nav-links {
@@ -149,14 +174,15 @@
         }
 
         .nav-link, .magnetic-element {
-            padding: 8px 18px;
+            padding: 10px 22px;
             border-radius: 20px;
             background: rgba(18, 22, 31, 0.6);
             border: 1px solid var(--card-border);
             color: var(--text-gold);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
             transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             display: inline-block;
         }
@@ -185,6 +211,7 @@
             color: var(--text-gold);
             font-size: 13px;
             font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
             margin-bottom: 24px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             position: relative;
@@ -197,6 +224,7 @@
         }
 
         .hero h1 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 52px;
             font-weight: 800;
             line-height: 1.15;
@@ -237,6 +265,7 @@
             color: var(--text-gold);
             font-size: 16px;
             font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
             text-decoration: none;
             cursor: pointer;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
@@ -277,6 +306,18 @@
             overflow: hidden;
         }
 
+        .feature-card::before, .step-item::before, .affiliate-disclaimer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle 180px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(223, 186, 103, 0.15), transparent 80%);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
         .feature-card:hover, .step-item:hover, .affiliate-disclaimer-card:hover {
             border-color: var(--card-border-glow);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
@@ -295,6 +336,7 @@
             font-size: 22px;
             margin-bottom: 20px;
             transition: transform 0.3s ease;
+            position: relative;
         }
 
         .feature-card:hover .feature-icon {
@@ -302,6 +344,7 @@
         }
 
         .feature-card h3 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 12px;
@@ -321,6 +364,7 @@
 
         .section-title {
             text-align: center;
+            font-family: 'Montserrat', sans-serif;
             font-size: 32px;
             font-weight: 800;
             margin-bottom: 12px;
@@ -354,6 +398,7 @@
             background: var(--gold-gradient);
             color: #080A0F;
             font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -363,6 +408,7 @@
         }
 
         .step-item h4 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 8px;
@@ -375,6 +421,7 @@
         }
 
         .affiliate-disclaimer-card h3 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 18px;
             font-weight: 700;
             color: var(--text-gold);
@@ -407,34 +454,67 @@
 
     <div class="container">
         <header>
-            <a href="https://apex-922.github.io/CopyCart/" class="logo">
-                <div style="position:relative; display:inline-block;">
-                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Logo" class="logo-icon">
+            <a href="https://apex-922.github.io/CopyCart/Home" class="logo" id="headerLogo">
+                <div style="position:relative; width: 100%; display: flex; justify-content: center; align-items: center;">
+                    <!-- Inline Responsive SVG Text Logo -->
+                    <svg class="svg-logo-banner" viewBox="0 0 650 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#F9E4B7" />
+                                <stop offset="50%" stop-color="#DFBA67" />
+                                <stop offset="100%" stop-color="#9E7D3B" />
+                            </linearGradient>
+                            <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="5" result="blur" />
+                                <feComponentTransfer in="blur" result="glow1">
+                                    <feFuncA type="linear" slope="0.8"/>
+                                </feComponentTransfer>
+                                <feMerge>
+                                    <feMergeNode in="glow1" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <text 
+                            x="50%" 
+                            y="55%" 
+                            dominant-baseline="middle" 
+                            text-anchor="middle"
+                            style='
+                                font-family: "Montserrat", "Arial Black", sans-serif;
+                                font-weight: 900;
+                                font-size: 76px;
+                                letter-spacing: -3px;
+                                fill: url("#goldGradient");
+                                filter: url("#goldGlow");
+                            '>
+                            CopyCart
+                        </text>
+                    </svg>
                     <div class="glitter-container" id="logoGlitter"></div>
                 </div>
-                <span>CopyCart</span>
             </a>
             <nav class="nav-links">
-                <a href="https://apex-922.github.io/CopyCart/#features" class="nav-link active">Features</a>
-                <a href="https://apex-922.github.io/CopyCart/#how-it-works" class="nav-link">How It Works</a>
+                <a href="https://apex-922.github.io/CopyCart/Home#features" class="nav-link">Features</a>
+                <a href="https://apex-922.github.io/CopyCart/Home#how-it-works" class="nav-link">How It Works</a>
                 <a href="https://apex-922.github.io/CopyCart/Support" class="nav-link">Link Generator</a>
-                <a href="https://apex-922.github.io/CopyCart/Privacy" class="nav-link">Privacy</a>
+                <a href="https://apex-922.github.io/CopyCart/PrivacyPolicy" class="nav-link">Privacy</a>
             </nav>
         </header>
 
         <section class="hero">
-            <div class="badge">
+            <div class="badge" id="badgeLogo">
                 <div style="position:relative; display:inline-block;">
                     <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
                     <div class="glitter-container" id="badgeGlitter"></div>
                 </div>
-                <span>CopyCart V1.3</span>
+                <span>CopyCart v1.3</span>
             </div>
-            <h1>Categorize, Save Multiple Cart items, and Share Carts like a Pro</h1>
+            <h1>Simplify Your Online Shopping <span>Categorize, Save Multiple Cart items, and Share Carts like a Pro</span></h1>
             <p>Extract active Amazon cart items instantly, generate multi-cart quick purchase links, organize custom cart folders, and share curated product lists effortlessly.</p>
             
             <div class="cta-group">
-                <a href="https://apex-922.github.io/CopyCart/Support" class="btn-badge-styled magnetic-target">
+                <a href="https://apex-922.github.io/CopyCart/Support" class="btn-badge-styled magnetic-target" id="btnLogo">
                     <div style="position:relative; display:inline-block;">
                         <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="btn-icon">
                         <div class="glitter-container" id="btnGlitter"></div>
@@ -446,17 +526,17 @@
 
         <section id="features" class="features">
             <div class="feature-card magnetic-target">
-                <div class="feature-icon">🛒</div>
+                <div class="feature-icon" id="sideLogoLeft">🛒</div>
                 <h3>Instant Extraction</h3>
                 <p>Pull all ASINs, quantities, and product titles straight from your active Amazon cart with a single click.</p>
             </div>
             <div class="feature-card magnetic-target">
-                <div class="feature-icon">🔗</div>
+                <div class="feature-icon" id="bgLogoCenter">🔗</div>
                 <h3>Multi-Cart Links</h3>
                 <p>Generate batch checkout links containing multiple items to share shopping lists or move items across accounts seamlessly.</p>
             </div>
             <div class="feature-card magnetic-target">
-                <div class="feature-icon">📂</div>
+                <div class="feature-icon" id="sideLogoRight">📂</div>
                 <h3>Saved Cart Folders</h3>
                 <p>Store and organize custom-named cart templates locally so you can reload or copy them whenever you need.</p>
             </div>
@@ -492,13 +572,12 @@
 
         <footer>
             <p>Copyright &copy; 2026 APEX. All Rights Reserved.</p>
-            <p style="margin-top: 8px;"><a href="https://apex-922.github.io/CopyCart/Privacy">Privacy Policy</a></p>
+            <p style="margin-top: 8px;"><a href="https://apex-922.github.io/CopyCart/PrivacyPolicy">Privacy Policy</a></p>
             <p class="footer-compliance">CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
         </footer>
     </div>
 
     <script>
-        // Flashlight cursor tracking for background logo
         window.addEventListener('mousemove', (e) => {
             const bg = document.getElementById('parallaxBg');
             const xPercent = (e.clientX / window.innerWidth) * 100;
@@ -512,7 +591,6 @@
             document.getElementById('parallaxBg').style.opacity = '0';
         });
 
-        // Dynamic Glitter generator for baskets/logos
         function createGlitter(containerId, count) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -530,18 +608,55 @@
         createGlitter('badgeGlitter', 4);
         createGlitter('btnGlitter', 5);
 
-        // Universal Magnetic Attraction Pull Toward Mouse Direction
-        document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .feature-card, .step-item').forEach(el => {
-            el.addEventListener('mousemove', (e) => {
-                const rect = el.getBoundingClientRect();
+        document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .feature-card, .step-item').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-                el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) translateY(-3px)`;
+                
+                const multiplier = (btn.classList.contains('generator-card') || btn.classList.contains('affiliate-disclaimer-card') || btn.classList.contains('custom-middle-card')) ? 0.08 : 0.25;
+                
+                btn.style.transform = `translate(${x * multiplier}px, ${y * multiplier}px)`;
+
+                const cardRect = btn.getBoundingClientRect();
+                btn.style.setProperty('--mouse-x', `${e.clientX - cardRect.left}px`);
+                btn.style.setProperty('--mouse-y', `${e.clientY - cardRect.top}px`);
             });
-            el.addEventListener('mouseleave', () => {
-                el.style.transform = 'translate(0px, 0px)';
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0px, 0px)';
             });
         });
+
+        function spawnRisingGlitter(targetEl) {
+            if (!targetEl) return;
+            const rect = targetEl.getBoundingClientRect();
+            const glitter = document.createElement('div');
+            glitter.className = 'logo-glitter';
+            
+            const startX = rect.left + rect.width * 0.2 + Math.random() * (rect.width * 0.6);
+            const startY = rect.top + rect.height * 0.3 + Math.random() * (rect.height * 0.4);
+            
+            glitter.style.left = `${startX}px`;
+            glitter.style.top = `${startY}px`;
+            glitter.style.setProperty('--glitter-dx', `${(Math.random() - 0.5) * 90}px`);
+            
+            if (Math.random() > 0.5) {
+                glitter.style.background = '#ffffff';
+                glitter.style.boxShadow = '0 0 10px #F9E4B7';
+            }
+
+            document.body.appendChild(glitter);
+            setTimeout(() => glitter.remove(), 3500);
+        }
+
+        setInterval(() => {
+            spawnRisingGlitter(document.getElementById('bgLogoCenter'));
+            spawnRisingGlitter(document.getElementById('sideLogoLeft'));
+            spawnRisingGlitter(document.getElementById('sideLogoRight'));
+            spawnRisingGlitter(document.getElementById('headerLogo'));
+            spawnRisingGlitter(document.getElementById('badgeLogo'));
+        }, 220);
     </script>
 </body>
 </html>
