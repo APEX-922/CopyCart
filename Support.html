@@ -456,7 +456,7 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
             position: relative;
             overflow: visible;
         }
@@ -470,11 +470,16 @@
             padding: 16px 20px;
         }
 
-        .btn-generate:hover, .btn-share:hover {
+        .btn-generate:hover:not(:disabled), .btn-share:hover:not(:disabled) {
             background: var(--gold-gradient);
             color: #080A0F;
             border-color: var(--card-border-glow);
             box-shadow: 0 0 35px rgba(223, 186, 103, 0.7), 0 8px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-generate:disabled {
+            cursor: not-allowed;
+            opacity: 0.65;
         }
 
         .btn-generate.copied-state {
@@ -582,6 +587,10 @@
             .btn-share {
                 width: 100%;
             }
+            .btn-generate {
+                display: flex !important;
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -673,7 +682,7 @@
 
                         <button type="button" class="btn-share" id="shareBtn" onclick="shareGeneratedLink(event)" title="Share Link" aria-label="Share Link">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-                            <span>Share</span>
+                            <span id="shareBtnText">Share Link</span>
                         </button>
                     </div>
                 </form>
@@ -720,6 +729,11 @@
     <script>
         const ASSOCIATE_TAG = 'apex087e-20';
         let copyTimeout = null;
+        let lastGeneratedUrl = null;
+
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
 
         function createGlitter(containerId, count = 12) {
             const container = document.getElementById(containerId);
@@ -768,6 +782,15 @@
                     <input type="url" class="form-control cartUrl" placeholder="https://www.amazon.com/dp/B08N5WRWNW" aria-label="Amazon Product URL" required>
                 </div>
             `;
+            lastGeneratedUrl = null;
+        }
+
+        function restoreGenerateBtnState() {
+            const generateBtn = document.getElementById('generateBtn');
+            const generateBtnText = document.getElementById('generateBtnText');
+            generateBtn.disabled = false;
+            generateBtn.classList.remove('copied-state');
+            generateBtnText.textContent = 'Generate & Copy Link';
         }
 
         function extractASIN(urlStr) {
@@ -875,6 +898,8 @@
             const generatedUrlString = getGeneratedUrl();
             if (!generatedUrlString) return;
 
+            lastGeneratedUrl = generatedUrlString;
+
             const generateBtn = document.getElementById('generateBtn');
             const generateBtnText = document.getElementById('generateBtnText');
 
@@ -886,39 +911,52 @@
                 generateBtn.classList.add('copied-state');
                 generateBtnText.textContent = 'LINK COPIED!';
 
-                resetInputs();
+                if (isMobile()) {
+                    generateBtn.disabled = true;
+                } else {
+                    resetInputs();
+                    if (copyTimeout) clearTimeout(copyTimeout);
 
-                if (copyTimeout) clearTimeout(copyTimeout);
-
-                copyTimeout = setTimeout(() => {
-                    generateBtn.classList.remove('copied-state');
-                    generateBtnText.textContent = 'Generate & Copy Link';
-                }, 2500);
+                    copyTimeout = setTimeout(() => {
+                        restoreGenerateBtnState();
+                    }, 2500);
+                }
             } else {
                 prompt('Copy your generated link below:', generatedUrlString);
-                resetInputs();
+                if (isMobile()) {
+                    generateBtn.disabled = true;
+                } else {
+                    resetInputs();
+                }
             }
         }
 
         async function shareGeneratedLink(event) {
             event.preventDefault();
-            const generatedUrlString = getGeneratedUrl();
-            if (!generatedUrlString) return;
+            
+            let targetUrl = lastGeneratedUrl || getGeneratedUrl();
+            if (!targetUrl) return;
+
+            const shareBtn = document.getElementById('shareBtn');
+            createFireworks(shareBtn);
+            await copyToClipboard(targetUrl);
 
             if (navigator.share) {
                 try {
                     await navigator.share({
                         title: 'CopyCart Link',
                         text: 'Check out these items on Amazon:',
-                        url: generatedUrlString
+                        url: targetUrl
                     });
-                    resetInputs();
                 } catch (err) {
-                    // Ignore explicit user cancellation on share dialog
+                    // Shared sheet dismissed
                 }
             } else {
-                generateAndCopyLink(event);
+                alert('Sharing is not natively supported on this browser. Link has been copied to your clipboard!');
             }
+
+            resetInputs();
+            restoreGenerateBtnState();
         }
 
         function createFireworks(btn) {
