@@ -231,10 +231,15 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        .content-card p {
+        .content-card p, .content-card li {
             color: var(--text-muted);
             font-size: 14.5px;
             line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        .content-card ul {
+            margin-left: 20px;
             margin-bottom: 16px;
         }
 
@@ -324,21 +329,31 @@
         <main class="main-content">
             <div class="content-card magnetic-target">
                 <h1>Privacy Policy</h1>
-                <p class="effective-date"><strong>Effective Date:</strong> January 2026</p>
+                <p class="effective-date"><strong>Effective Date:</strong> August 30, 2026</p>
                 
-                <h2>1. Overview</h2>
-                <p>CopyCart values your privacy. This privacy policy explains how data is handled when using the CopyCart browser extension and web utility.</p>
+                <p><strong>CopyCart</strong> respects your privacy. This Privacy Policy explains how our browser extension handles your information.</p>
 
-                <h2>2. Data Collection and Usage</h2>
-                <p>CopyCart operates locally within your browser. We do not collect, store, or transmit any personal identifiable information (PII) to external servers.</p>
+                <h2>Information Collection</h2>
+                <p>CopyCart is designed with a privacy-first architecture. <strong>I do not collect, store, transmit, or harvest any personal data, user credentials, browsing history, or personal identifiers.</strong></p>
 
-                <h2>3. Local Storage</h2>
-                <p>Cart templates, custom product lists, and temporary settings created within CopyCart are saved directly to your browser's local storage. You retain complete control over this data and can clear it at any time through browser settings.</p>
+                <h2>Local Storage</h2>
+                <p>All cart items, folders, and preferences you save using CopyCart are stored <strong>exclusively in your browser's local storage</strong> (<code>browser.storage.local</code>). This data never leaves your device and is not accessible to me or any third parties.</p>
 
-                <h2>4. Affiliate Links Disclosure</h2>
-                <p>CopyCart is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate, we earn from qualifying purchases made via generated links.</p>
+                <h2>Permissions Usage</h2>
+                <p>To provide its core functionality, CopyCart requests specific browser permissions, which are strictly limited to local execution:</p>
+                <ul>
+                    <li><strong><code>activeTab</code> & Host Permissions:</strong> Interacts only with active Amazon cart pages to read product data when you explicitly trigger the extension.</li>
+                    <li><strong><code>scripting</code>:</strong> Executes local scripts to parse cart contents.</li>
+                    <li><strong><code>storage</code>:</strong> Manages your saved custom cart folders locally on your machine.</li>
+                </ul>
 
-                <h2>5. Contact Information</h2>
+                <h2>Affiliate Disclosure</h2>
+                <p>CopyCart is an independent third-party tool not affiliated with Amazon.com, Inc. As an Amazon Associate I earn from qualifying purchases.</p>
+
+                <h2>Changes to This Policy</h2>
+                <p>This Privacy Policy may be updated from time to time to enforce compliance or reflect new features. Any changes will be posted on this page.</p>
+
+                <h2>Contact Information</h2>
                 <p>If you have any questions about this privacy policy, please reach out via our GitHub repository issues page.</p>
             </div>
         </main>
@@ -351,7 +366,6 @@
     </div>
 
     <script>
-        // Smooth background parallax logic
         const centerLogo = document.getElementById('bgLogoCenter');
         if (centerLogo) {
             document.addEventListener('mousemove', (e) => {
@@ -373,7 +387,6 @@
             });
         }
 
-        // Generate fixed sparkle elements
         function initGlitter(containerId, count) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -390,7 +403,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             initGlitter('logoGlitter', 6);
 
-            // Magnetic and spotlight hover effects
             document.querySelectorAll('.magnetic-target, .nav-link').forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
                     const rect = btn.getBoundingClientRect();
