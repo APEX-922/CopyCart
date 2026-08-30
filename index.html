@@ -163,44 +163,44 @@
         }
 
         .hero {
-            padding: 80px 0 60px;
+            padding: 60px 0 60px;
             text-align: center;
         }
         
-.badge-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
+        .badge-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
 
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 24px;
-    border-radius: 30px;
-    background: rgba(18, 22, 31, 0.85);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--card-border);
-    color: var(--text-gold);
-    font-size: 16px;
-    font-weight: 700;
-    font-family: 'Montserrat', sans-serif;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(223, 186, 103, 0.15);
-    position: relative;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            border-radius: 30px;
+            background: rgba(18, 22, 31, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            color: var(--text-gold);
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(223, 186, 103, 0.15);
+            position: relative;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.badge:hover {
-    border-color: var(--card-border-glow);
-    box-shadow: 0 0 25px rgba(223, 186, 103, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
-}
+        .badge:hover {
+            border-color: var(--card-border-glow);
+            box-shadow: 0 0 25px rgba(223, 186, 103, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
+        }
 
-.badge-icon {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
-}
+        .badge-icon {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+        }
 
         .hero h1 {
             font-family: 'Montserrat', sans-serif;
@@ -208,7 +208,7 @@
             font-weight: 800;
             line-height: 1.15;
             letter-spacing: -1px;
-            margin-bottom: 20px;
+            margin-bottom: 28px;
             color: #ffffff;
         }
 
@@ -481,12 +481,14 @@
         </header>
 
         <section class="hero">
-            <div class="badge" id="badgeLogo">
-                <div style="position:relative; display:inline-block;">
-                    <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
-                    <div class="glitter-container" id="badgeGlitter"></div>
+            <div class="badge-wrapper">
+                <div class="badge" id="badgeLogo">
+                    <div style="position:relative; display:inline-block;">
+                        <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
+                        <div class="glitter-container" id="badgeGlitter"></div>
+                    </div>
+                    <span>CopyCart v1.3</span>
                 </div>
-                <span>CopyCart v1.3</span>
             </div>
             <h1>Simplify Your Online Shopping <span>Categorize, Save Multiple Cart items, and Share Carts like a Pro</span></h1>
             <p>Extract active Amazon cart items instantly, generate multi-cart quick purchase links, organize custom cart folders, and share curated product lists effortlessly.</p>
