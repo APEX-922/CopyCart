@@ -185,27 +185,31 @@
         }
 
         .version-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 24px;
-            border-radius: 30px;
-            background: rgba(18, 22, 31, 0.85);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--card-border);
-            color: var(--text-gold);
-            font-size: 16px;
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(223, 186, 103, 0.15);
-            position: relative;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    border-radius: 30px;
+    background: rgba(18, 22, 31, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--card-border);
+    color: var(--text-gold);
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(223, 186, 103, 0.15);
+    position: relative;
+    text-decoration: none; /* Removes default anchor underline */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Combines transitions cleanly */
+}
 
-        .version-badge:hover {
-            border-color: var(--card-border-glow);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5), 0 0 25px rgba(223, 186, 103, 0.35);
-        }
+.version-badge:hover {
+    border-color: var(--card-border-glow);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5), 0 0 25px rgba(223, 186, 103, 0.35);
+    transform: translateY(-2px); /* Adds a subtle lift effect on hover */
+    color: #ffffff;
+}
 
         .badge-icon {
             width: 26px;
@@ -642,13 +646,13 @@
 
         <main class="main-content">
             <div class="badge-wrapper">
-                <div class="version-badge" id="badgeLogo">
+                <a href="https://addons.mozilla.org/en-US/firefox/addon/copycart/" class="version-badge" id="badgeLogo" target="_blank" rel="noopener noreferrer">
                     <div style="position:relative; display:inline-block;">
                         <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
                         <div class="glitter-container" id="badgeGlitter"></div>
                     </div>
                     <span>CopyCart v1.3</span>
-                </div>
+                </a>
             </div>
 
             <div class="intro-banner">
