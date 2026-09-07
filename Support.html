@@ -265,43 +265,6 @@
             object-fit: contain;
         }
 
-        .btn-badge-styled {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 10px 24px;
-            border-radius: 30px;
-            background: rgba(18, 22, 31, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            color: var(--text-gold);
-            font-size: 15px;
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            text-decoration: none;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .btn-badge-styled .btn-icon {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(223, 186, 103, 0.3));
-        }
-
-        .btn-badge-styled:hover {
-            background: var(--gold-gradient);
-            color: #080A0F;
-            border-color: var(--card-border-glow);
-            box-shadow: 0 0 35px rgba(223, 186, 103, 0.7), 0 8px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 255, 255, 0.5);
-        }
-
         .intro-banner {
             max-width: 660px;
             margin: 0 auto 32px;
@@ -746,18 +709,6 @@
                         <span>CopyCart v1.5</span>
                     </a>
                 </div>
-
-                <!-- Web Version / Link Generator Card -->
-                <div class="badge-card magnetic-target">
-                    <span class="badge-label">Use The Web Version</span>
-                    <a href="https://apex-922.github.io/CopyCart/Support" class="btn-badge-styled" id="btnLogo">
-                        <div style="position:relative; display:inline-block;">
-                            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
-                            <div class="glitter-container" id="btnGlitter"></div>
-                        </div>
-                        Link Generator
-                    </a>
-                </div>
             </div>
 
             <div class="intro-banner">
@@ -1096,7 +1047,6 @@
             createGlitter('logoGlitter', 14);
             createGlitter('badgeGlitterChrome', 4);
             createGlitter('badgeGlitterFirefox', 4);
-            createGlitter('btnGlitter', 5);
 
             if (navigator.share) {
                 const shareBtn = document.getElementById('shareBtn');
