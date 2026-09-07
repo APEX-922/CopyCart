@@ -178,15 +178,66 @@
             padding: 50px 0 60px;
         }
 
-        .badge-wrapper {
+        .cta-group {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            align-items: stretch;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
         }
 
-        .version-badge {
+        .badge-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 24px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 310px;
+        }
+
+        .badge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle 180px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(223, 186, 103, 0.15), transparent 80%);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .badge-card:hover {
+            border-color: var(--card-border-glow);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
+        }
+
+        .badge-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-gold);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
             padding: 10px 24px;
             border-radius: 30px;
@@ -194,27 +245,61 @@
             backdrop-filter: blur(8px);
             border: 1px solid var(--card-border);
             color: var(--text-gold);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             font-family: 'Montserrat', sans-serif;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(223, 186, 103, 0.15);
             position: relative;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+            width: 100%;
         }
 
-        .version-badge:hover {
+        .badge:hover {
             border-color: var(--card-border-glow);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5), 0 0 25px rgba(223, 186, 103, 0.35);
-            transform: translateY(-2px);
-            color: #ffffff;
+            box-shadow: 0 0 25px rgba(223, 186, 103, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
         }
 
         .badge-icon {
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             object-fit: contain;
+        }
+
+        .btn-badge-styled {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 10px 24px;
+            border-radius: 30px;
+            background: rgba(18, 22, 31, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            color: var(--text-gold);
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .btn-badge-styled .btn-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(223, 186, 103, 0.3));
+        }
+
+        .btn-badge-styled:hover {
+            background: var(--gold-gradient);
+            color: #080A0F;
+            border-color: var(--card-border-glow);
+            box-shadow: 0 0 35px rgba(223, 186, 103, 0.7), 0 8px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
         .intro-banner {
@@ -577,14 +662,6 @@
                 padding: 8px 16px;
                 font-size: 13px;
             }
-            .version-badge {
-                font-size: 14px;
-                padding: 8px 20px;
-            }
-            .badge-icon {
-                width: 22px;
-                height: 22px;
-            }
             .action-buttons-wrapper {
                 flex-direction: column;
             }
@@ -645,14 +722,42 @@
         </header>
 
         <main class="main-content">
-            <div class="badge-wrapper">
-                <a href="https://addons.mozilla.org/en-US/firefox/addon/copycart/" class="version-badge" id="badgeLogo" target="_blank" rel="noopener noreferrer">
-                    <div style="position:relative; display:inline-block;">
-                        <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
-                        <div class="glitter-container" id="badgeGlitter"></div>
-                    </div>
-                    <span>CopyCart v1.5</span>
-                </a>
+            <div class="cta-group">
+                <!-- Chrome Card -->
+                <div class="badge-card magnetic-target">
+                    <span class="badge-label">Get This For Chrome</span>
+                    <a href="https://chromewebstore.google.com/detail/copycart/lhnmfphjaelpcpgfjjokadcfjljgmekb?authuser=1&hl=en" class="badge" id="badgeLogoChrome" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+                        <div style="position:relative; display:inline-block;">
+                            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
+                            <div class="glitter-container" id="badgeGlitterChrome"></div>
+                        </div>
+                        <span>CopyCart v1.5</span>
+                    </a>
+                </div>
+
+                <!-- Firefox Card -->
+                <div class="badge-card magnetic-target">
+                    <span class="badge-label">Get This For Firefox</span>
+                    <a href="https://addons.mozilla.org/en-US/firefox/addon/copycart/" class="badge" id="badgeLogoFirefox" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+                        <div style="position:relative; display:inline-block;">
+                            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
+                            <div class="glitter-container" id="badgeGlitterFirefox"></div>
+                        </div>
+                        <span>CopyCart v1.5</span>
+                    </a>
+                </div>
+
+                <!-- Web Version / Link Generator Card -->
+                <div class="badge-card magnetic-target">
+                    <span class="badge-label">Use The Web Version</span>
+                    <a href="https://apex-922.github.io/CopyCart/Support" class="btn-badge-styled" id="btnLogo">
+                        <div style="position:relative; display:inline-block;">
+                            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
+                            <div class="glitter-container" id="btnGlitter"></div>
+                        </div>
+                        Link Generator
+                    </a>
+                </div>
             </div>
 
             <div class="intro-banner">
@@ -989,20 +1094,30 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             createGlitter('logoGlitter', 14);
-            createGlitter('badgeGlitter', 6);
+            createGlitter('badgeGlitterChrome', 4);
+            createGlitter('badgeGlitterFirefox', 4);
+            createGlitter('btnGlitter', 5);
 
             if (navigator.share) {
                 const shareBtn = document.getElementById('shareBtn');
                 if (shareBtn) shareBtn.style.display = 'inline-flex';
             }
 
-            document.querySelectorAll('.generator-card, .affiliate-disclaimer-card, .custom-middle-card').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
+            // Magnetic tracking logic for cards and badges
+            document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .badge-card, .generator-card, .affiliate-disclaimer-card, .custom-middle-card').forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    const multiplier = btn.classList.contains('affiliate-disclaimer-card') ? 0.08 : 0.2;
+                    
+                    btn.style.transform = `translate(${x * multiplier}px, ${y * multiplier}px)`;
+                    btn.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    btn.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                });
+
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0px, 0px)';
                 });
             });
         });
