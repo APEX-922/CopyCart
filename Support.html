@@ -267,7 +267,7 @@
 
         .intro-banner {
             max-width: 660px;
-            margin: 0 auto 32px;
+            margin: 32px auto;
             text-align: center;
             color: var(--text-muted);
             font-size: 15px;
@@ -685,36 +685,7 @@
         </header>
 
         <main class="main-content">
-            <div class="cta-group">
-                <!-- Chrome Card -->
-                <div class="badge-card magnetic-target">
-                    <span class="badge-label">Get This For Chrome</span>
-                    <a href="https://chromewebstore.google.com/detail/copycart/lhnmfphjaelpcpgfjjokadcfjljgmekb?authuser=1&hl=en" class="badge" id="badgeLogoChrome" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
-                        <div style="position:relative; display:inline-block;">
-                            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
-                            <div class="glitter-container" id="badgeGlitterChrome"></div>
-                        </div>
-                        <span>CopyCart v1.5</span>
-                    </a>
-                </div>
-
-                <!-- Firefox Card -->
-                <div class="badge-card magnetic-target">
-                    <span class="badge-label">Get This For Firefox</span>
-                    <a href="https://addons.mozilla.org/en-US/firefox/addon/copycart/" class="badge" id="badgeLogoFirefox" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
-                        <div style="position:relative; display:inline-block;">
-                            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
-                            <div class="glitter-container" id="badgeGlitterFirefox"></div>
-                        </div>
-                        <span>CopyCart v1.5</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="intro-banner">
-                This page is solely here to help support CopyCart. It is entirely optional and unnecessary because this is all handled within the extension itself. But feel free to copy any Amazon link u wish to make easily sharable multi-item suggestions to your friends, family, or colleagues.
-            </div>
-
+            <!-- 1. Generate & Copy Link Card at the top -->
             <div class="generator-card" id="link-generator">
                 <h2>
                     <span class="pulsing-arrow">↓</span>
@@ -746,6 +717,38 @@
                         </button>
                     </div>
                 </form>
+            </div>
+
+            <!-- 2. Text banner positioned in between -->
+            <div class="intro-banner">
+                This page is solely here to help support CopyCart. It is entirely optional and unnecessary because this is all handled within the extension itself. But feel free to copy any Amazon link u wish to make easily sharable multi-item suggestions to your friends, family, or colleagues.
+            </div>
+
+            <!-- 3. Chrome & Firefox Badges at the bottom -->
+            <div class="cta-group">
+                <!-- Chrome Card -->
+                <div class="badge-card magnetic-target">
+                    <span class="badge-label">Get This For Chrome</span>
+                    <a href="https://chromewebstore.google.com/detail/copycart/lhnmfphjaelpcpgfjjokadcfjljgmekb?authuser=1&hl=en" class="badge" id="badgeLogoChrome" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+                        <div style="position:relative; display:inline-block;">
+                            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
+                            <div class="glitter-container" id="badgeGlitterChrome"></div>
+                        </div>
+                        <span>CopyCart v1.5</span>
+                    </a>
+                </div>
+
+                <!-- Firefox Card -->
+                <div class="badge-card magnetic-target">
+                    <span class="badge-label">Get This For Firefox</span>
+                    <a href="https://addons.mozilla.org/en-US/firefox/addon/copycart/" class="badge" id="badgeLogoFirefox" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+                        <div style="position:relative; display:inline-block;">
+                            <img src="https://raw.githubusercontent.com/APEX-922/CopyCart/main/icon.png" alt="Icon" class="badge-icon">
+                            <div class="glitter-container" id="badgeGlitterFirefox"></div>
+                        </div>
+                        <span>CopyCart v1.5</span>
+                    </a>
+                </div>
             </div>
 
             <div class="custom-middle-card">
