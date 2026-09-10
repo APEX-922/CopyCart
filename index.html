@@ -168,6 +168,79 @@ padding: 60px 0 60px;
 text-align: center;
 }
 
+.hero h1 {
+font-family: 'Montserrat', sans-serif;
+font-size: 52px;
+font-weight: 800;
+line-height: 1.15;
+letter-spacing: -1px;
+margin-bottom: 28px;
+color: #ffffff;
+}
+
+.hero h1 span {
+background: var(--gold-gradient);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.hero p {
+font-size: 18px;
+color: var(--text-muted);
+max-width: 680px;
+margin: 0 auto 36px;
+}
+
+/* Video Section Styling */
+.hero-video-card {
+max-width: 820px;
+margin: 0 auto 40px;
+padding: 20px;
+background: var(--card-bg);
+backdrop-filter: blur(16px);
+border: 1px solid var(--card-border);
+border-radius: var(--radius-lg);
+transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+position: relative;
+overflow: hidden;
+}
+
+.hero-video-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: radial-gradient(circle 180px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(223, 186, 103, 0.15), transparent 80%);
+pointer-events: none;
+transition: opacity 0.3s ease;
+}
+
+.hero-video-card:hover {
+border-color: var(--card-border-glow);
+box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
+}
+
+.video-wrapper {
+position: relative;
+padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+height: 0;
+overflow: hidden;
+border-radius: var(--radius-md);
+border: 1px solid var(--card-border);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.video-wrapper iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+border: 0;
+}
+
 .badge-card {
 display: flex;
 flex-direction: column;
@@ -246,29 +319,6 @@ height: 24px;
 object-fit: contain;
 }
 
-.hero h1 {
-font-family: 'Montserrat', sans-serif;
-font-size: 52px;
-font-weight: 800;
-line-height: 1.15;
-letter-spacing: -1px;
-margin-bottom: 28px;
-color: #ffffff;
-}
-
-.hero h1 span {
-background: var(--gold-gradient);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-}
-
-.hero p {
-font-size: 18px;
-color: var(--text-muted);
-max-width: 680px;
-margin: 0 auto 36px;
-}
-
 .cta-group {
 display: flex;
 justify-content: center;
@@ -322,7 +372,7 @@ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 gap: 24px;
 }
 
-.feature-card, .step-item, .video-card, .affiliate-disclaimer-card {
+.feature-card, .step-item, .affiliate-disclaimer-card {
 background: var(--card-bg);
 backdrop-filter: blur(16px);
 border: 1px solid var(--card-border);
@@ -333,7 +383,7 @@ position: relative;
 overflow: hidden;
 }
 
-.feature-card::before, .step-item::before, .video-card::before, .affiliate-disclaimer-card::before {
+.feature-card::before, .step-item::before, .affiliate-disclaimer-card::before {
 content: '';
 position: absolute;
 top: 0;
@@ -345,7 +395,7 @@ pointer-events: none;
 transition: opacity 0.3s ease;
 }
 
-.feature-card:hover, .step-item:hover, .video-card:hover, .affiliate-disclaimer-card:hover {
+.feature-card:hover, .step-item:hover, .affiliate-disclaimer-card:hover {
 border-color: var(--card-border-glow);
 box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
 }
@@ -442,32 +492,6 @@ margin-bottom: 8px;
 color: var(--text-gold);
 }
 
-/* Video Section Styling */
-.video-card {
-margin: 40px 0;
-padding: 24px;
-text-align: center;
-}
-
-.video-wrapper {
-position: relative;
-padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-height: 0;
-overflow: hidden;
-border-radius: var(--radius-md);
-border: 1px solid var(--card-border);
-box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-}
-
-.video-wrapper iframe {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-border: 0;
-}
-
 .affiliate-disclaimer-card {
 margin: 40px 0;
 text-align: center;
@@ -558,6 +582,19 @@ CopyCart
 <h1>Simplify Your Online Shopping <span>Categorize, Save Multiple Cart items, and Share Carts like a Pro</span></h1>
 <p>Extract active Amazon cart items instantly, generate multi-cart quick purchase links, organize custom cart folders, and share curated product lists effortlessly.</p>
 
+<!-- Demo Video Card -->
+<div class="hero-video-card magnetic-target">
+<div class="video-wrapper">
+  <iframe 
+    src="https://www.youtube.com/embed/2btxTgfDwBs?autoplay=1&mute=1&loop=1&playlist=2btxTgfDwBs&rel=0" 
+    title="How to Share Your Entire Amazon Cart in One Link | CopyCart Demo" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerpolicy="strict-origin-when-cross-origin" 
+    allowfullscreen>
+  </iframe>
+</div>
+</div>
+
 <div class="cta-group">
 <!-- Chrome Card -->
 <div class="badge-card magnetic-target">
@@ -638,19 +675,6 @@ Link Generator
 </div>
 </section>
 
-<!-- Demo Video Card -->
-<div class="video-card magnetic-target">
-<div class="video-wrapper">
-  <iframe 
-    src="https://www.youtube.com/embed/2btxTgfDwBs?autoplay=1&mute=1&loop=1&playlist=2btxTgfDwBs&rel=0" 
-    title="How to Share Your Entire Amazon Cart in One Link | CopyCart Demo" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" 
-    allowfullscreen>
-  </iframe>
-</div>
-</div>
-
 <div class="affiliate-disclaimer-card magnetic-target">
 <h3>Affiliate Disclosure</h3>
 <p>As an Amazon Associate I earn from qualifying purchases.</p>
@@ -706,12 +730,12 @@ initGlitter('badgeGlitterFirefox', 4);
 initGlitter('btnGlitter', 5);
 
 // Magnetic effect handling
-document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .feature-card, .step-item, .badge-card, .video-card').forEach(btn => {
+document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .feature-card, .step-item, .badge-card, .hero-video-card').forEach(btn => {
 btn.addEventListener('mousemove', (e) => {
 const rect = btn.getBoundingClientRect();
 const x = e.clientX - rect.left - rect.width / 2;
 const y = e.clientY - rect.top - rect.height / 2;
-const multiplier = btn.classList.contains('affiliate-disclaimer-card') || btn.classList.contains('video-card') ? 0.08 : 0.2;
+const multiplier = btn.classList.contains('affiliate-disclaimer-card') || btn.classList.contains('hero-video-card') ? 0.08 : 0.2;
 
 btn.style.transform = `translate(${x * multiplier}px, ${y * multiplier}px)`;
 btn.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
