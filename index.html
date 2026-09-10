@@ -322,7 +322,7 @@ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 gap: 24px;
 }
 
-.feature-card, .step-item, .affiliate-disclaimer-card {
+.feature-card, .step-item, .video-card, .affiliate-disclaimer-card {
 background: var(--card-bg);
 backdrop-filter: blur(16px);
 border: 1px solid var(--card-border);
@@ -333,7 +333,7 @@ position: relative;
 overflow: hidden;
 }
 
-.feature-card::before, .step-item::before, .affiliate-disclaimer-card::before {
+.feature-card::before, .step-item::before, .video-card::before, .affiliate-disclaimer-card::before {
 content: '';
 position: absolute;
 top: 0;
@@ -345,7 +345,7 @@ pointer-events: none;
 transition: opacity 0.3s ease;
 }
 
-.feature-card:hover, .step-item:hover, .affiliate-disclaimer-card:hover {
+.feature-card:hover, .step-item:hover, .video-card:hover, .affiliate-disclaimer-card:hover {
 border-color: var(--card-border-glow);
 box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 186, 103, 0.35);
 }
@@ -440,6 +440,32 @@ font-size: 16px;
 font-weight: 700;
 margin-bottom: 8px;
 color: var(--text-gold);
+}
+
+/* Video Section Styling */
+.video-card {
+margin: 40px 0;
+padding: 24px;
+text-align: center;
+}
+
+.video-wrapper {
+position: relative;
+padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+height: 0;
+overflow: hidden;
+border-radius: var(--radius-md);
+border: 1px solid var(--card-border);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.video-wrapper iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+border: 0;
 }
 
 .affiliate-disclaimer-card {
@@ -612,6 +638,19 @@ Link Generator
 </div>
 </section>
 
+<!-- Demo Video Card -->
+<div class="video-card magnetic-target">
+<div class="video-wrapper">
+  <iframe 
+    src="https://www.youtube.com/embed/2btxTgfDwBs?autoplay=1&mute=1&loop=1&playlist=2btxTgfDwBs&rel=0" 
+    title="How to Share Your Entire Amazon Cart in One Link | CopyCart Demo" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerpolicy="strict-origin-when-cross-origin" 
+    allowfullscreen>
+  </iframe>
+</div>
+</div>
+
 <div class="affiliate-disclaimer-card magnetic-target">
 <h3>Affiliate Disclosure</h3>
 <p>As an Amazon Associate I earn from qualifying purchases.</p>
@@ -639,7 +678,7 @@ const threshold = 380;
 if (centerDist < threshold) {
 const intensity = 1 - (centerDist / threshold);
 centerLogo.style.opacity = (0.15 + (intensity * 0.6)).toString();
-centerLogo.style.filter = drop-shadow(0 0 ${35 + intensity * 40}px rgba(223, 186, 103, ${0.3 + intensity * 0.7})) brightness(${1 + intensity * 0.25})`;
+centerLogo.style.filter = `drop-shadow(0 0 ${35 + intensity * 40}px rgba(223, 186, 103, ${0.3 + intensity * 0.7})) brightness(${1 + intensity * 0.25})`;
 } else {
 centerLogo.style.opacity = '0.15';
 centerLogo.style.filter = 'drop-shadow(0 0 35px rgba(223, 186, 103, 0.25)) brightness(1)';
@@ -654,7 +693,9 @@ if (!container) return;
 for (let i = 0; i < count; i++) {
 const sparkle = document.createElement('div');
 sparkle.className = 'sparkle';
-sparkle.style.left = ${Math.random() * 100}%`; sparkle.style.top = `$`{Math.random() * 100}%`; sparkle.style.animationDelay =${Math.random() * 3}s`;
+sparkle.style.left = `${Math.random() * 100}%`;
+sparkle.style.top = `${Math.random() * 100}%`;
+sparkle.style.animationDelay = `${Math.random() * 3}s`;
 container.appendChild(sparkle);
 }
 }
@@ -665,15 +706,16 @@ initGlitter('badgeGlitterFirefox', 4);
 initGlitter('btnGlitter', 5);
 
 // Magnetic effect handling
-document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .feature-card, .step-item, .badge-card').forEach(btn => {
+document.querySelectorAll('.magnetic-target, .nav-link, .btn-badge-styled, .feature-card, .step-item, .badge-card, .video-card').forEach(btn => {
 btn.addEventListener('mousemove', (e) => {
 const rect = btn.getBoundingClientRect();
 const x = e.clientX - rect.left - rect.width / 2;
 const y = e.clientY - rect.top - rect.height / 2;
-const multiplier = btn.classList.contains('affiliate-disclaimer-card') ? 0.08 : 0.2;
+const multiplier = btn.classList.contains('affiliate-disclaimer-card') || btn.classList.contains('video-card') ? 0.08 : 0.2;
 
-btn.style.transform = translate(${x * multiplier}px, ${y * multiplier}px);
-btn.style.setProperty('--mouse-x', ${e.clientX - rect.left}px); btn.style.setProperty('--mouse-y', ``${e.clientY - rect.top}px);
+btn.style.transform = `translate(${x * multiplier}px, ${y * multiplier}px)`;
+btn.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+btn.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
 });
 
 btn.addEventListener('mouseleave', () => {
@@ -683,4 +725,3 @@ btn.style.transform = 'translate(0px, 0px)';
 </script>
 </body>
 </html>
-
